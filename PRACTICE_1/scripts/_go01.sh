@@ -1,0 +1,1 @@
+./execute_db_script.sh 01_script_CREATE_SCHEMA.txt

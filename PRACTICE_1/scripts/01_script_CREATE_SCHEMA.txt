@@ -9,7 +9,7 @@
 --==============
 \set dataBase db_operational
 ;
-\set userName postgres
+\set userName florin
 ;
 \connect :dataBase :userName
 ;
@@ -20,10 +20,13 @@
 
 -------------------------------
 -- create the relational schema
+-- here we cannot change the order because how the relationships are created.
+-- psql:01_script_CREATE_SCHEMA.txt:95: ERROR:  multiple primary keys for table "r1" are not allowed
+-- psql:01_script_CREATE_SCHEMA.txt:101: ERROR:  relation "ak1_r1" already exists
 -------------------------------
+DROP TABLE IF EXISTS R1;
 DROP TABLE IF EXISTS R2;
 DROP TABLE IF EXISTS R3;
-DROP TABLE IF EXISTS R1;
 DROP TABLE IF EXISTS R4;
 --------------------------------
 
