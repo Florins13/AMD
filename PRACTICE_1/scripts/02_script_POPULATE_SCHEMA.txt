@@ -24,13 +24,19 @@ DELETE FROM R1;
 DELETE FROM R4;
 ---------------------------------
 
+-- add the code to insert at least 4 tuples for each table
 
+-- Insert into R1
+INSERT INTO R1 (c1, c2, c3)
+VALUES (1, 'A1', 'Row in R1');
+
+-- Insert into R4
+INSERT INTO R4 (c1)
+VALUES (10);
 
 -- uncomment the next lines and add the necessary code for statements execution
 INSERT INTO R3( C1_R1, C1_R4, C1 )
 VALUES( 1, 10, '2012-1-31' );
 
 
-
--- add the code to insert at least 4 tuples for each table
 
