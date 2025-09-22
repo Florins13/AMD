@@ -26,19 +26,34 @@ DELETE FROM R4;
 
 -- add the code to insert at least 4 tuples for each table
 
--- Insert into R1
+-- Insert 4 tuples into R1
 INSERT INTO R1 (c1, c2, c3)
-VALUES (1, 'A1', 'Row in R1');
+VALUES (1, 'A1', 'Row 1 in R1'),
+       (2, 'A2', 'Row 2 in R1'),
+       (3, 'A3', 'Row 3 in R1'),
+       (4, 'A4', 'Row 4 in R1');
 
--- Insert into R4
+-- Insert 4 tuples into R4
 INSERT INTO R4 (c1)
-VALUES (10);
+VALUES (10),
+       (20),
+       (30),
+       (40);
 
--- uncomment the next lines and add the necessary code for statements execution
+-- Insert 4 tuples into R3 (references R1 and R4)
 INSERT INTO R3( C1_R1, C1_R4, C1 )
-VALUES( 1, 10, '2012-1-31' );
+VALUES( 1, 10, '2012-1-31' ),
+      ( 2, 20, '2012-2-28' ),
+      ( 3, 30, '2012-3-31' ),
+      ( 4, 40, '2012-4-30' );
 
+-- Insert 4 tuples into R2 (references R1)
 INSERT INTO R2( c1, c2, c3, C1_R1)
-VALUES( 'B1', 'B2', 'row in R2', 1)
+VALUES( 'B1', 'B2', 'row 1 in R2', 1),
+      ( 'C1', 'C2', 'row 2 in R2', 2),
+      ( 'D1', 'D2', 'row 3 in R2', 3),
+      ( 'E1', 'E2', 'row 4 in R2', 4)
+
+
 
 
