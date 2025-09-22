@@ -8,7 +8,7 @@
 --=============
 \set dataBase db_operational
 ;
-\set userName postgres
+\set userName florin
 ;
 \connect :dataBase :userName
 ;
@@ -19,8 +19,11 @@
 --===============
 -- drop data
 --===============
--- DELETE FROM ...
--- ;
-
--- DELETE FROM ...
--- ;
+DELETE from R3
+;
+DELETE from R2
+;
+DELETE from R1
+;
+DELETE from R4
+;

@@ -8,7 +8,7 @@
 --=============
 \set dataBase db_operational
 ;
-\set userName postgres
+\set userName florin
 ;
 \connect :dataBase :userName
 ;
@@ -29,14 +29,12 @@ DROP VIEW IF EXISTS v1;
 
 
 
--- CREATE VIEW v1( ... ) AS
--- SELECT ...
--- FROM ...
--- WHERE ...
--- ;
+CREATE VIEW V1 (C1_R1, R1_C2, R1_C3)
+AS
+SELECT R1.C1 AS C1_R1, R1.C2 AS R1_C2, R1.C3 AS R1_C3
+FROM R1;
 
+SELECT * FROM v1;
 
--- SELECT * FROM v1
--- ;
 
 
