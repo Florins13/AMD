@@ -9,7 +9,7 @@
 --==============
 \set dataBase db_operational
 ;
-\set userName florin
+\set userName postgres
 ;
 \connect :dataBase :userName
 ;
