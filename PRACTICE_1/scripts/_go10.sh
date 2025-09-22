@@ -1,0 +1,1 @@
+./execute_db_script.sh 10_script_DELETE_DATA.txt

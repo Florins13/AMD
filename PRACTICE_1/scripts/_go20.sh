@@ -1,0 +1,1 @@
+./execute_db_script.sh 20_script_DROP_TABLE.txt
