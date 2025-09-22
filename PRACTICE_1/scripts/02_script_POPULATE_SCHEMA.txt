@@ -38,5 +38,7 @@ VALUES (10);
 INSERT INTO R3( C1_R1, C1_R4, C1 )
 VALUES( 1, 10, '2012-1-31' );
 
+INSERT INTO R2( c1, c2, c3, C1_R1)
+VALUES( 'B1', 'B2', 'row in R2', 1)
 
 
