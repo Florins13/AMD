@@ -39,6 +39,14 @@ DROP VIEW IF EXISTS v2_attrType;
 -- CREATE VIEW v1( VC1, VC2, VC3 ) AS
 -- ;
 
+CREATE VIEW v1( VC1, VC2, VC3 ) AS
+select R2.C1 AS VC1, R1.C1 AS VC2, R3.C1 AS VC3
+from R2
+inner join R1 ON R2.C1_R1 = R1.C1
+inner join R3 ON R3.C1_R1 = R1.C1
+order by R3.C1
+ ;
+
 
 
 -- after completing the previous code uncomment the following 2 lines
