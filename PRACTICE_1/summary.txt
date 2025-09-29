@@ -1,0 +1,10 @@
+Group 3
+Student - Florin Sofinet A46608
+Student - Diogo Guerra 49149
+Student - Nuno Silva
+
+1. For the first 2 introductory steps we have followed the guide, installed a postgres version on our machines.
+We had to modify some of the scripts since some of the members of the group use Linux based systems.
+2. A database was created with the name db_operational. The scripts with the modifications are in the scripts folder.
+3. For the entity diagram we have used the Diagram option of intelij and generate the relationship. A relationship_ss.png
+is present and can be seen with the relationship.

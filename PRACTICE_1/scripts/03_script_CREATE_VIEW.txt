@@ -1,5 +1,5 @@
 --#############
---# Paulo Trigo
+--# Grupo 3
 --#############
 
 
@@ -28,11 +28,17 @@ DROP VIEW IF EXISTS v1;
 ---------------------------------
 
 
-
-CREATE VIEW V1 (C1_R1, R1_C2, R1_C3)
+CREATE VIEW V1 (C1_R1, R1_C2, R1_C3, R2_C1, R2_C2, R2_C3, R3_C1, R4_C1)
 AS
-SELECT R1.C1 AS C1_R1, R1.C2 AS R1_C2, R1.C3 AS R1_C3
-FROM R1;
+SELECT R1.C1 AS C1_R1, R1.C2 AS R1_C2, R1.C3 AS R1_C3,
+	   R2.C1 AS R2_C1, R2.C2 AS R2_C2, R2.C3 AS R2_C3,
+	   R3.C1 AS R3_C1,
+	   R4.C1 AS R4_C1
+FROM R1
+inner join R2 ON R1.C1 = R2.C1_R1
+inner join R3 ON R1.C1 = R3.C1_R1
+inner join R4 ON R4.C1 = R3.C1_R4
+;
 
 SELECT * FROM v1;
 
