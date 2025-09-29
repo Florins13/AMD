@@ -1,7 +1,7 @@
 Group 3
 Student - Florin Sofinet A46608
 Student - Diogo Guerra 49149
-Student - Nuno Silva
+Student - Nuno Silva A53976
 
 1. For the first 2 introductory steps we have followed the guide, installed a postgres version on our machines.
 We had to modify some of the scripts since some of the members of the group use Linux based systems.
