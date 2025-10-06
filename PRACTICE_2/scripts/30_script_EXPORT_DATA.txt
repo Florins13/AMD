@@ -20,7 +20,12 @@
 --==========================
 -- [PRS: ADAPT]
 -- the file path where to write the data
--- \set filePath 'YOUR_DRIVE:/YOUR_PATH/yourFileName.txt'
+-- Set environment variable EXPORT_FILE_PATH before running psql
+-- Example: echo 'export EXPORT_FILE_PATH="(your_AMD_path)/AMD/PRACTICE_2/scripts/new_view_export.txt"' >> ~/.bashrc
+-- Then source the bash to be able to use the new environment variable set on the current session:
+-- Example: source ~/.bashrc
+\set filePath `echo $EXPORT_FILE_PATH`
+
 --==========================
 
 
@@ -38,11 +43,12 @@
 -- for detailed information see:
 -- a01_postgresql-10-A4.pdf, page 1394, or
 -- https://www.postgresql.org/docs/current/app-psql.html
+-- Note: For views, use COPY (SELECT ...) TO format
 --==============================
--- COPY ...
-;
+-- COPY (SELECT * FROM v1) TO STDOUT WITH
+-- (FORMAT csv, HEADER true, DELIMITER ',');
 
-
+-- \o
 
 --==============================
 -- a different solution using the \COPY psql statement
@@ -55,8 +61,19 @@
 -- for detailed information see:
 -- a01_postgresql-10-A4.pdf, or
 -- https://www.postgresql.org/docs/current/app-psql.html
+-- Note: For views, use \COPY (SELECT ...) TO format
 --==============================
--- \COPY ...
-;
+\COPY (SELECT * FROM v1) TO new_view_export.txt WITH (FORMAT csv, HEADER true, DELIMITER ',');
 
-
+--==============================
+-- Comments on the two approaches
+--==============================
+-- COPY: 
+--   • Runs on the server side.
+--   • Requires that the PostgreSQL server has access and permission to write to the given file path.
+--   • Often requires superuser privileges.
+--
+-- \COPY:
+--   • Runs on the client side (through psql).
+--   • Uses the client’s local filesystem permissions, so no superuser rights are required.
+--   • Easier to use in environments where the database server and the client machine are different.
