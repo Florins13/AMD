@@ -50,9 +50,9 @@ order by R3.C1
 
 
 -- after completing the previous code uncomment the following 2 lines
--- SELECT VC1, VC2, VC3
--- FROM v1
--- ;
+SELECT VC1, VC2, VC3
+FROM v1
+;
 
 
 
@@ -67,14 +67,65 @@ order by R3.C1
 --| 222 |   2 | 2012-03-31
 --|(3 rows)
 
+-- view v1_domain (nomes das colunas)
+CREATE VIEW v1_domain( vc1, vc2, vc3 ) AS
+SELECT
+    'vc1'::text AS vc1,
+    'vc2'::text AS vc2,
+    'vc3'::text AS vc3
+;
+
+-- view v1_attrType (tipos de atributos)
+CREATE VIEW v1_attrType( vc1, vc2, vc3 ) AS
+SELECT
+    'discrete'::text AS vc1,
+    'discrete'::text AS vc2,
+    'discrete'::text AS vc3
+;
+
+-- view v1_class (marca a coluna de classe)
+CREATE VIEW v1_class( vc1, vc2, vc3 ) AS
+SELECT
+    NULL::text    AS vc1,
+    NULL::text    AS vc2,
+    'class'::text AS vc3
+;
 
 
 
--- Follow the "practiceGuide.pdf" until arriving at this goal:
--- create the "dataset view" compatible with the Orange "3-Row-Header" format
--- CREATE VIEW v1_dataset( my_order, VC1, VC2, VC3 ) AS
--- ;
+-- view v1_dataset (3-Row-Header format)
+DROP VIEW IF EXISTS v1_dataset;
 
+CREATE VIEW v1_dataset( my_order, vc1, vc2, vc3 ) AS
+SELECT *
+FROM (
+    -- linha 1: nomes das colunas
+    SELECT 0 AS my_order, vc1, vc2, vc3
+    FROM v1_domain
+
+    UNION ALL
+
+    -- linha 2: tipos dos atributos
+    SELECT 1 AS my_order, vc1, vc2, vc3
+    FROM v1_attrType
+
+    UNION ALL
+
+    -- linha 3: coluna de classe
+    SELECT 2 AS my_order, vc1, vc2, vc3
+    FROM v1_class
+
+    UNION ALL
+
+    -- linhas seguintes: dados reais
+    SELECT 3 AS my_order, VC1::text, VC2::text, VC3::text
+    FROM v1
+) AS combined
+ORDER BY my_order
+;
+
+-- Test the dataset view
+SELECT VC1, VC2, VC3 FROM v1_dataset ORDER BY my_order;
 
 
 
