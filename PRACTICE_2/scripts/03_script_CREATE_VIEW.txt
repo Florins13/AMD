@@ -127,12 +127,36 @@ ORDER BY my_order
 -- Test the dataset view
 SELECT VC1, VC2, VC3 FROM v1_dataset ORDER BY my_order;
 
-
+-- Generate text file 
+\COPY (SELECT vc1, vc2, vc3 FROM v1_dataset ORDER BY my_order) TO 'dataset_3RowHeader.txt' WITH (FORMAT csv, HEADER false, DELIMITER ',');
 
 -- Follow the "practiceGuide.pdf" until arriving at this goal:
 -- create the "dataset view" compatible with the Orange "Header-with-Attribute-Type" format
--- CREATE VIEW v2_dataset( my_order, VC1, VC2, VC3 ) AS
--- ;
 
+-- view v2_attrType (nomes com prefixo de tipo/role)
+CREATE VIEW v2_attrType( vc1, vc2, vc3 ) AS
+SELECT
+    'D#vc1'::text  AS vc1,   -- Discrete
+    'D#vc2'::text  AS vc2,   -- Discrete
+    'Dc#vc3'::text AS vc3    -- Discrete + class
+;
 
+-- view v2_dataset (Header-with-Attribute-Type format)
+DROP VIEW IF EXISTS v2_dataset;
+
+CREATE VIEW v2_dataset( vc1, vc2, vc3 ) AS
+SELECT vc1, vc2, vc3
+FROM v2_attrType
+
+UNION ALL
+
+SELECT VC1::text, VC2::text, VC3::text
+FROM v1
+;
+
+-- Test the v2_dataset view
+SELECT vc1, vc2, vc3 FROM v2_dataset;
+
+-- Generate text file for representation of v2_dataset
+\COPY (SELECT vc1, vc2, vc3 FROM v2_dataset) TO 'dataset_HeaderWithType.txt' WITH (FORMAT csv, HEADER false, DELIMITER ',');
 
