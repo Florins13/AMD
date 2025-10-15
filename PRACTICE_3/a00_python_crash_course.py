@@ -14,31 +14,35 @@
 
 # Strings
 #> notice how you can access characters in the string using array syntax
-data = 'hello world'
-print( data[0] )
-print( len(data) )
-print( data )
+def hello_function():
+   data = 'hello world'
+   print( data[0] )
+   print( len(data) )
+   print( data )
 
 # Numbers
-value = 123.1
-print( value )
-value = 10
-print( value )
+def number_function():
+   value = 123.1
+   print( value )
+   value = 10
+   print( value )
 
 # Boolean
-a = True
-b = False
-print( a, b )
+def boolean_section():
+   a = True
+   b = False
+   print( a, b )
 
 # Multiple Assignment
 #> This can also be very handy for unpacking data in simple data structures
-a, b, c = 1, 2, 3
-print( a, b, c )
+def multiple_assignments():
+   a, b, c = 1, 2, 3
+   print( a, b, c )
 
 # No value
-a = None
-print(a)
-
+def no_value():
+   a = None
+   print(a)
 
 
 # Flow Control
@@ -47,23 +51,26 @@ print(a)
 #> If-Then-Else conditions, For-Loops and While-Loops
 
 # If-Then-Else
-value =60
-if value < 60:
-   print( 'That is safe' )
-elif value < 120:
-   print( 'That is fast' )
-else:
-   print( 'That is too fast' )
+def if_then_else():
+   value =60
+   if value < 60:
+      print( 'That is safe' )
+   elif value < 120:
+      print( 'That is fast' )
+   else:
+      print( 'That is too fast' )
 
-# For-Loop
-for i in range(10):
-   print(i)
+def for_loop():
+   # For-Loop
+   for i in range(10):
+      print(i)
 
-# While-Loop
-i = 0
-while i < 10:
-   print( i )
-   i += 1
+def while_loop():
+   # While-Loop
+   i = 0
+   while i < 10:
+      print( i )
+      i += 1
 
 
 # Data Structures
@@ -73,35 +80,37 @@ while i < 10:
 
 # Tuple (cannot change - immutable)
 #> read-only collections of items
-a = (1, 2, 3)
-print( a )
+def my_tuples():
+   a = (1, 2, 3)
+   print( a )
 
 
 # Lists
 #> use the square bracket notation and can be indexed using array notation
 #> Notice that we are using some simple printf-like
 #> functionality to combine strings and variables when printing
-mylist = [1, 2, 3]
-print( "Zeroth Value: %d" % mylist[0] )
-mylist.append(4)
-print( "List Length: %d" % len(mylist) )
-for value in mylist:
-   print( value )
-
+def my_list():
+   mylist = [1, 2, 3]
+   print( "Zeroth Value: %d" % mylist[0] )
+   mylist.append(4)
+   print( "List Length: %d" % len(mylist) )
+   for value in mylist:
+      print( value )
 
 
 # Dictionaries
 #> mappings of names to values, like key-value pairs
 #> Note the use of the curly bracket, and
 #> colon notations when defining the dictionary
-mydict = {'a': 1, 'b': 2, 'c': 3}
-print( "A value: %d" % mydict['a'] )
-mydict['a'] = 11
-print( "A value: %d" % mydict['a'] )
-print( "Keys: %s" % mydict.keys() )
-print( "Values: %s" % mydict.values() )
-for key in mydict.keys():
-   print( mydict[key] )
+def my_dict():
+   mydict = {'a': 1, 'b': 2, 'c': 3}
+   print( "A value: %d" % mydict['a'] )
+   mydict['a'] = 11
+   print( "A value: %d" % mydict['a'] )
+   print( "Keys: %s" % mydict.keys() )
+   print( "Values: %s" % mydict.values() )
+   for key in mydict.keys():
+      print( mydict[key] )
 
 
 # Functions
@@ -110,16 +119,27 @@ for key in mydict.keys():
 #> Ensure that you have an empty new line after indented code
 
 # Sum function
-def mysum(x, y):
+def my_sum(x, y):
    return x + y
 
 # Test sum function
-x = mysum( 1000, 3333 )
+x = my_sum( 1000, 3333 )
 print( x )
 
 # A function that is called in case this file is not being imported
 def main():
-   mysum( 2, 4 )
+   my_sum( 2, 4 )
+   my_dict()
+   my_list()
+   my_tuples()
+   while_loop()
+   for_loop()
+   if_then_else()
+   hello_function()
+   number_function()
+   boolean_section()
+   multiple_assignments()
+   no_value()
 
 
 #_______________________________________________________________________________
