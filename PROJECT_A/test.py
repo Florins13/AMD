@@ -20,8 +20,8 @@ best_feature, best_rule, best_error = one_rule(data)
 
 count = 0
 
-# for i in range(0, len(data)):
-#     count += 1
-#     # Convert feature value to string to use as dictionary key
-#     predicted_class = best_rule[str(data[i][best_feature])]
-#     print(f"row {count} with the best feature: {best_feature} with a predicted class: {predicted_class}")
+for i in range(0, len(data)):
+    count += 1
+    # Convert feature value to string to use as dictionary key 
+    predicted_class = best_rule[str(data[i][best_feature])]
+    print(f"row {count} with the best feature: {best_feature} with a predicted class: {predicted_class}")

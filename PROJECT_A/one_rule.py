@@ -1,6 +1,11 @@
 import Orange
 import numpy as np
 
+"""
+WARNING:
+The following one rule algorithm will classify for discrete datasets only 
+"""
+
 def one_rule(data):
     """
     Simple 1-Rule learner.
