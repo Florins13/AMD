@@ -41,12 +41,18 @@ class OrangeClassifierManager:
 
         return best_feature, best_rule, best_error, test_error_rate
     
+    # def induction_tree_model(self):
+        # TODO
+
+    # def naive_bayes_model(self):
+        # TODO
+    
 if __name__ == "__main__":
     print("=== Running One Rule Classifier ===")
     manager = OrangeClassifierManager("titanic")
     best_feature, best_rule, best_error, test_error_rate = manager.one_rule_model()
 
-    print("\n=== Results Summary ===")
+    print("\n=== One Rule Classifier Results Summary ===")
     print(f"Best feature: {best_feature.name}")
     print(f"Training error rate: {best_error:.2f}")
     print(f"Testing error rate:  {test_error_rate:.2f}")
@@ -57,4 +63,4 @@ if __name__ == "__main__":
         count += 1
         # Convert feature value to string to use as dictionary key 
         predicted_class = best_rule[str(manager.data[i][best_feature])]
-        print(f"row {count} with the best feature: {best_feature} with a predicted class: {predicted_class}")
+        print(f"One Rule model: row {count} with the best feature: {best_feature} with a predicted class: {predicted_class}")
