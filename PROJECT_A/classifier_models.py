@@ -40,17 +40,49 @@ class OrangeClassifierManager:
         print(f"[1-Rule] Test error rate: {test_error_rate:.2f}")
 
         return best_feature, best_rule, best_error, test_error_rate
-    
-    # def induction_tree_model(self):
-        # TODO
 
-    # def naive_bayes_model(self):
-        # TODO
-    
+    # --------------------------
+    # Induction tree classifier
+    # --------------------------    
+    def induction_tree_model(self):
+        learner = Orange.classification.TreeLearner()
+        classifier = learner(self.train) 
+        
+        errors = 0
+        for inst in self.test:
+            pred = classifier(inst)
+            if pred != inst.get_class():
+                errors += 1
+        
+        test_error_rate = errors / len(self.test)
+        print(f"[Decision Tree] Test error rate: {test_error_rate:.2f}")
+        return test_error_rate
+
+
+    # --------------------------
+    # Naive Bayes Classifier
+    # --------------------------
+    def naive_bayes_model(self):
+        learner = Orange.classification.NaiveBayesLearner()
+        classifier = learner(self.train)
+
+        errors = 0
+        for inst in self.test:
+            pred = classifier(inst)
+            if pred != inst.get_class():
+                errors += 1
+        test_error_rate = errors / len(self.test)
+        print(f"[Naive Bayes] Test error rate: {test_error_rate:.2f}")
+
+        return test_error_rate
+
 if __name__ == "__main__":
     print("=== Running One Rule Classifier ===")
     manager = OrangeClassifierManager("titanic")
     best_feature, best_rule, best_error, test_error_rate = manager.one_rule_model()
+
+    manager.induction_tree_model()
+    manager.naive_bayes_model()
 
     print("\n=== One Rule Classifier Results Summary ===")
     print(f"Best feature: {best_feature.name}")
