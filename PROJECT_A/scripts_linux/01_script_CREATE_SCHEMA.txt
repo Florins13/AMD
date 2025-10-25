@@ -1,0 +1,120 @@
+--#############
+--##   G03   ##
+--#############
+
+
+------------------------------------------
+
+\set dataBase db_projeto_a
+;
+\set userName postgres
+;
+\connect :dataBase :userName
+;
+
+------------------------------------------
+
+DROP TABLE IF EXISTS Prescription;
+DROP TABLE IF EXISTS Consult;
+DROP TABLE IF EXISTS Lenses;
+DROP TABLE IF EXISTS Doctor;
+DROP TABLE IF EXISTS Eye_Health;
+DROP TABLE IF EXISTS Patient;
+DROP TABLE IF EXISTS Tear_Rate;
+DROP TABLE IF EXISTS Disease;
+
+--------------------------------
+
+
+BEGIN;
+
+
+CREATE TABLE IF NOT EXISTS TEAR_RATE
+(
+    rate_name CHAR(20) PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS LENSES
+(
+    lens_name CHAR(20) PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS DISEASE
+(
+    disease_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    disease_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS AGE
+(
+    name VARCHAR(50) PRIMARY KEY,
+    min_age INT NOT NULL,
+    max_age INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS DOCTOR
+(
+    doctor_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS PATIENT
+(
+    patient_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS APPOINTMENT
+(
+    appointment_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    appointment_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    patient_id INTEGER NOT NULL,
+    doctor_id INTEGER NOT NULL,
+    tear_rate CHAR(20) NOT NULL,
+    lenses CHAR(20) NOT NULL,
+
+    CONSTRAINT ix_appointment_unique UNIQUE (doctor_id, patient_id, appointment_date),
+    CONSTRAINT fk_doctor_id FOREIGN KEY (doctor_id)
+        REFERENCES DOCTOR (doctor_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT fk_patient_id FOREIGN KEY (patient_id)
+        REFERENCES PATIENT (patient_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT fk_lenses FOREIGN KEY (lenses)
+        REFERENCES LENSES (lens_name) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT fk_tear_rate FOREIGN KEY (tear_rate)
+        REFERENCES TEAR_RATE (rate_name) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+CREATE TABLE IF NOT EXISTS PRESCRIPTION
+(
+    appointment_id INTEGER NOT NULL,
+    disease_id INTEGER NOT NULL,
+    PRIMARY KEY (appointment_id, disease_id),
+
+    CONSTRAINT fk_appointment_id FOREIGN KEY (appointment_id)
+        REFERENCES APPOINTMENT (appointment_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT fk_disease_id FOREIGN KEY (disease_id)
+        REFERENCES DISEASE (disease_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+	
+
+END;

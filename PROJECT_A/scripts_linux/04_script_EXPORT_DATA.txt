@@ -1,0 +1,19 @@
+--#############
+--##   G03   ##
+--#############
+
+------------------------------------------
+
+\set dataBase db_projeto_a
+\set userName postgres
+\connect :dataBase :userName
+
+------------------------------------------
+
+\set filePath '/Users/florin/isel-2025/AMD/PROJECT_A/dataset.csv'
+
+\o :filePath
+
+COPY (SELECT * FROM v1_dataset) TO STDOUT DELIMITER E'\t' CSV HEADER;
+
+;

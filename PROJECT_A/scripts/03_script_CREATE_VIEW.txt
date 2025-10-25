@@ -1,0 +1,84 @@
+--#############
+--##   G03   ##
+--#############
+
+
+------------------------------------------
+
+\set dataBase db_projeto_a
+;
+\set userName postgres
+;
+\connect :dataBase :userName
+;
+
+---------------------------------
+
+DROP VIEW IF EXISTS v1_data;
+DROP VIEW IF EXISTS v1_class;
+DROP VIEW IF EXISTS v1_domain;
+DROP VIEW IF EXISTS v1_dataset;
+DROP FUNCTION IF EXISTS getage(integer);
+
+---------------------------------
+
+CREATE OR REPLACE FUNCTION getage(age_input integer)
+RETURNS text
+LANGUAGE sql
+IMMUTABLE STRICT
+AS $$
+   SELECT name 
+   FROM AGE
+   WHERE min_age <= age_input AND max_age >= age_input;
+$$;
+	
+
+CREATE VIEW v1_data AS
+SELECT
+    getage(CAST(EXTRACT(YEAR FROM NOW()) - EXTRACT(YEAR FROM P.birth_date) AS INT)) AS age,
+    D.disease_name AS prescription,
+    CASE WHEN D.disease_name = 'astigmatic' THEN 'yes' ELSE 'no' END AS astigmatic,
+    A.tear_rate,
+    COALESCE(A.lenses, 'none') AS lenses
+FROM APPOINTMENT A
+JOIN PATIENT P ON A.patient_id = P.patient_id
+JOIN PRESCRIPTION PR ON A.appointment_id = PR.appointment_id
+JOIN DISEASE D ON PR.disease_id = D.disease_id
+ORDER BY age DESC, prescription DESC, astigmatic, tear_rate DESC, lenses;
+
+
+
+CREATE VIEW v1_class AS 
+SELECT
+	   '' AS AGE, 
+	   '' AS Prescription, 
+	   '' AS astigmatic, 
+	   '' AS tear_rate, 
+	   'class' AS lenses
+;
+	   
+
+CREATE VIEW v1_domain as 
+SELECT
+	   'discrete' AS AGE, 
+	   'discrete' AS Prescription, 
+	   'discrete' AS astigmatic, 
+	   'discrete' AS tear_rate, 
+	   'discrete' AS lenses
+;
+
+CREATE VIEW v1_dataset as 
+	SELECT * FROM v1_domain
+	union all 
+	SELECT * FROM v1_class
+	union all 
+	SELECT * FROM v1_data
+;
+
+
+------------------------------------
+
+SELECT * FROM v1_data;
+SELECT * FROM v1_class;
+SELECT * FROM v1_domain;
+SELECT * FROM v1_dataset;

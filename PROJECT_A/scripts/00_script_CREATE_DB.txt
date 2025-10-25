@@ -1,0 +1,24 @@
+--#############
+--##   G03   ##
+--#############
+
+
+------------------------------------------
+
+\set dataBase db_projeto_a
+;
+
+\echo "Remove Data Base" :dataBase
+;
+
+DROP DATABASE IF EXISTS :dataBase
+;
+
+
+\echo "Create Data Base" :dataBase
+;
+
+------------------------------------------
+
+CREATE DATABASE :dataBase
+;

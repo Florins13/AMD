@@ -1,0 +1,2 @@
+#!/bin/bash
+./_go.sh 03_script_CREATE_VIEW.txt

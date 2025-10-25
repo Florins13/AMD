@@ -1,0 +1,20 @@
+--#############
+--##   G03   ##
+--#############
+
+------------------------------------------
+
+\set dataBase db_projeto_a
+\set userName postgres
+\connect :dataBase :userName
+
+------------------------------------------
+
+\set filePath 'C:\Users\Nuno Silva\Desktop\Nuno\Universidade\Ano 1\Semestre 1\Aprendizagem e Mineração de Dados\Prática\Projeto\A\final'
+
+\o :filePath
+
+-- COPY (SELECT * FROM v1_dataset) TO STDOUT WITH (FORMAT CSV, DELIMITER E'\t', HEADER)
+COPY (SELECT * FROM v1_dataset) TO STDOUT DELIMITER E'\t' CSV HEADER;
+
+;
