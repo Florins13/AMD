@@ -3,7 +3,7 @@ from one_rule import one_rule  # your existing one_rule() function
 
 
 class OrangeClassifierManager:
-    def __init__(self, dataset_name="titanic", split_ratio=0.8):
+    def __init__(self, dataset_name="dataset.tab", split_ratio=0.8):
         """
         Handles data loading, splitting, and provides train/test sets
         for multiple classifiers (including custom ones).
@@ -78,21 +78,21 @@ class OrangeClassifierManager:
 
 if __name__ == "__main__":
     print("=== Running One Rule Classifier ===")
-    manager = OrangeClassifierManager("titanic")
+    manager = OrangeClassifierManager("dataset.tab")
     best_feature, best_rule, best_error, test_error_rate = manager.one_rule_model()
 
     manager.induction_tree_model()
     manager.naive_bayes_model()
 
-    print("\n=== One Rule Classifier Results Summary ===")
-    print(f"Best feature: {best_feature.name}")
-    print(f"Training error rate: {best_error:.2f}")
-    print(f"Testing error rate:  {test_error_rate:.2f}")
+    # print("\n=== One Rule Classifier Results Summary ===")
+    # print(f"Best feature: {best_feature.name}")
+    # print(f"Training error rate: {best_error:.2f}")
+    # print(f"Testing error rate:  {test_error_rate:.2f}")
 
-    count = 0
+    # count = 0
 
-    for i in range(0, 50): # edit the number of instances to be shown on print
-        count += 1
-        # Convert feature value to string to use as dictionary key 
-        predicted_class = best_rule[str(manager.data[i][best_feature])]
-        print(f"One Rule model: row {count} with the best feature: {best_feature} with a predicted class: {predicted_class}")
+    # for i in range(0, 50): # edit the number of instances to be shown on print
+    #     count += 1
+    #     # Convert feature value to string to use as dictionary key 
+    #     predicted_class = best_rule[str(manager.data[i][best_feature])]
+    #     print(f"One Rule model: row {count} with the best feature: {best_feature} with a predicted class: {predicted_class}")

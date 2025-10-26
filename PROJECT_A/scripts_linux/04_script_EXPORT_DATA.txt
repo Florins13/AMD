@@ -10,7 +10,7 @@
 
 ------------------------------------------
 
-\set filePath '/Users/florin/isel-2025/AMD/PROJECT_A/dataset.csv'
+\set filePath '/Users/florin/isel-2025/AMD/PROJECT_A/dataset.tab'
 
 \o :filePath
 

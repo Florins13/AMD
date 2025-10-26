@@ -16,7 +16,7 @@ def one_rule(data):
     """
     domain = data.domain
     class_var = domain.class_var
-    classes = list(class_var.values)
+    # classes = list(class_var.values)
 
     best_feature = None
     best_rule = None
