@@ -23,7 +23,6 @@ def one_rule(data):
     best_error = np.inf
 
     for feature in domain.attributes:
-        # Skip continuous features for simplicity
         if feature.is_continuous:
             continue
 
@@ -41,28 +40,21 @@ def one_rule(data):
             freq = {}
             for inst in subset:
                 cls = inst.get_class()
-                # Try to use the value directly, if unhashable convert to string
                 try:
                     cls_key = cls.value if hasattr(cls, 'value') else cls
                     freq[cls_key] = freq.get(cls_key, 0) + 1
                 except TypeError:
-                    # If unhashable (Orange.data.Value), convert to string
                     cls_key = str(cls)
                     freq[cls_key] = freq.get(cls_key, 0) + 1
 
-            # Majority class for this feature value
-            maj_class = max(freq.items(), key=lambda kv: kv[1])[0]
+            maj_class = max(freq, key=freq.get)
             
-            # Store rule with string key to avoid unhashable type issues
             rule[str(val)] = maj_class
 
-            # Count misclassified instances
             errors += len(subset) - freq[maj_class]
 
-        # Total error rate for this feature
         error_rate = errors / len(data)
 
-        # Keep best feature so far
         if error_rate < best_error:
             best_error = error_rate
             best_feature = feature
