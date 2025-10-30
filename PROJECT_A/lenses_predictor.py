@@ -1,2 +1,0 @@
-import Orange
-import OrangeClassifierManager from classifier_models
