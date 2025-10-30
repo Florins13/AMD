@@ -76,23 +76,134 @@ class OrangeClassifierManager:
 
         return test_error_rate
 
-if __name__ == "__main__":
-    print("=== Running One Rule Classifier ===")
+    # --------------------------
+    # Train all models and return classifiers
+    # --------------------------
+    def train_all_models(self):
+        """Train all models and return the classifiers for prediction."""
+        print("\n=== Training Models ===")
+        
+        # One Rule
+        best_feature, best_rule, best_error, one_rule_error = self.one_rule_model()
+        
+        # Decision Tree
+        tree_learner = Orange.classification.TreeLearner()
+        tree_classifier = tree_learner(self.train)
+        tree_error = self.induction_tree_model()
+        
+        # Naive Bayes
+        nb_learner = Orange.classification.NaiveBayesLearner()
+        nb_classifier = nb_learner(self.train)
+        nb_error = self.naive_bayes_model()
+        
+        classifiers = {
+            'one_rule': (best_feature, best_rule),
+            'tree': tree_classifier,
+            'naive_bayes': nb_classifier
+        }
+        
+        error_rates = {
+            'one_rule': one_rule_error,
+            'tree': tree_error,
+            'naive_bayes': nb_error
+        }
+        
+        return classifiers, error_rates
+    
+    # --------------------------
+    # Predict from user input
+    # --------------------------
+    def predict_from_input(self, classifiers, age, prescription, astigmatic, tear_rate):
+        """Make predictions using all trained classifiers."""
+        # Create an Orange instance from input
+        instance = Orange.data.Instance(self.data.domain, [age, prescription, astigmatic, tear_rate, "?"])
+        
+        results = {}
+        
+        # One Rule prediction
+        best_feature, best_rule = classifiers['one_rule']
+        val = str(instance[best_feature])
+        results['One Rule'] = best_rule.get(val, "none")
+        
+        # Decision Tree prediction
+        tree_pred = classifiers['tree'](instance)
+        results['Decision Tree'] = self.data.domain.class_var.values[int(tree_pred)]
+        
+        # Naive Bayes prediction
+        nb_pred = classifiers['naive_bayes'](instance)
+        results['Naive Bayes'] = self.data.domain.class_var.values[int(nb_pred)]
+        
+        return results
+
+
+def interactive_prediction():
+    """Interactive prompt for making predictions."""
+    print("=" * 60)
+    print("LENS RECOMMENDATION SYSTEM")
+    print("=" * 60)
+    
+    # Train models
     manager = OrangeClassifierManager("dataset.tab")
-    best_feature, best_rule, best_error, test_error_rate = manager.one_rule_model()
+    classifiers, error_rates = manager.train_all_models()
+    
+    print("\n" + "=" * 60)
+    print("Models trained! Ready for predictions.")
+    print("=" * 60)
+    
+    while True:
+        print("\n" + "-" * 60)
+        print("Enter patient data (or 'quit' to exit)")
+        print("-" * 60)
+        print("\nFormat: age,prescription,astigmatic,tear_rate")
+        print("Example: young,myope,yes,normal")
+        print("\nValid values:")
+        print("  age: young, pre-presbyopic, presbyopic")
+        print("  prescription: myope, hypermetrope")
+        print("  astigmatic: yes, no")
+        print("  tear_rate: normal, reduced")
+        print("-" * 60)
+        
+        user_input = input("\nEnter data: ").strip()
+        
+        if user_input.lower() in ['quit', 'exit', 'q']:
+            print("\nThank you for using the Lens Recommendation System!")
+            break
+        
+        try:
+            # Parse input
+            parts = [p.strip() for p in user_input.split(',')]
+            if len(parts) != 4:
+                print("❌ Error: Please enter exactly 4 values separated by commas.")
+                continue
+            
+            age, prescription, astigmatic, tear_rate = parts
+            
+            # Make predictions
+            results = manager.predict_from_input(classifiers, age, prescription, astigmatic, tear_rate)
+            
+            print("\n" + "=" * 60)
+            print("PREDICTIONS:")
+            print("=" * 60)
+            print(f"Patient: {age}, {prescription}, astigmatic={astigmatic}, tear_rate={tear_rate}")
+            print("-" * 60)
+            
+            # Map display names to internal keys
+            model_mapping = {
+                'One Rule': 'one_rule',
+                'Decision Tree': 'tree',
+                'Naive Bayes': 'naive_bayes'
+            }
+            
+            for model_name, prediction in results.items():
+                model_key = model_mapping[model_name]
+                error_rate = error_rates[model_key]
+                print(f"  {model_name:20s} → {prediction:10s} (Error Rate: {error_rate:.2%})")
+            print("=" * 60)
+            
+        except Exception as e:
+            print(f"❌ Error: {e}")
+            print("Please check your input and try again.")
 
-    manager.induction_tree_model()
-    manager.naive_bayes_model()
 
-    # print("\n=== One Rule Classifier Results Summary ===")
-    # print(f"Best feature: {best_feature.name}")
-    # print(f"Training error rate: {best_error:.2f}")
-    # print(f"Testing error rate:  {test_error_rate:.2f}")
-
-    # count = 0
-
-    # for i in range(0, 50): # edit the number of instances to be shown on print
-    #     count += 1
-    #     # Convert feature value to string to use as dictionary key 
-    #     predicted_class = best_rule[str(manager.data[i][best_feature])]
-    #     print(f"One Rule model: row {count} with the best feature: {best_feature} with a predicted class: {predicted_class}")
+if __name__ == "__main__":
+    interactive_prediction()
