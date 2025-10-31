@@ -1,13 +1,9 @@
 import Orange
-from one_rule import one_rule  # your existing one_rule() function
+from one_rule import one_rule
 
 
 class OrangeClassifierManager:
     def __init__(self, dataset_name="dataset.tab", split_ratio=0.8):
-        """
-        Handles data loading, splitting, and provides train/test sets
-        for multiple classifiers (including custom ones).
-        """
         # Load dataset
         self.data = Orange.data.Table(dataset_name)
 
@@ -21,9 +17,7 @@ class OrangeClassifierManager:
         print(f"{len(self.train)} training examples")
         print(f"{len(self.test)} testing examples")
 
-    # --------------------------
     # One Rule Classifier
-    # --------------------------
     def one_rule_model(self):
         best_feature, best_rule, best_error = one_rule(self.train)
 
@@ -41,9 +35,7 @@ class OrangeClassifierManager:
 
         return best_feature, best_rule, best_error, test_error_rate
 
-    # --------------------------
-    # Induction tree classifier
-    # --------------------------    
+    # Induction tree classifier  
     def induction_tree_model(self):
         learner = Orange.classification.TreeLearner()
         classifier = learner(self.train) 
@@ -59,9 +51,7 @@ class OrangeClassifierManager:
         return test_error_rate
 
 
-    # --------------------------
     # Naive Bayes Classifier
-    # --------------------------
     def naive_bayes_model(self):
         learner = Orange.classification.NaiveBayesLearner()
         classifier = learner(self.train)
@@ -76,13 +66,8 @@ class OrangeClassifierManager:
 
         return test_error_rate
 
-    # --------------------------
     # Train all models and return classifiers
-    # --------------------------
     def train_all_models(self):
-        """Train all models and return the classifiers for prediction."""
-        print("\n=== Training Models ===")
-        
         # One Rule
         best_feature, best_rule, best_error, one_rule_error = self.one_rule_model()
         
@@ -110,13 +95,10 @@ class OrangeClassifierManager:
         
         return classifiers, error_rates
     
-    # --------------------------
     # Predict from user input
-    # --------------------------
     def predict_from_input(self, classifiers, age, prescription, astigmatic, tear_rate):
-        """Make predictions using all trained classifiers."""
         # Create an Orange instance from input
-        instance = Orange.data.Instance(self.data.domain, [age, prescription, astigmatic, tear_rate, "?"])
+        instance = Orange.data.Instance(self.data.domain, [age, prescription, astigmatic, tear_rate, None])
         
         results = {}
         
@@ -137,14 +119,13 @@ class OrangeClassifierManager:
 
 
 def interactive_prediction():
-    """Interactive prompt for making predictions."""
     print("=" * 60)
-    print("LENS RECOMMENDATION SYSTEM")
+    print("LENS PREDICTION SYSTEM")
     print("=" * 60)
     
     # Train models
-    manager = OrangeClassifierManager("dataset.tab")
-    classifiers, error_rates = manager.train_all_models()
+    orange_manager = OrangeClassifierManager("dataset.tab")
+    classifiers, error_rates = orange_manager.train_all_models()
     
     print("\n" + "=" * 60)
     print("Models trained! Ready for predictions.")
@@ -173,13 +154,13 @@ def interactive_prediction():
             # Parse input
             parts = [p.strip() for p in user_input.split(',')]
             if len(parts) != 4:
-                print("❌ Error: Please enter exactly 4 values separated by commas.")
+                print("Error: Please enter exactly 4 values separated by commas.")
                 continue
             
             age, prescription, astigmatic, tear_rate = parts
             
             # Make predictions
-            results = manager.predict_from_input(classifiers, age, prescription, astigmatic, tear_rate)
+            results = orange_manager.predict_from_input(classifiers, age, prescription, astigmatic, tear_rate)
             
             print("\n" + "=" * 60)
             print("PREDICTIONS:")
@@ -201,7 +182,7 @@ def interactive_prediction():
             print("=" * 60)
             
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"Error: {e}")
             print("Please check your input and try again.")
 
 
