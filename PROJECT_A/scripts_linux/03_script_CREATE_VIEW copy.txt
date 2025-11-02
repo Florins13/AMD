@@ -1,0 +1,88 @@
+--#############
+--##   G03   ##
+--#############
+
+------------------------------------------
+\set dataBase db_projeto_a
+;
+\set userName postgres
+;
+\connect :dataBase :userName
+;
+------------------------------------------
+
+DROP VIEW IF EXISTS v1_data CASCADE;
+DROP VIEW IF EXISTS v1_class CASCADE;
+DROP VIEW IF EXISTS v1_domain CASCADE;
+DROP VIEW IF EXISTS v1_dataset CASCADE;
+DROP FUNCTION IF EXISTS getage(integer);
+
+CREATE OR REPLACE FUNCTION getage(age_input integer)
+RETURNS text
+LANGUAGE sql
+IMMUTABLE STRICT
+AS $$
+   SELECT name 
+   FROM AGE
+   WHERE min_age <= age_input AND max_age >= age_input;
+$$;
+
+CREATE OR REPLACE VIEW v1_data AS
+SELECT
+    getage(CAST(EXTRACT(YEAR FROM NOW()) - EXTRACT(YEAR FROM P.birth_date) AS INT)) AS age,
+
+    D.disease_name AS prescription,
+
+    CASE 
+        WHEN A3.appointment_id IS NOT NULL THEN 'yes'
+        ELSE 'no'
+    END AS astigmatic,
+
+    A.tear_rate,
+    COALESCE(A.lenses, 'none') AS lenses
+
+FROM APPOINTMENT A
+JOIN PATIENT P 
+    ON A.patient_id = P.patient_id
+JOIN PRESCRIPTION PR 
+    ON A.appointment_id = PR.appointment_id
+JOIN DISEASE D 
+    ON PR.disease_id = D.disease_id 
+    AND D.disease_name <> 'astigmatic'
+LEFT JOIN (
+    SELECT DISTINCT appointment_id
+    FROM PRESCRIPTION PR2
+    JOIN DISEASE D2 ON PR2.disease_id = D2.disease_id
+    WHERE D2.disease_name = 'astigmatic'
+) AS A3
+    ON A3.appointment_id = A.appointment_id
+
+ORDER BY age DESC, prescription DESC, astigmatic, tear_rate DESC, lenses;
+
+CREATE OR REPLACE VIEW v1_class AS 
+SELECT
+    '' AS age, 
+    '' AS prescription, 
+    '' AS astigmatic, 
+    '' AS tear_rate, 
+    'class' AS lenses;
+
+CREATE OR REPLACE VIEW v1_domain AS 
+SELECT
+    'discrete' AS age, 
+    'discrete' AS prescription, 
+    'discrete' AS astigmatic, 
+    'discrete' AS tear_rate, 
+    'discrete' AS lenses;
+
+CREATE OR REPLACE VIEW v1_dataset AS 
+SELECT * FROM v1_domain
+UNION ALL 
+SELECT * FROM v1_class
+UNION ALL 
+SELECT * FROM v1_data;
+
+SELECT * FROM v1_data;
+SELECT * FROM v1_class;
+SELECT * FROM v1_domain;
+SELECT * FROM v1_dataset;
