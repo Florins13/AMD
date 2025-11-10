@@ -118,13 +118,15 @@ class OrangeClassifierManager:
         return results
 
 
-def interactive_prediction():
+def interactive_prediction(dataset_name="dataset.tab"):
     print("=" * 60)
     print("LENS PREDICTION SYSTEM")
     print("=" * 60)
+    print(f"Using dataset: {dataset_name}")
+    print("=" * 60)
     
     # Train models
-    orange_manager = OrangeClassifierManager("dataset.tab")
+    orange_manager = OrangeClassifierManager(dataset_name)
     classifiers, error_rates = orange_manager.train_all_models()
     
     print("\n" + "=" * 60)
@@ -187,4 +189,13 @@ def interactive_prediction():
 
 
 if __name__ == "__main__":
-    interactive_prediction()
+    import sys
+    
+    # Default dataset
+    dataset_name = "dataset.tab"
+    
+    # Check if dataset file is provided as command line argument
+    if len(sys.argv) > 1:
+        dataset_name = sys.argv[1]
+    
+    interactive_prediction(dataset_name)

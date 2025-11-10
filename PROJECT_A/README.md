@@ -28,7 +28,12 @@ python3 PROJECT_A/classifier_models.py
 ```
 
 What the prompt does
-- The script loads the dataset `dataset.tab` by default (to use another file, edit the filename in the code or replace `dataset.tab` with another file name).
+- The script loads the dataset `dataset.tab` by default. To use another file, add to the first command argument the dataset file name like this:
+
+```bash
+python3 PROJECT_A/classifier_models.py dataset1.tab
+```
+
 - It trains One-Rule (a simple categorical rule), a Decision Tree (Orange's TreeLearner) and a Naive Bayes classifier.
 - After training it opens an interactive prompt where we enter four comma-separated values matching the dataset attributes in this order:
   age, prescription, astigmatic, tear_rate
@@ -43,6 +48,5 @@ How to exit
 - Type `quit`, `exit` or press Ctrl+C
 
 Notes
-- If the dataset file is not `dataset.tab`, either pass the correct filename when creating the `OrangeClassifierManager` inside the script or replace the default in the `__init__` call.
 - With very small datasets the Decision Tree may overfit; we need to use the printed error rates to compare models.
 - If we prefer a command-line quick-run (non-interactive) we can edit `classifier_models.py` to expose a small CLI wrapper that calls `one_rule_model()`, `induction_tree_model()` or `naive_bayes_model()` directly.
