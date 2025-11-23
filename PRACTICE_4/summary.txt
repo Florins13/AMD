@@ -1,0 +1,50 @@
+# Exercise 4
+a) Imports module: Imports a01_aFunction as aF and calls aF.f(['x', 4])
+
+This function filters the list for even integers (none in this list), so it becomes empty
+It then waits for user input, looping until the user enters 'quit' or 'exit'
+In the script a02 the number 4 is included in the list. If we press 4 we break the loop and exit the prompt script.
+
+b) code added for this part
+
+c) The created script is a .bat script which cannot be runned in linux based systems. But after investigating
+the file we observed that this file tries to ensure a specific version of python is being used rather then default python set in the system path.
+This guaratess that the correct python interpreter runs the file even with multiple versions.
+This part also writes a new line in the a02 file and prints it into the console.
+
+d) We can observe that its possible to have dynamic code generation. The ITEM-C adds a new function that prints even when the
+number is divided and the rest is 0 and display odd if the rest is different then 0.
+
+e) When executed in Windows Command Prompt (DOS shell):
+   - platform.system() returns "Windows", so launcher = "my_python"
+   - Executes: my_python a01_aFunction.py
+   - The my_python.bat batch file runs, setting the specific Python path
+   - The modified a01_aFunction.py executes in a subprocess within the DOS shell
+   - Output shows the new print statement and function definition added by ITEM-A and ITEM-C
+   - The subprocess runs in the DOS shell environment, showing true inter-process communication
+
+
+# Exercise 5
+
+a) Uncomment ITEM-A through ITEM-C and Execute
+   - ITEM-A appends a new print statement to a01_aFunction.py
+   - ITEM-B executes the modified file using the platform-appropriate launcher (my_python.bat on Windows, ../my_python.sh on Linux/macOS)
+   - ITEM-C appends a new function g(x) to a01_aFunction.py that checks if a number is even or odd
+   - Result: The file is modified twice and executed, showing the cascading effects of dynamic code generation
+   - Undo: Remove the added print statement and function g(x) from a01_aFunction.py, then re-comment ITEM-A, ITEM-B, ITEM-C in a02_anotherBehavior.py
+
+b) Add average() function to a01_aFunction.py
+   - Created new function average(aList) that calculates the average of all numeric values in aList
+   - Returns the sum divided by the count of numeric values
+   - Function handles empty lists and mixed data types correctly
+
+c) Uncomment ITEM-A through ITEM-D and Execute with average() function
+   - Uncommented all sections including ITEM-D which now calls the average() function
+   - ITEM-A adds a print statement to a01_aFunction.py
+   - ITEM-B executes the modified file via subprocess
+   - ITEM-C adds the average() function (or another custom function) to a01_aFunction.py
+   - ITEM-D imports the module, reloads it with importlib, and calls the average() function with test data
+   - Result: The script demonstrates complete dynamic code generation workflow from file modification to execution
+   - The average() function is dynamically added and executed in the subprocess
+
+

@@ -13,7 +13,7 @@ import sys
 from getopt import getopt, error
 # The "getopt" module helps scripts to parse the command line arguments in sys.argv.
 # It supports the same conventions as the Unix getopt() function
-# (including the special meanings of arguments of the form ‘-‘ and ‘--‘).
+# (including the special meanings of arguments of the form ï¿½-ï¿½ and ï¿½--ï¿½).
 
 
 
@@ -25,11 +25,12 @@ from getopt import getopt, error
 class e_Config():
    def __init__( self ):
       # definition of default (option, value) pairs
-      # i.e., the defualt values for the system parameters: a, b, c
+      # i.e., the defualt values for the system parameters: x, y, z, t
       self.__optionValue = { \
-         ("-a", "--paramA"): "aaa", \
-         ("-b", "--paramB"): 555, \
-         ("-c", "--paramC"): "RsR" }
+         ("-x", "--paramX"): "valueX", \
+         ("-y", "--paramY"): 100, \
+         ("-z", "--paramZ"): "valueZ", \
+         ("-t", "--paramT"): 999 }
 
   
    def config( self, argv ):
@@ -37,8 +38,8 @@ class e_Config():
          try:
             (argv_optionValue, args) = \
                getopt( argv[1:], \
-                       "a:b:c:", \
-                       ["paramA=", "paramB=", "paramC="] )
+                       "x:y:z:t:", \
+                       ["paramX=", "paramY=", "paramZ=", "paramT="] )
          except error: raise Usage( self.usage() )
       except Usage as incorrect:
          sys.stderr.write( incorrect.msg )
@@ -62,9 +63,9 @@ class e_Config():
       aStr = ""
       aStr += "\n"
       aStr += "\n" + "Usage:"
-      aStr += "\n" +  "> " + thisFile + " -a valueA -b valueB -c valueC"
+      aStr += "\n" +  "> " + thisFile + " -x valueX -y valueY -z valueZ -t valueT"
       aStr += "\n" +  "or"
-      aStr += "\n" +  "> " + thisFile + " --paramA valueA --paramB valueB --paramC valueC"
+      aStr += "\n" +  "> " + thisFile + " --paramX valueX --paramY valueY --paramZ valueZ --paramT valueT"
       aStr += "\n"
       return aStr
 
@@ -99,10 +100,10 @@ if __name__ == "__main__":
    e.config( sys.argv )
    print( e.obterOpcaoValor() )
    
-##   # a test: uncomment the next 3 lines to activate the test
-##   argvTest = ["f", '-a', 111, '-b', 222, '-c', 333]
-##   e.config( argvTest )
-##   print( e.obterOpcaoValor() )
+   # a test: uncomment the next 3 lines to activate the test
+   argvTest = ["f", '-x', 111, '-y', 222, '-z', 333, '-t', 444]
+   e.config( argvTest )
+   print( e.obterOpcaoValor() )
 
 
 

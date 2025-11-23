@@ -21,3 +21,16 @@ if __name__ == "__main__":
 
 
 
+def g( x ):
+  if x % 2 == 0: print( "EVEN" )
+  else: print( "ODD" )
+
+
+def average( aList ):
+   numeric_values = [ x for x in aList if isinstance(x, (int, float)) ]
+   
+   if len(numeric_values) == 0:
+      return 0  # return 0 if no numeric values found
+   
+   return sum(numeric_values) / len(numeric_values)
+
