@@ -71,6 +71,58 @@ print( c()( 3 )() )
 #__________________________________________________________________________
 
 
+#__________________________________________________________________________
+# extended class with new method
+#__________________________________________________________________________
+print( "\n\n=== extended class with new method ===" )
+
+def c_extended( v=0 ):
+   def s_m( x ):
+      if x == 1:
+         def m( y ): return y**2 + v
+      elif x == 2:
+         def m( y ): return "< " + str(y) + " >" + "$ " + str(v) + " $"
+      elif x == 3:  # NEW METHOD: returns cube
+         def m( y ): return y**3 + v
+      else:
+         def m(): return "---"
+      return m
+   return s_m
+
+print( "new method (3 - cube):" )
+print( "c_extended()( 3 )( 5 ) =", c_extended()( 3 )( 5 ) )  # 125
+print( "c_extended( 10 )( 3 )( 2 ) =", c_extended( 10 )( 3 )( 2 ) )  # 18
+#__________________________________________________________________________
+
+
+#__________________________________________________________________________
+# meta-class concept
+#__________________________________________________________________________
+print( "\n===  meta-class concept ===" )
+
+def meta_class( class_type="math" ):
+   if class_type == "math":
+      def math_class( v=0 ):
+         def s_m( x ):
+            if x == 1:
+               def m( y ): return y + v  # addition
+            elif x == 2:
+               def m( y ): return y * v if v != 0 else y  # multiplication
+            else:
+               def m(): return "Unknown"
+            return m
+         return s_m
+      return math_class
+   else:
+      return c  # default
+
+print( "math class via meta_class:" )
+MathClass = meta_class( "math" )
+print( "mathClass( 10 )( 1 )( 5 ) [add] =", MathClass( 10 )( 1 )( 5 ) )  # 15
+print( "mathClass( 10 )( 2 )( 5 ) [mul] =", MathClass( 10 )( 2 )( 5 ) )  # 50
+#__________________________________________________________________________
+
+
 
 #__________________________________________________________________________
 # seja:
@@ -101,7 +153,7 @@ def g( fn ):
       return s
    return local
    
-print( "\nVersion with @decorator syntax:" )
+print( "\nversion with @decorator syntax:" )
 @f
 @g
 def h():
@@ -110,10 +162,32 @@ def h():
 
 print( h() )
 
-print( "\nVersion with direct (explicit) definition:" )
+print( "\nversion with direct (explicit) definition:" )
 def h():
    s = "h"
    return s
 
 h = f( g ( h ) )
 print( h() )
+
+
+#__________________________________________________________________________
+# decorator variations
+#__________________________________________________________________________
+print( "\n\n=== PART (D): decorator variations ===" )
+
+print( "\n1. reversed order @g @f:" )
+@g
+@f
+def h_var1():
+   return "h"
+print( h_var1() )
+
+print( "\n2. multiple @f @f @f @g:" )
+@f
+@f
+@f
+@g
+def h_var2():
+   return "h"
+print( h_var2() )
