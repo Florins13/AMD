@@ -2,7 +2,7 @@ import Orange
 from one_rule import one_rule
 
 class ClassifierHandler():
-    def __init__(self, dataset_name="dataset.tab", split_ratio=0.8):
+    def __init__(self, dataset_name="dataset_long_name_CONVERTED.tab", split_ratio=0.8):
         # Load dataset
         self.data = Orange.data.Table(dataset_name)
 
