@@ -1,0 +1,13 @@
+Selected attribute: odor
+Error rate: 0.0143
+
+(odor, ALMOND, EDIBLE) : (0, 308)
+(odor, ANISE, EDIBLE) : (0, 304)
+(odor, CREOSOTE, POISONOUS) : (0, 153)
+(odor, FISHY, POISONOUS) : (0, 472)
+(odor, FOUL, POISONOUS) : (0, 1724)
+(odor, MUSTY, POISONOUS) : (0, 35)
+(odor, NONE, EDIBLE) : (0, 2957)
+(odor, NONE, POISONOUS) : (96, 96)
+(odor, PUNGENT, POISONOUS) : (0, 218)
+(odor, SPICY, POISONOUS) : (0, 465)
