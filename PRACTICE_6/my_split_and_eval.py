@@ -187,7 +187,7 @@ def fold_split( k_folds, seed=None ):
   # - k consecutive folds (k_folds parameter)
   # - each fold used once as validation; the k-1 remaining folds as training dataset
   # - shuffle=True, so dataset is shuffled (random split) before building the folds
-  tt_split_indexes = None # <your-code-here>
+  tt_split_indexes = KFold(n_splits=k_folds, shuffle=True, random_state=seed)  #None 
   return tt_split_indexes
 
 
@@ -197,7 +197,7 @@ def stratified_fold_split( k_folds, seed=None ):
   # - each fold used once as validation; the k-1 remaining folds as training dataset
   # - shuffle=True, so dataset is shuffled (random split) before building the folds
   # - datasets preserve the percentage of samples for each class
-  tt_split_indexes = None # <your-code-here>
+  tt_split_indexes = StratifiedKFold(n_splits=k_folds,shuffle=True, random_state=seed) 
   return tt_split_indexes
 
 
@@ -206,8 +206,8 @@ def repeated_fold_split( k_folds, n_repeat, seed=None ):
   # - k consecutive folds (k_folds parameter)
   # - each fold used once as validation; the k-1 remaining folds as training dataset
   # - repeats (n_repeat times) KFold with different randomization in each repetition
-  tt_split_indexes = None # <your-code-here>
-  return tt_split_indexes
+  tt_split_indexes = RepeatedKFold(n_splits=k_folds,n_repeats=n_repeat,random_state=seed) 
+  return tt_split_indexes 
 
 
 def repeated_stratified_fold_split( k_folds, n_repeat, seed=None ):
@@ -215,7 +215,7 @@ def repeated_stratified_fold_split( k_folds, n_repeat, seed=None ):
   # - k consecutive folds (k_folds parameter)
   # - each fold used once as validation; the k-1 remaining folds as training dataset
   # - repeats (n_repeat times) StratifiedKFold with different randomization in each repetition
-  tt_split_indexes = None # <your-code-here>
+  tt_split_indexes = RepeatedStratifiedKFold(n_splits=k_folds, n_repeats=n_repeat, random_state=seed ) #None
   return tt_split_indexes
 
 
@@ -224,7 +224,7 @@ def leave_one_out():
   # - each sample is used once as a test set (singleton), and
   # - the remaining samples form the training set
   # - same as KFold(n_splits=n), where n is number of dataset samples
-  tt_split_indexes = None # <your-code-here>
+  tt_split_indexes = LeaveOneOut() #None 
   return tt_split_indexes
 
 
@@ -233,7 +233,7 @@ def leave_p_out( p ):
   # - testing on all distinct samples of size p, and
   # - the remaining n-p samples form the training set in each iteration
   # - NOT same as KFold(n_splits=n_samples//p), which creates non-overlapping test sets
-  tt_split_indexes = None # <your-code-here>
+  tt_split_indexes = LeavePOut(p=p) #None 
   return tt_split_indexes
 
 
