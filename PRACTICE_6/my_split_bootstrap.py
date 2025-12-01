@@ -55,7 +55,10 @@ class MyBootstrap( ABC ):
   
     #testing set is created from individuals, i, not in training set
     # <your-code-here>
-    test_indexes = train_indexes
+    test_indexes = []
+    for i in indexes:
+      if i not in train_indexes:
+        test_indexes.append( i )
 
     self.tt_split_indexes = [ ( train_indexes, test_indexes ) ]
     return self.tt_split_indexes
@@ -133,11 +136,13 @@ def main():
   print( "tt_split_indexes | once\n", tt_split_indexes )
 
   # <your-code-here>
-  n_repeat = 3
-  print( 2*"\n" + "<<< ----- >>>" )
-  bsR = MyBootstrapSplitRepeated( n_repeat, seed )
-  tt_split_indexes = bsR.split( X )
-  print( "tt_split_indexes | repeated\n", tt_split_indexes )
+  # Try different numbers of repetitions
+  for repetition_number in [2, 10, 40]:
+    print( 2*"\n" + "<<< ----- >>>" )
+    print( f"n_repeat = {repetition_number}" )
+    bsR = MyBootstrapSplitRepeated( repetition_number, seed )
+    tt_split_indexes = bsR.split( X )
+    print( "tt_split_indexes | repeated\n", tt_split_indexes )
 
 
 
