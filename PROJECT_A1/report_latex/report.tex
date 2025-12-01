@@ -325,7 +325,7 @@ No último ponto utiliza-se o Orange Data Mining para construir um fluxo visual 
 
 \subsection{Número total de instâncias}
 
-The dataset provided contains 8416 instances (occurrences) of the observed characteristics which can be seen in Figure~\ref{fig:data_table}.
+O dataset fornecido contém 8416 instâncias (ocorrências) das características observadas, tal como se pode ver na Figura~\ref{fig:data_table}.
 
 \begin{figure}[H]
     \centering
@@ -336,7 +336,7 @@ The dataset provided contains 8416 instances (occurrences) of the observed chara
 
 \subsection{Número de instâncias de cada classe}
 
-The FungiDataset has a distribution with 4488 instances classified as EDIBLE and 3928 instances classified as POISONOUS as can be seen in the figure below.
+O FungiDataset tem uma distribuição com 4488 instâncias classificadas como EDIBLE e 3928 instâncias classificadas como POISONOUS, tal como se pode ver na figura abaixo.
 
 \begin{figure}[H]
     \centering
@@ -347,7 +347,7 @@ The FungiDataset has a distribution with 4488 instances classified as EDIBLE and
 
 \subsection{Classificador Tree}
 
-Figure~\ref{fig:tree_classification} shows the result of the TREE classification using Orange. It can be observed that it chose the same parameter as 1R, correctly identifying all poisonous mushrooms and only missing 2.5\% of the edible ones (false negatives). The decision tree easily separates mushrooms because the odor attribute is a strong predictor. Subsequent splits only refine borderline cases.
+A Figura~\ref{fig:tree_classification} mostra o resultado da classificação TREE utilizando Orange. Pode observar-se que escolheu o mesmo parâmetro que o 1R, identificando corretamente todos os cogumelos venenosos e perdendo apenas 2,5\% dos comestíveis (falsos negativos). A árvore de decisão separa facilmente os cogumelos porque o atributo odor é um preditor forte.
 
 \begin{figure}[H]
     \centering
@@ -358,7 +358,7 @@ Figure~\ref{fig:tree_classification} shows the result of the TREE classification
 
 \subsection{Classificador Random Forest}
 
-The Random Forest classifier demonstrates absolute effectiveness in correctly classifying all occurrences into their respective classes. Figure~\ref{fig:rf_confusion_matrix} perfectly illustrates the confusion matrix on the diagonal. Random Forest aggregates multiple decision trees for more stable predictions.
+O classificador Random Forest demonstra eficácia absoluta ao classificar corretamente todas as ocorrências nas suas respectivas classes. A Figura~\ref{fig:rf_confusion_matrix} ilustra perfeitamente a matriz de confusão na diagonal. Random Forest agrega múltiplas árvores de decisão para previsões mais estáveis.
 
 \begin{figure}[H]
     \centering
@@ -367,7 +367,7 @@ The Random Forest classifier demonstrates absolute effectiveness in correctly cl
     \label{fig:rf_confusion_matrix}
 \end{figure}
 
-The fact that this classifier performed better than the previous one is due to its better distribution of training and test data, as well as its reliance on multiple decision trees. The figure below shows the trees it generated.
+O melhor desempenho deste classificador em relação ao anterior deve-se à sua melhor distribuição de dados de treino e teste, bem como à sua dependência de múltiplas árvores de decisão. A figura seguinte mostra as árvores geradas.
 
 \begin{figure}[H]
     \centering
@@ -378,7 +378,7 @@ The fact that this classifier performed better than the previous one is due to i
 
 \subsection{Previsões}
 
-The comparisons made are between the Tree classifier (Figure~\ref{fig:tree_confusion_matrix}) and the Random Forest (Figure~\ref{fig:rf_confusion_matrix}). As mentioned in the previous paragraph, RF has a perfect score, correctly identifying all classes; however, tree has a small deviation.
+Os classificadores Random Forest (Figura 4) e Tree (Figura 6) são comparados e, como mencionado anteriormente, RF tem uma pontuação perfeita, identificando corretamente todas as classes, apesar do pequeno desvio da árvore
 
 \begin{figure}[H]
     \centering
@@ -393,6 +393,6 @@ A realização deste laboratório permitiu aplicar de forma integrada várias co
 
 A utilização combinada de código e ferramentas visuais evidencia a complementaridade entre abordagens programáticas e ambientes de data mining interativos.
 
-The mushroom dataset contains 8416 instances. The attribute odor dominates the classification. Random forest confirms robustness of predictions. Both were near perfect score with Random Forest having a slight more accurate prediction.
+O dataset de cogumelos contém 8416 instâncias. O atributo odor domina a classificação. Random Forest confirma a robustez das previsões. Ambos obtiveram uma pontuação próxima da perfeição, com Random Forest a ter uma previsão ligeiramente mais precisa.
 
 \end{document}
