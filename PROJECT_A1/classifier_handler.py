@@ -16,4 +16,8 @@ class ClassifierHandler():
         print(f"{len(self.train)} training examples")
         print(f"{len(self.test)} testing examples")
 
-    
+if __name__ == "__main__":
+    handler = ClassifierHandler(
+        dataset_name="dataset_long_name_CONVERTED.tab", 
+        split_ratio=0.8
+    )
