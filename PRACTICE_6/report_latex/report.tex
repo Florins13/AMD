@@ -1,0 +1,570 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Page geometry
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+
+% Code listings setup
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    captionpos=b,
+    tabsize=4
+}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    {\Large \textbf{Instituto Superior de Engenharia de Lisboa}}\\[0.5cm]
+    
+    {\large Departamento de Engenharia Eletrónica e Telecomunicações e de Computadores (DEETC)}\\[1cm]
+    
+    {\large Mestrado em Engenharia Informática e de Computadores}\\[2cm]
+    
+    {\LARGE \textbf{PRACTICE 6 - Report}}\\[0.5cm]
+    {\Large Train-Test Split Methods and Evaluation Metrics}\\[1.5cm]
+    
+    {\Large Aprendizagem e Mineração de Dados (AMD)}\\[0.3cm]
+    {\large 1º Semestre -- 2025/2026}\\[3cm]
+    
+    \vfill
+    
+    {\large \textbf{Autores:}}\\[0.2cm]
+    {\large
+        Florin Sofinet (A46608)\\
+        Diogo Guerra (A49149)\\
+        Nuno Silva (A53976)
+    }
+    
+    \vfill
+    
+    {\large \today}
+    
+\end{titlepage}
+
+% Table of contents
+\tableofcontents
+\newpage
+
+% Main content
+\section{Introduction}
+
+This report documents the implementation and analysis of exercises 6 and 7 from Practice 6, focusing on building classifiers using various train-test split methods and evaluating their performance using multiple scoring metrics. The exercises utilize the \texttt{my\_split\_and\_eval.py} script, which provides a comprehensive framework for machine learning model evaluation using scikit-learn.
+
+\subsection{Objectives}
+
+The main objectives of these exercises are:
+\begin{itemize}
+    \item Implement and understand different train-test split methodologies
+    \item Build classification models using Decision Tree Classifier
+    \item Apply multiple evaluation metrics to assess model performance
+    \item Understand and handle metric warnings in edge cases
+    \item Analyze the impact of small datasets on evaluation metrics
+\end{itemize}
+
+\section{Exercise 6: Building a Classifier with Train-Test Split}
+
+\subsection{Overview}
+
+Exercise 6 focuses on the fundamental implementation of a classifier using a single train-test split method. The goal is to establish the basic pipeline for training and evaluating machine learning models.
+
+\subsection{Implementation Steps}
+
+\subsubsection{Step a) Comment All Train-Test Split Methods}
+
+The first step required commenting out all train-test split methods in the \texttt{list\_func\_tt\_split} list. This ensures a clean starting point where no split method is active.
+
+\begin{lstlisting}[caption={Commented split methods}]
+# list_func_tt_split = \
+#   [
+#    (holdout, (0.5, seed)),
+#    (stratified_holdout, (1.0/3.0, seed)),
+#    (repeated_holdout, (1.0/3.0, 2, seed)),
+#    ...
+#   ]
+\end{lstlisting}
+
+\subsubsection{Step b) Apply DecisionTreeClassifier}
+
+The \texttt{DecisionTreeClassifier} was enabled in the \texttt{list\_func\_classifier} list:
+
+\begin{lstlisting}[caption={Enabled Decision Tree Classifier}]
+list_func_classifier = \
+  [
+   (DecisionTreeClassifier, ())
+  ]
+\end{lstlisting}
+
+At this stage, running the script results in no output because:
+\begin{enumerate}
+    \item No train-test split method is active
+    \item The main loop has no iterations to perform
+\end{enumerate}
+
+\subsubsection{Step c) Apply Holdout Split Method}
+
+The holdout split method was enabled with a 50\% train-test split:
+
+\begin{lstlisting}[caption={Enabled holdout split}]
+list_func_tt_split = \
+  [
+   (holdout, (0.5, seed)),
+  ]
+\end{lstlisting}
+
+Additionally, the \texttt{accuracy\_score} metric was enabled:
+
+\begin{lstlisting}[caption={Enabled accuracy metric}]
+list_score_metric = \
+  [
+   (accuracy_score, {}),
+  ]
+\end{lstlisting}
+
+\subsection{Holdout Split Method}
+
+The holdout method is the simplest train-test split technique:
+
+\begin{itemize}
+    \item \textbf{Definition:} Randomly splits the dataset into two disjoint subsets
+    \item \textbf{Parameters:} 
+    \begin{itemize}
+        \item \texttt{test\_size=0.5} -- 50\% of data for testing
+        \item \texttt{seed=5} -- Random seed for reproducibility
+    \end{itemize}
+    \item \textbf{Characteristics:}
+    \begin{itemize}
+        \item Single split execution (n\_splits=1)
+        \item Fast and simple
+        \item High variance in results (depends on random split)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Results}
+
+Using the Pima Indians Diabetes dataset (768 instances, 8 features):
+
+\begin{verbatim}
+train_test_split: holdout
+classifier: DecisionTreeClassifier
+score_method: accuracy_score
+::all-evaluated-datasets::
+ 66.15% |
+66.15% (+/- 0.00%)
+\end{verbatim}
+
+\subsubsection{Analysis}
+
+\begin{itemize}
+    \item \textbf{Accuracy:} 66.15\% -- The classifier correctly predicted diabetes status in approximately 2/3 of test cases
+    \item \textbf{Standard Deviation:} 0.00\% -- Expected, as only one split was performed
+    \item \textbf{Interpretation:} This represents a baseline performance for the Decision Tree on this medical diagnosis task
+\end{itemize}
+
+\section{Exercise 7: Multiple Metrics and Repeated Splits}
+
+\subsection{Overview}
+
+Exercise 7 extends the previous work by implementing the complete scoring pipeline with multiple evaluation metrics and repeated train-test splits. This exercise also addresses important warnings that arise when working with small datasets or imbalanced class distributions.
+
+\subsection{Implementation Steps}
+
+\subsubsection{Step d) Complete the score\_recipe Function}
+
+The \texttt{score\_recipe} function required two critical implementations:
+
+\begin{lstlisting}[caption={Completed score\_recipe function}]
+def score_recipe( classifier, X, y, tt_split_indexes,
+                  f_score, **keyword_args_score ):
+    score_all_list = list()
+
+    for ( train_index, test_index ) in tt_split_indexes.split( X, y ):
+      X_train, y_train = X[train_index], y[train_index]
+      X_test,  y_test  = X[test_index],  y[test_index]
+
+      # fit (build) model using classifier
+      classifier.fit( X_train, y_train )
+
+      # predict using the model and X_test
+      y_predict = classifier.predict( X_test )
+
+      # score the model using y_test and y_predict
+      score = f_score( y_test, y_predict, **keyword_args_score )
+      
+      score_all_list.append( score )
+
+    return score_all_list
+\end{lstlisting}
+
+\textbf{Key implementations:}
+\begin{enumerate}
+    \item \texttt{y\_predict = classifier.predict( X\_test )} -- Generates predictions for test data
+    \item \texttt{score = f\_score( y\_test, y\_predict, **keyword\_args\_score )} -- Calculates the metric score
+\end{enumerate}
+
+\subsubsection{Step e) Test with Repeated Holdout}
+
+The configuration was changed to use repeated holdout:
+
+\begin{lstlisting}[caption={Repeated holdout configuration}]
+list_func_tt_split = \
+  [
+   (repeated_holdout, (1.0/3.0, 2, seed)),
+  ]
+\end{lstlisting}
+
+All five evaluation metrics were enabled:
+
+\begin{lstlisting}[caption={All evaluation metrics}]
+list_score_metric = \
+  [
+   (accuracy_score, {}),
+   (precision_score, {"average":"weighted"}),
+   (recall_score, {"average":"weighted"}),
+   (f1_score, {"average":"weighted"}),
+   (cohen_kappa_score, {}),
+  ]
+\end{lstlisting}
+
+\subsection{Repeated Holdout Method}
+
+\begin{itemize}
+    \item \textbf{Definition:} Performs multiple random train-test splits
+    \item \textbf{Parameters:}
+    \begin{itemize}
+        \item \texttt{test\_size=1.0/3.0} -- 33.33\% for testing, 66.67\% for training
+        \item \texttt{n\_splits=2} -- Performs 2 independent splits
+        \item \texttt{seed=5} -- Random seed for reproducibility
+    \end{itemize}
+    \item \textbf{Advantages:}
+    \begin{itemize}
+        \item Reduces variance compared to single holdout
+        \item Provides standard deviation estimates
+        \item More reliable performance estimation
+    \end{itemize}
+\end{itemize}
+
+\subsection{Evaluation Metrics}
+
+\subsubsection{Accuracy}
+
+\begin{itemize}
+    \item \textbf{Definition:} Ratio of correct predictions to total predictions
+    \item \textbf{Formula:} $\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$
+    \item \textbf{Use case:} Overall correctness measure
+    \item \textbf{Limitation:} Can be misleading with imbalanced datasets
+\end{itemize}
+
+\subsubsection{Precision}
+
+\begin{itemize}
+    \item \textbf{Definition:} Ratio of true positives to all positive predictions
+    \item \textbf{Formula:} $\text{Precision} = \frac{TP}{TP + FP}$
+    \item \textbf{Use case:} Measures the ability not to label negative samples as positive
+    \item \textbf{Question answered:} "Of all instances predicted as positive, how many are actually positive?"
+\end{itemize}
+
+\subsubsection{Recall (Sensitivity)}
+
+\begin{itemize}
+    \item \textbf{Definition:} Ratio of true positives to all actual positive samples
+    \item \textbf{Formula:} $\text{Recall} = \frac{TP}{TP + FN}$
+    \item \textbf{Use case:} Measures the ability to find all positive samples
+    \item \textbf{Question answered:} "Of all actual positive instances, how many did we correctly identify?"
+\end{itemize}
+
+\subsubsection{F1-Score}
+
+\begin{itemize}
+    \item \textbf{Definition:} Harmonic mean of precision and recall
+    \item \textbf{Formula:} $\text{F1} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$
+    \item \textbf{Use case:} Balanced measure when you need to consider both false positives and false negatives
+    \item \textbf{Range:} 0 (worst) to 1 (best)
+\end{itemize}
+
+\subsubsection{Cohen's Kappa}
+
+\begin{itemize}
+    \item \textbf{Definition:} Measures agreement between predicted and actual classifications, accounting for chance agreement
+    \item \textbf{Formula:} $\kappa = \frac{p_o - p_e}{1 - p_e}$
+    \begin{itemize}
+        \item $p_o$ = observed agreement
+        \item $p_e$ = expected agreement by chance
+    \end{itemize}
+    \item \textbf{Range:} -1 to +1
+    \begin{itemize}
+        \item $\kappa = 1$: Perfect agreement
+        \item $\kappa = 0$: Agreement by chance
+        \item $\kappa < 0$: Less than chance agreement
+    \end{itemize}
+\end{itemize}
+
+\subsection{Results with Simple Dataset}
+
+Using the \texttt{simple\_dataset} (6 instances, 2 features, 2 classes):
+
+\begin{verbatim}
+train_test_split: repeated_holdout
+classifier: DecisionTreeClassifier
+
+score_method: accuracy_score
+::all-evaluated-datasets::
+ 50.00% | 0.00% |
+25.00% (+/- 25.00%)
+
+score_method: precision_score
+::all-evaluated-datasets::
+ 100.00% | 0.00% |
+50.00% (+/- 50.00%)
+
+score_method: recall_score
+::all-evaluated-datasets::
+ 50.00% | 0.00% |
+25.00% (+/- 25.00%)
+
+score_method: f1_score
+::all-evaluated-datasets::
+ 66.67% | 0.00% |
+33.33% (+/- 33.33%)
+
+score_method: cohen_kappa_score
+::all-evaluated-datasets::
+ 0.00% | 0.00% |
+0.00% (+/- 0.00%)
+\end{verbatim}
+
+\subsubsection{Analysis of Results}
+
+\begin{itemize}
+    \item \textbf{Accuracy:} 25.00\% $\pm$ 25.00\% -- High variance due to small dataset
+    \item \textbf{Precision:} 50.00\% $\pm$ 50.00\% -- One split had 100\%, another had 0\%
+    \item \textbf{Recall:} 25.00\% $\pm$ 25.00\% -- Similar variance to accuracy
+    \item \textbf{F1-Score:} 33.33\% $\pm$ 33.33\% -- Reflects the imbalance in precision/recall
+    \item \textbf{Cohen's Kappa:} 0.00\% $\pm$ 0.00\% -- No better than random chance
+\end{itemize}
+
+The extremely high standard deviations and poor performance are expected with only 6 samples split into even smaller train/test sets.
+
+\subsection{Understanding Metric Warnings}
+
+\subsubsection{Step f) \& g) Warning Analysis}
+
+When running the code, two types of warnings appear:
+
+\paragraph{Warning 1: "No Predicted Samples"}
+
+\begin{lstlisting}[language=bash, frame=single]
+UndefinedMetricWarning: Precision is ill-defined and being 
+set to 0.0 in labels with no predicted samples.
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item Occurs when the classifier \textbf{never predicts} a certain class
+    \item Example: Test set contains both class 0 and class 1, but the classifier only predicts class 1
+    \item \textbf{Formula breakdown:} $\text{Precision}_{\text{class 0}} = \frac{TP_0}{TP_0 + FP_0}$
+    \item If class 0 is never predicted: $TP_0 = 0$ and $FP_0 = 0$ $\Rightarrow$ division by zero
+    \item Affects: \textbf{Precision} and \textbf{F1-score}
+\end{itemize}
+
+\paragraph{Warning 2: "No True Samples"}
+
+\begin{lstlisting}[language=bash, frame=single]
+UndefinedMetricWarning: Recall is ill-defined and being 
+set to 0.0 in labels with no true samples.
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item Occurs when a certain class \textbf{doesn't exist} in the test set
+    \item Example: Test set only contains class 1 (no class 0 instances)
+    \item \textbf{Formula breakdown:} $\text{Recall}_{\text{class 0}} = \frac{TP_0}{TP_0 + FN_0}$
+    \item If no true class 0 samples exist: $TP_0 = 0$ and $FN_0 = 0$ $\Rightarrow$ division by zero
+    \item Affects: \textbf{Recall} and \textbf{F1-score}
+\end{itemize}
+
+\paragraph{Why F1-Score Gets Both Warnings}
+
+The F1-score is the harmonic mean of precision and recall:
+$$\text{F1} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+Therefore:
+\begin{itemize}
+    \item If precision is undefined $\Rightarrow$ F1 is undefined
+    \item If recall is undefined $\Rightarrow$ F1 is undefined
+    \item F1-score inherits warnings from both metrics
+\end{itemize}
+
+\subsubsection{Step h) Handling Warnings with zero\_division Parameter}
+
+Scikit-learn provides the \texttt{zero\_division} parameter to handle these edge cases:
+
+\begin{lstlisting}[caption={Adding zero\_division parameter}]
+list_score_metric = \
+  [
+   (accuracy_score, {}),
+   (precision_score, {"average":"weighted", "zero_division":0}),
+   (recall_score, {"average":"weighted", "zero_division":0}),
+   (f1_score, {"average":"weighted", "zero_division":0}),
+   (cohen_kappa_score, {}),
+  ]
+\end{lstlisting}
+
+\textbf{Effect of zero\_division=0:}
+\begin{itemize}
+    \item Sets undefined metrics to 0.0 instead of raising warnings
+    \item Explicitly handles division by zero cases
+    \item More appropriate than default behavior (which also sets to 0 but warns)
+    \item Warnings are still generated but can be controlled separately
+\end{itemize}
+
+\subsubsection{Step i) Suppressing Warnings}
+
+To completely suppress the warnings (with caution):
+
+\begin{lstlisting}[caption={Suppressing UndefinedMetricWarning}]
+warnings.filterwarnings( "ignore", category=UndefinedMetricWarning )
+\end{lstlisting}
+
+\textbf{Important considerations:}
+\begin{itemize}
+    \item \textbf{Advantage:} Cleaner output, no warning clutter
+    \item \textbf{Disadvantage:} Loss of diagnostic information
+    \item \textbf{Best practice:} Only use "ignore" when you fully understand the implications
+    \item \textbf{Recommendation:} Keep warnings during development, suppress only in production if necessary
+\end{itemize}
+
+\section{Comparative Analysis}
+
+\subsection{Impact of Dataset Size}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Aspect} & \textbf{Simple Dataset (6)} & \textbf{Diabetes Dataset (768)} \\
+\hline
+Train size (50\%) & 3 instances & 384 instances \\
+Test size (50\%) & 3 instances & 384 instances \\
+Accuracy & 25\% $\pm$ 25\% & 66.15\% $\pm$ 0\% \\
+Warnings & Frequent & Rare \\
+Reliability & Very low & High \\
+\hline
+\end{tabular}
+\caption{Impact of dataset size on evaluation}
+\end{table}
+
+\subsection{Holdout vs Repeated Holdout}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Characteristic} & \textbf{Holdout} & \textbf{Repeated Holdout} \\
+\hline
+Number of splits & 1 & Multiple (e.g., 2, 5, 10) \\
+Standard deviation & Always 0\% & Provides variance estimate \\
+Reliability & Lower & Higher \\
+Computation time & Faster & Slower \\
+Best for & Quick testing & Reliable evaluation \\
+\hline
+\end{tabular}
+\caption{Comparison of split methods}
+\end{table}
+
+\section{Conclusions}
+
+\subsection{Key Learnings}
+
+\begin{enumerate}
+    \item \textbf{Train-Test Split Importance:}
+    \begin{itemize}
+        \item Proper data splitting is crucial for unbiased evaluation
+        \item Single holdout provides quick results but high variance
+        \item Repeated splits offer more reliable performance estimates
+    \end{itemize}
+
+    \item \textbf{Multiple Metrics Matter:}
+    \begin{itemize}
+        \item Accuracy alone is insufficient for comprehensive evaluation
+        \item Precision and recall provide complementary insights
+        \item F1-score balances both metrics
+        \item Cohen's Kappa accounts for chance agreement
+    \end{itemize}
+
+    \item \textbf{Edge Cases and Warnings:}
+    \begin{itemize}
+        \item Small datasets frequently trigger metric warnings
+        \item Understanding "no predicted samples" vs "no true samples" is essential
+        \item The \texttt{zero\_division} parameter provides explicit control
+        \item Warning suppression should be used judiciously
+    \end{itemize}
+
+    \item \textbf{Dataset Size Impact:}
+    \begin{itemize}
+        \item Minimum viable dataset size is crucial for reliable evaluation
+        \item With 6 samples, results are essentially random
+        \item Larger datasets (768+) provide stable, meaningful metrics
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Best Practices}
+
+\begin{itemize}
+    \item Use repeated splits (holdout, k-fold) for reliable evaluation
+    \item Report multiple metrics, not just accuracy
+    \item Understand warning messages before suppressing them
+    \item Use \texttt{zero\_division} parameter explicitly
+    \item Ensure adequate dataset size for your evaluation strategy
+    \item Set random seeds for reproducibility
+    \item Consider stratified splits for imbalanced datasets
+\end{itemize}
+
+\subsection{Future Work}
+
+Potential extensions to these exercises:
+\begin{itemize}
+    \item Implement k-fold cross-validation for more robust evaluation
+    \item Compare performance across multiple classifiers (Naive Bayes, SVM, Random Forest)
+    \item Apply stratified splits to handle class imbalance
+    \item Analyze learning curves with varying dataset sizes
+    \item Implement bootstrap sampling for variance estimation
+\end{itemize}
+
+\end{document}

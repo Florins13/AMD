@@ -1,0 +1,68 @@
+\babel@toc {portuguese}{}\relax 
+\contentsline {section}{\numberline {1}Introdução}{3}{section.1}%
+\contentsline {section}{\numberline {2}Exercício 1: Orange Data Mining}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Objetivo}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}1.a) Instalação da biblioteca pandas}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}1.b) Verificação das versões das bibliotecas}{3}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Exercício 2: Carregamento de um Dataset}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Objetivo}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}2.a) Execução do ficheiro original}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}2.b) Carregamento do dataset Pima Indians Diabetes}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}2.c) Exploração da função load\_dataset}{5}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}2.d) Retorno ao simple\_dataset}{5}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Exercício 3: Aplicação de Métodos de Separação Train-Test}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Objetivo}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}3.a) Método Holdout}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}3.b) Método Holdout com Divisão 50/50}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}3.c) Método Stratified Holdout}{8}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}3.d) Método Repeated Stratified Holdout}{8}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Exercício 4: Código Completo de Train-Test e Análise de Resultados}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Objetivo}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}4.a) Implementação de Métodos Adicionais}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}4.b) Análise de Estratégias}{10}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}4.c) Resultados e Incompatibilidades}{10}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Exercício 5: Análise e Implementação Bootstrap}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Objetivo}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}5.a) Execução do Script Bootstrap}{11}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}5.b) Correção do Conjunto de Teste}{11}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}5.c) Teste com Diferentes Repetições}{11}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}5.d) Integração no Script Principal}{12}{subsection.6.5}%
+\contentsline {section}{\numberline {7}Exercício 6: Construir um Classificador com Divisão Treino-Teste}{12}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Objetivo}{12}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Método de Divisão Holdout}{13}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Vantagens do Holdout}{13}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}Desvantagens do Holdout}{13}{subsubsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.3}Implementação}{13}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Classificador: Árvore de Decisão}{13}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Conjunto de Dados: Pima Indians Diabetes}{14}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Resultados}{14}{subsection.7.6}%
+\contentsline {subsubsection}{\numberline {7.6.1}Interpretação dos Resultados}{14}{subsubsection.7.6.1}%
+\contentsline {section}{\numberline {8}Exercício 7: Múltiplas Métricas e Divisões Repetidas}{14}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Objetivo}{14}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Completar a Função score\_recipe}{15}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Implementação}{15}{subsubsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.3}Métricas de Avaliação}{15}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}1. Exatidão (Accuracy)}{15}{subsubsection.8.3.1}%
+\contentsline {subsubsection}{\numberline {8.3.2}2. Precisão (Precision)}{16}{subsubsection.8.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.3}3. Revocação (Recall / Sensibilidade)}{16}{subsubsection.8.3.3}%
+\contentsline {subsubsection}{\numberline {8.3.4}4. F1-Score}{16}{subsubsection.8.3.4}%
+\contentsline {subsubsection}{\numberline {8.3.5}5. Kappa de Cohen}{17}{subsubsection.8.3.5}%
+\contentsline {subsection}{\numberline {8.4}Implementação das Métricas}{17}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Holdout Repetido}{17}{subsection.8.5}%
+\contentsline {subsubsection}{\numberline {8.5.1}Configuração}{18}{subsubsection.8.5.1}%
+\contentsline {subsubsection}{\numberline {8.5.2}Vantagens sobre Holdout Simples}{18}{subsubsection.8.5.2}%
+\contentsline {subsection}{\numberline {8.6}Análise de Avisos}{18}{subsection.8.6}%
+\contentsline {subsubsection}{\numberline {8.6.1}Tipos de Avisos}{18}{subsubsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.7}Parâmetro zero\_division}{19}{subsection.8.7}%
+\contentsline {subsection}{\numberline {8.8}Supressão de Avisos}{19}{subsection.8.8}%
+\contentsline {subsection}{\numberline {8.9}Resultados com simple\_dataset}{20}{subsection.8.9}%
+\contentsline {subsubsection}{\numberline {8.9.1}Por que Tantos Avisos?}{20}{subsubsection.8.9.1}%
+\contentsline {subsection}{\numberline {8.10}Análise Comparativa}{20}{subsection.8.10}%
+\contentsline {subsection}{\numberline {8.11}Comparação Holdout vs. Holdout Repetido}{20}{subsection.8.11}%
+\contentsline {section}{\numberline {9}Boas Práticas e Conclusões}{21}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Principais Aprendizagens}{21}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Recomendações}{21}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Conclusão}{22}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Competências Adquiridas}{22}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Principais Aprendizagens}{22}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Visão Final}{23}{subsection.10.3}%

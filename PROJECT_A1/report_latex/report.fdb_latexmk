@@ -1,9 +1,9 @@
 # Fdb version 3
-["pdflatex"] 1764605936 "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_A1/report_latex/report.tex" "report.pdf" "report" 1764605937
+["pdflatex"] 1764615197 "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_A1/report_latex/report.tex" "report.pdf" "report" 1764615199
   "/etc/texmf/web2c/texmf.cnf" 1695455309 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1741010867 14040 e4d5a4225876fb0ae0253ad5be4ef630 ""
   "/home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1440.600pk" 1764603546 16944 82c6f837870955e86cdf1448d6633a73 ""
-  "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_A1/report_latex/report.tex" 1764605934 18565 11eb888b85a920d5968828ecfd9bc3d4 ""
+  "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_A1/report_latex/report.tex" 1764615195 18540 4b4ae65d3e624e4c4da477ba5d802eac ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1440.tfm" 1136768653 1536 3290a75021d32d016616fe527bc9884c ""
@@ -90,10 +90,10 @@
   "figures/distribution_classes.png" 1764604988 422237 a7a178fccabc9ad06cb4265db5063403 ""
   "figures/pythagorean_forest_map.png" 1764605080 561106 0edbedb6d0c944958ddb990f338505b9 ""
   "figures/tree_classification.png" 1764605001 160782 fc115afeed6d8310fb9ce4d4cbda2af1 ""
-  "report.aux" 1764605937 5753 0391c7dfa5ce8163389f67323f8ec14a "pdflatex"
-  "report.out" 1764605937 5214 ac2a7454d8ca01ab63924edacd1e9c6b "pdflatex"
-  "report.tex" 1764605934 18565 11eb888b85a920d5968828ecfd9bc3d4 ""
-  "report.toc" 1764605937 2533 d5d2a64671a6098679b4877237cf43bc "pdflatex"
+  "report.aux" 1764615198 5753 0391c7dfa5ce8163389f67323f8ec14a "pdflatex"
+  "report.out" 1764615198 5214 ac2a7454d8ca01ab63924edacd1e9c6b "pdflatex"
+  "report.tex" 1764615195 18540 4b4ae65d3e624e4c4da477ba5d802eac ""
+  "report.toc" 1764615198 2533 d5d2a64671a6098679b4877237cf43bc "pdflatex"
   (generated)
   "report.aux"
   "report.log"

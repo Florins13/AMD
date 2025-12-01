@@ -40,7 +40,7 @@ import warnings
 # - "no true samples" (thrown by score_recall and f_score metrics)
 # - "no predicted samples" (thrown by score_precision and f_score metrics)
 # <your-code-here>
-warnings.filterwarnings( "always", category=UndefinedMetricWarning ) #use "always" or "ignore"
+warnings.filterwarnings( "ignore", category=UndefinedMetricWarning ) #use "always" or "ignore"
 
 
 # utility to check the version of each library
@@ -284,10 +284,10 @@ def score_recipe( classifier, X, y, tt_split_indexes,
       classifier.fit( X_train, y_train )
 
       # predict using the model and X_test (testing dataset)
-      y_predict = None # <your-code-here>
+      y_predict = classifier.predict( X_test ) # <your-code-here>
 
       # score the model using y_test (expected) and y_predict (predicted by model)
-      score = 0.0 # <your-code-here>
+      score = f_score( y_test, y_predict, **keyword_args_score ) # <your-code-here>
       
       score_all_list.append( score )
 
@@ -310,10 +310,10 @@ seed = 5 #None #used by random generator (value is integer or None)
 # <your-code-here>
 list_func_tt_split = \
   [
-#    (holdout, (0.5, seed)),
+#   (holdout, (0.5, seed)),
 #    (stratified_holdout, (1.0/3.0, seed)),
-#    (repeated_holdout, (1.0/3.0, 2, seed)),
-    (repeated_stratified_holdout, (0.5, 2, seed)),
+   (repeated_holdout, (1.0/3.0, 2, seed)),
+    # (repeated_stratified_holdout, (0.5, 2, seed)),
 #    (fold_split, (3, seed)),
 #    (stratified_fold_split, (3, seed)),
 #    (repeated_fold_split, (3, 2, seed)),
@@ -332,7 +332,7 @@ list_func_tt_split = \
 list_func_classifier = \
   [
 #    (GaussianNB, ()),
-#    (DecisionTreeClassifier, ())
+   (DecisionTreeClassifier, ())
   ]
 
 
@@ -342,11 +342,11 @@ list_func_classifier = \
 # <your-code-here>
 list_score_metric = \
   [
-#    (accuracy_score, {}),
-#    (precision_score, {"average":"weighted"}), #macro #micro #weighted
-#    (recall_score, {"average":"weighted"}), #macro #micro #weighted
-#    (f1_score, {"average":"weighted"}), #macro #micro #weighted
-#    (cohen_kappa_score, {}),
+   (accuracy_score, {}),
+   (precision_score, {"average":"weighted", "zero_division":0}), #macro #micro #weighted
+   (recall_score, {"average":"weighted", "zero_division":0}), #macro #micro #weighted
+   (f1_score, {"average":"weighted", "zero_division":0}), #macro #micro #weighted
+   (cohen_kappa_score, {}),
   ]
 
 # ACCURACY:
@@ -388,7 +388,7 @@ list_score_metric = \
 fileName = "pima-indians-diabetes.data.csv"
 featureName = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
 # <your-code-here>
-func_datasetLoader = simple_dataset
+func_datasetLoader = simple_dataset #None
 
 
 

@@ -1,0 +1,970 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+% Page geometry
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+
+% Code listings setup
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    captionpos=b,
+    tabsize=4
+}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+    \centering
+    
+    \vspace*{0.8cm}
+    
+    {\Large Instituto Superior de Engenharia de Lisboa}\\[0.3cm]
+    {\large Departamento de Engenharia Eletrónica e Telecomunicações e de Computadores (DEETC)}\\[0.3cm]
+    {\large Mestrado em Engenharia Informática e de Computadores}\\[2cm]
+    
+    {\huge\bfseries Módulo de Prática \#06}\\[0.3cm]
+    {\LARGE Avaliação de Modelos}\\[1.5cm]
+    
+    {\Large Aprendizagem e Mineração de Dados (AMD)}\\[0.3cm]
+    {\large 1º Semestre -- 2025/2026}\\[3cm]
+
+    \includegraphics[width=0.8\textwidth]{figures/01_ISEL-Logotipo-RGB_Horizontal-Compacto-900.png}\\[0.8cm]
+    
+    {\large \textbf{Autores:}}\\[0.3cm]
+    {\large Florin Sofinet (A46608)}\\[0.2cm]
+    {\large Diogo Guerra (A49149)}\\[0.2cm]
+    {\large Nuno Silva (A53976)}\\[2cm]
+    
+    {\large \today}
+    
+    \vfill
+    
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introdução}
+
+Este laboratório tem como objetivo explorar métodos de avaliação de modelos de Machine Learning, combinando capacidades programáticas de Python com ferramentas de outras bibliotecas e do ambiente do Orange Data Mining.
+
+Ao longo do trabalho, serão analisadas diversas técnicas de divisão de dados, métodos de amostragem, bootstrap, métricas de desempenho e construção de classificadores.
+
+Os objetivos principais são:
+\begin{enumerate}
+    \item Integrar bibliotecas Python no ambiente Orange Data Mining
+    \item Carregar e processar datasets para análise
+    \item Compreender e implementar métodos de divisão treino-teste (holdout, stratified holdout, holdout repetido)
+    \item Implementar e analisar métodos avançados de amostragem (leave-one-out, leave-p-out, k-fold, bootstrap)
+    \item Construir classificadores utilizando scikit-learn
+    \item Implementar múltiplas métricas de avaliação (exatidão, precisão, revocação, F1-score, Kappa de Cohen)
+    \item Analisar avisos de métricas e compreender as suas causas
+    \item Comparar desempenho em conjuntos de dados de diferentes tamanhos
+\end{enumerate}
+
+\section{Exercício 1: Orange Data Mining}
+
+\subsection{Objetivo}
+
+Integrar a biblioteca pandas no ambiente virtual do Orange Data Mining para preparar o ambiente de trabalho necessário para os exercícios seguintes.
+
+\subsection{1.a) Instalação da biblioteca pandas}
+
+Foi instalada a biblioteca pandas no ambiente virtual do Orange utilizando o gestor de pacotes pip. Esta biblioteca é essencial para manipulação e análise de dados tabulares.
+
+\subsection{1.b) Verificação das versões das bibliotecas}
+
+Verificamos as versões das bibliotecas instaladas no ambiente virtual:
+\begin{itemize}
+    \item \textbf{pandas:} Biblioteca para manipulação de dados
+    \item \textbf{numpy:} Biblioteca para computação numérica
+    \item \textbf{scikit-learn:} Biblioteca para machine learning
+\end{itemize}
+
+Esta verificação garante que todas as dependências necessárias estão corretamente instaladas e com versões compatíveis para os exercícios seguintes.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/verificacao_versoes.png}
+\caption{Verificação das versões de pandas, numpy e scikit-learn instaladas no ambiente virtual}
+\end{figure}
+
+\section{Exercício 2: Carregamento de um Dataset}
+
+\subsection{Objetivo}
+
+Compreender como os datasets são lidos, processados e disponibilizados para análise através de diferentes métodos de carregamento.
+
+\subsection{2.a) Execução do ficheiro original}
+
+Executamos o ficheiro \texttt{my\_split\_and\_eval.py} original sem alterações para compreender o comportamento padrão do script e verificar o seu correto funcionamento.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/execucao_my_split_and_eval.png}
+\caption{Execução do ficheiro my\_split\_and\_eval.py sem alterações}
+\end{figure}
+
+\subsection{2.b) Carregamento do dataset Pima Indians Diabetes}
+
+Substituímos a função de carregamento do \texttt{simple\_dataset} pelo carregamento direto do ficheiro \texttt{pima-indians-diabetes.data.csv}.
+
+Este dataset contém:
+\begin{itemize}
+    \item \textbf{Instâncias:} 768 pacientes
+    \item \textbf{Características:} 8 características médicas (gravidez, glucose, pressão arterial, espessura da pele, insulina, IMC, pedigree de diabetes, idade)
+    \item \textbf{Classes:} 2 (diabético vs. não-diabético)
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/substituicao_simple_datas.png}
+\caption{Substituição da função simple\_dataset pelo carregamento direto do dataset Pima}
+\end{figure}
+
+\subsection{2.c) Exploração da função load\_dataset}
+
+Exploramos o funcionamento da função \texttt{load\_dataset} para compreender:
+\begin{itemize}
+    \item Como os dados são lidos do ficheiro CSV
+    \item Como as características e labels são separadas
+    \item Como os dados são convertidos para arrays NumPy
+    \item Como a função lida com diferentes formatos de dados
+\end{itemize}
+
+\subsection{2.d) Retorno ao simple\_dataset}
+
+Alteramos o mecanismo de carregamento de dados para utilizar novamente \texttt{simple\_dataset}, que fornece um conjunto de dados pequeno e controlado ideal para testes e compreensão inicial dos métodos de divisão.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/carregamento_dataset.png}
+\caption{Carregamento do dataset simples através da função simple\_dataset}
+\end{figure}
+
+\section{Exercício 3: Aplicação de Métodos de Separação Train-Test}
+
+\subsection{Objetivo}
+
+Aplicar e compreender diferentes técnicas de separação de dados em conjuntos de treino e teste, essenciais para a avaliação adequada de modelos de machine learning.
+
+\subsection{3.a) Método Holdout}
+
+Aplicamos o método holdout ao dataset simples fornecido pelo script. Este método divide os dados numa única vez em conjuntos de treino e teste.
+
+\textbf{Configuração padrão:}
+\begin{itemize}
+    \item Proporção de teste: 1/3 (aproximadamente 33\%)
+    \item Proporção de treino: 2/3 (aproximadamente 67\%)
+    \item Seed aleatório para reprodutibilidade
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/metodo_holdout.png}
+\caption{Aplicação do método holdout ao dataset simples}
+\end{figure}
+
+\subsection{3.b) Método Holdout com Divisão 50/50}
+
+Repetimos o método holdout, alterando o rácio para 50\% train e 50\% test. Esta configuração:
+\begin{itemize}
+    \item Equilibra o tamanho dos conjuntos de treino e teste
+    \item Pode ser útil quando se tem dados limitados
+    \item Reduz o tamanho do conjunto de treino, potencialmente afetando o desempenho do modelo
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/divisao_50_50.png}
+\caption{Método holdout com divisão 50/50 aplicado ao dataset simples}
+\end{figure}
+
+\subsection{3.c) Método Stratified Holdout}
+
+Aplicamos o método \texttt{stratified\_holdout}, que preserva a proporção das classes no processo de divisão train-test.
+
+\textbf{Vantagens da divisão estratificada:}
+\begin{itemize}
+    \item Mantém a distribuição de classes em ambos os conjuntos
+    \item Particularmente importante para datasets desequilibrados
+    \item Reduz a variância nas estimativas de desempenho
+    \item Garante que ambos os conjuntos são representativos da distribuição original
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/divisaoestratificada_50_50.png}
+\caption{Divisão estratificada 50/50 preservando as proporções das classes}
+\end{figure}
+
+\subsection{3.d) Método Repeated Stratified Holdout}
+
+Aplicamos o método \texttt{repeated\_stratified\_holdout}, que executa várias divisões estratificadas sucessivas.
+
+\textbf{Configuração utilizada:}
+\begin{itemize}
+    \item Divisão 50/50
+    \item 2 repetições com seeds diferentes
+    \item Preservação da proporção de classes em cada repetição
+\end{itemize}
+
+\textbf{Benefícios das repetições:}
+\begin{itemize}
+    \item Reduz a dependência de uma única divisão aleatória
+    \item Fornece múltiplas estimativas de desempenho
+    \item Permite calcular média e desvio padrão das métricas
+    \item Aumenta a confiança estatística nos resultados
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/repeated_stratified_holdout.png}
+\caption{Aplicação do método repeated\_stratified\_holdout com duas repetições}
+\end{figure}
+
+\section{Exercício 4: Código Completo de Train-Test e Análise de Resultados}
+
+\subsection{Objetivo}
+
+Aprofundar as técnicas de validação, implementando vários métodos e analisando o seu comportamento em diferentes cenários.
+
+\subsection{4.a) Implementação de Métodos Adicionais}
+
+Todos os métodos restantes foram implementados no ficheiro \texttt{my\_split\_and\_eval.py}. Estes métodos incluem:
+
+\begin{itemize}
+    \item \textbf{leave\_one\_out:} Remove uma instância de cada vez para teste
+    \item \textbf{leave\_p\_out:} Remove p instâncias de cada vez para teste
+    \item \textbf{k\_fold:} Divide os dados em k partições
+    \item \textbf{stratified\_k\_fold:} K-fold com preservação de proporções de classes
+    \item \textbf{bootstrap:} Amostragem com reposição
+\end{itemize}
+
+\subsection{4.b) Análise de Estratégias}
+
+Os métodos implementados cobrem um vasto leque de estratégias -- desde abordagens exaustivas, como \texttt{leave\_one\_out} e \texttt{leave\_p\_out}, até técnicas que criam múltiplas divisões com menor custo computacional, como \texttt{k\_fold} e \texttt{bootstrap}.
+
+\textbf{Comparação de métodos:}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Método} & \textbf{Custo Computacional} & \textbf{Variância} & \textbf{Uso Recomendado} \\
+\hline
+Holdout & Muito baixo & Alta & Datasets grandes \\
+Leave-one-out & Muito alto & Muito baixa & Datasets pequenos \\
+K-fold & Moderado & Moderada & Uso geral \\
+Bootstrap & Configurável & Baixa & Datasets médios \\
+\hline
+\end{tabular}
+\caption{Comparação de métodos de validação}
+\end{table}
+
+Cada método serve um propósito diferente, sendo importante considerar qual é o mais adequado para a situação específica.
+
+\subsection{4.c) Resultados e Incompatibilidades}
+
+As funções produziram resultados de classificação variados: algumas entregaram divisões precisas, enquanto outras não tiveram um desempenho tão bom.
+
+\textbf{Problemas identificados:}
+\begin{itemize}
+    \item Certas abordagens mostraram-se incompatíveis com o dataset utilizado
+    \item Os métodos \texttt{leave\_one\_out} e \texttt{leave\_p\_out} entraram em loop infinito com o dataset pequeno
+    \item A incompatibilidade impediu a obtenção de resultados de classificação para estes métodos
+\end{itemize}
+
+\textbf{Lições aprendidas:}
+\begin{itemize}
+    \item A escolha do método de validação deve considerar o tamanho do dataset
+    \item Métodos exaustivos podem ser impraticáveis para certos datasets
+    \item É importante testar a viabilidade computacional antes da aplicação em produção
+\end{itemize}
+
+\section{Exercício 5: Análise e Implementação Bootstrap}
+
+\subsection{Objetivo}
+
+Analisar o método bootstrap e corrigir a implementação incompleta fornecida, compreendendo os princípios da amostragem com reposição.
+
+\subsection{5.a) Execução do Script Bootstrap}
+
+Executamos o ficheiro \texttt{my\_split\_bootstrap.py} utilizando o VSCode. O script inicial apresentava uma implementação incompleta do método de divisão bootstrap.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/output_my_split_bootstrap.png}
+\caption{Output da execução de my\_split\_bootstrap.py}
+\end{figure}
+
+\subsection{5.b) Correção do Conjunto de Teste}
+
+Identificamos que o conjunto de teste deve conter apenas amostras não utilizadas no treino. Implementamos um filtro dos índices originais para manter apenas aqueles ausentes do conjunto de treino, permitindo uma avaliação adequada do modelo.
+
+\textbf{Implementação correta:}
+\begin{lstlisting}
+# Filtrar indices para obter apenas amostras nao utilizadas no treino
+test_indices = [i for i in range(len(X)) if i not in train_indices]
+\end{lstlisting}
+
+\textbf{Justificação:}
+\begin{itemize}
+    \item Garante independência entre conjuntos de treino e teste
+    \item Evita sobreajuste artificial nas métricas de avaliação
+    \item Mantém a integridade da validação do modelo
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/output_after_split.png}
+\caption{Output após atualização do método de divisão}
+\end{figure}
+
+\subsection{5.c) Teste com Diferentes Repetições}
+
+Testamos a reamostragem bootstrap com 10, 50 e 100 repetições para demonstrar como o aumento do número de divisões treino-teste fornece uma avaliação de modelo mais robusta através de múltiplas rondas independentes de validação.
+
+\textbf{Observações:}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Repetições} & \textbf{Tempo de Execução} & \textbf{Estabilidade} \\
+\hline
+10 & Rápido & Moderada \\
+50 & Moderado & Boa \\
+100 & Mais lento & Muito boa \\
+\hline
+\end{tabular}
+\caption{Impacto do número de repetições bootstrap}
+\end{table}
+
+\begin{itemize}
+    \item Maior número de repetições aumenta a confiança estatística
+    \item Existe um compromisso entre precisão e custo computacional
+    \item Para datasets médios, 50-100 repetições são geralmente suficientes
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/output_repetitions.png}
+\caption{Output com diferentes números de repetições (10, 50, 100)}
+\end{figure}
+
+\subsection{5.d) Integração no Script Principal}
+
+Implementamos métodos de divisão treino-teste bootstrap criando instâncias das classes \texttt{MyBootstrapSplitOnce} e \texttt{MyBootstrapSplitRepeated}, já importadas no início do ficheiro, permitindo reamostragem bootstrap simples e repetida para avaliação de modelos.
+
+\textbf{Integração no \texttt{my\_split\_and\_eval.py}:}
+\begin{lstlisting}
+# Bootstrap simples
+("bootstrap_once", MyBootstrapSplitOnce(), ()),
+
+# Bootstrap repetido
+("bootstrap_repeated", MyBootstrapSplitRepeated(n_repeats=50), ()),
+\end{lstlisting}
+
+\section{Exercício 6: Construir um Classificador com Divisão Treino-Teste}
+
+\subsection{Objetivo}
+
+O Exercício 6 requer a implementação de um classificador básico utilizando o método de divisão treino-teste holdout. O primeiro passo exigiu comentar todos os métodos de divisão treino-teste na lista \texttt{list\_func\_tt\_split}, exceto o método \texttt{holdout}. Isto permite-nos focar num único método de divisão e verificar a sua implementação corretamente.
+
+\subsection{Método de Divisão Holdout}
+
+O método holdout é a abordagem mais simples para divisão treino-teste. Divide o conjunto de dados numa única vez em dois subconjuntos:
+
+\begin{itemize}
+    \item \textbf{Conjunto de Treino:} Utilizado para treinar o modelo (tipicamente 60-80\% dos dados)
+    \item \textbf{Conjunto de Teste:} Utilizado para avaliar o desempenho do modelo (tipicamente 20-40\% dos dados)
+\end{itemize}
+
+\subsubsection{Vantagens do Holdout}
+\begin{itemize}
+    \item Computacionalmente eficiente (apenas uma divisão)
+    \item Simples de implementar e compreender
+    \item Adequado para conjuntos de dados grandes
+\end{itemize}
+
+\subsubsection{Desvantagens do Holdout}
+\begin{itemize}
+    \item Alta variância nos resultados (dependente da divisão específica)
+    \item Pode não ser representativo para conjuntos de dados pequenos
+    \item Utiliza menos dados para treino em comparação com validação cruzada
+\end{itemize}
+
+\subsection{Implementação}
+
+No código fornecido, o método holdout está configurado como:
+\begin{lstlisting}
+( "holdout", holdout, (1.0/3.0, 5) ),
+\end{lstlisting}
+
+Isto configura:
+\begin{itemize}
+    \item \textbf{Proporção de teste:} 1/3 (aproximadamente 33\%) dos dados para teste
+    \item \textbf{Proporção de treino:} 2/3 (aproximadamente 67\%) dos dados para treino
+    \item \textbf{Seed aleatório:} 5 (para reprodutibilidade)
+\end{itemize}
+
+\subsection{Classificador: Árvore de Decisão}
+
+O exercício utiliza o \texttt{DecisionTreeClassifier} do scikit-learn. As árvores de decisão são uma escolha popular devido à sua:
+\begin{itemize}
+    \item Interpretabilidade (estrutura em árvore visualizável)
+    \item Capacidade de lidar com características numéricas e categóricas
+    \item Não necessidade de normalização de características
+    \item Capacidade de capturar relações não-lineares
+\end{itemize}
+
+\subsection{Conjunto de Dados: Pima Indians Diabetes}
+
+O conjunto de dados utilizado contém:
+\begin{itemize}
+    \item \textbf{Instâncias:} 768 pacientes
+    \item \textbf{Características:} 8 características médicas (gravidez, glucose, pressão arterial, etc.)
+    \item \textbf{Classes:} 2 (diabético vs. não-diabético)
+    \item \textbf{Distribuição:} 268 positivos (34.9\%), 500 negativos (65.1\%)
+\end{itemize}
+
+\subsection{Resultados}
+
+Ao executar o script com apenas o método holdout ativo, obtivemos:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Métrica} & \textbf{Valor} \\
+\hline
+Exatidão (Accuracy) & 66.15\% \\
+\hline
+\end{tabular}
+\caption{Resultados do Exercício 6 utilizando divisão holdout}
+\end{table}
+
+\subsubsection{Interpretação dos Resultados}
+
+\begin{itemize}
+    \item A exatidão de 66.15\% significa que o classificador prevê corretamente a classe para aproximadamente 2 em cada 3 instâncias
+    \item Este valor está acima do baseline de classe maioritária (65.1\%), indicando que o modelo aprendeu alguns padrões
+    \item No entanto, há espaço significativo para melhoria, possivelmente através de:
+    \begin{itemize}
+        \item Ajuste de hiperparâmetros da árvore de decisão
+        \item Engenharia de características
+        \item Tentativa de diferentes algoritmos de classificação
+        \item Tratamento de valores em falta ou outliers
+    \end{itemize}
+\end{itemize}
+
+\section{Exercício 7: Múltiplas Métricas e Divisões Repetidas}
+
+\subsection{Objetivo}
+
+O Exercício 7 expande o Exercício 6 ao:
+\begin{enumerate}
+    \item Completar a função \texttt{score\_recipe} para calcular previsões e pontuações
+    \item Ativar múltiplas métricas de avaliação
+    \item Implementar o método holdout repetido
+    \item Lidar com avisos de métricas adequadamente
+\end{enumerate}
+
+\subsection{Completar a Função score\_recipe}
+
+A função \texttt{score\_recipe} é responsável por:
+\begin{enumerate}
+    \item Gerar previsões utilizando o classificador treinado
+    \item Calcular a métrica de pontuação especificada
+\end{enumerate}
+
+\subsubsection{Implementação}
+
+As duas linhas principais adicionadas foram:
+
+\begin{lstlisting}
+y_predict = classifier.predict( X_test )  -- Gera previsoes para dados de teste
+score = f_score( y_test, y_predict, **keyword_args_score )  -- Calcula a pontuacao
+\end{lstlisting}
+
+\textbf{Explicação linha por linha:}
+
+\begin{enumerate}
+    \item \texttt{y\_predict = classifier.predict(X\_test)}
+    \begin{itemize}
+        \item Utiliza o classificador treinado para fazer previsões no conjunto de teste
+        \item \texttt{X\_test} contém os valores das características
+        \item \texttt{y\_predict} conterá as etiquetas de classe previstas
+    \end{itemize}
+    
+    \item \texttt{score = f\_score(y\_test, y\_predict, **keyword\_args\_score)}
+    \begin{itemize}
+        \item Compara as previsões com as verdadeiras etiquetas
+        \item \texttt{f\_score} é uma função de métrica (exatidão, precisão, etc.)
+        \item \texttt{**keyword\_args\_score} passa argumentos adicionais (como \texttt{zero\_division})
+        \item Devolve um valor numérico representando o desempenho
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Métricas de Avaliação}
+
+O Exercício 7 requer a ativação de cinco métricas de avaliação. Cada métrica fornece uma perspetiva diferente sobre o desempenho do classificador.
+
+\subsubsection{1. Exatidão (Accuracy)}
+
+\begin{equation}
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\end{equation}
+
+\textbf{Interpretação:} Proporção de previsões corretas em relação ao total de previsões.
+
+\textbf{Quando usar:}
+\begin{itemize}
+    \item Conjuntos de dados equilibrados
+    \item Quando todos os erros têm igual importância
+\end{itemize}
+
+\textbf{Limitações:}
+\begin{itemize}
+    \item Enganadora para conjuntos de dados desequilibrados
+    \item Não distingue entre tipos de erros
+\end{itemize}
+
+\subsubsection{2. Precisão (Precision)}
+
+\begin{equation}
+\text{Precision} = \frac{TP}{TP + FP}
+\end{equation}
+
+\textbf{Interpretação:} Entre todas as previsões positivas, que proporção estava correta?
+
+\textbf{Quando usar:}
+\begin{itemize}
+    \item Quando falsos positivos são dispendiosos
+    \item Exemplo: deteção de spam (marcar incorretamente emails legítimos como spam)
+\end{itemize}
+
+\textbf{Características especiais:}
+\begin{itemize}
+    \item Indefinida quando não há previsões positivas (TP + FP = 0)
+    \item Necessita do parâmetro \texttt{zero\_division} para lidar com este caso
+\end{itemize}
+
+\subsubsection{3. Revocação (Recall / Sensibilidade)}
+
+\begin{equation}
+\text{Recall} = \frac{TP}{TP + FN}
+\end{equation}
+
+\textbf{Interpretação:} Entre todos os casos realmente positivos, que proporção foi corretamente identificada?
+
+\textbf{Quando usar:}
+\begin{itemize}
+    \item Quando falsos negativos são dispendiosos
+    \item Exemplo: diagnóstico médico (falhar a deteção de uma doença)
+\end{itemize}
+
+\textbf{Características especiais:}
+\begin{itemize}
+    \item Indefinida quando não há amostras positivas verdadeiras (TP + FN = 0)
+    \item Necessita do parâmetro \texttt{zero\_division} para lidar com este caso
+\end{itemize}
+
+\subsubsection{4. F1-Score}
+
+\begin{equation}
+\text{F1-score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2 \times TP}{2 \times TP + FP + FN}
+\end{equation}
+
+\textbf{Interpretação:} Média harmónica de precisão e revocação.
+
+\textbf{Quando usar:}
+\begin{itemize}
+    \item Quando se necessita equilibrar precisão e revocação
+    \item Conjuntos de dados desequilibrados
+    \item Quando ambos falsos positivos e falsos negativos são importantes
+\end{itemize}
+
+\textbf{Características especiais:}
+\begin{itemize}
+    \item Herda problemas de divisão por zero tanto de precisão como de revocação
+    \item Pode gerar avisos mesmo quando apenas uma das métricas principais tem problemas
+\end{itemize}
+
+\subsubsection{5. Kappa de Cohen}
+
+\begin{equation}
+\kappa = \frac{p_o - p_e}{1 - p_e}
+\end{equation}
+
+Onde:
+\begin{itemize}
+    \item $p_o$ = concordância observada (exatidão)
+    \item $p_e$ = concordância esperada por acaso
+\end{itemize}
+
+\textbf{Interpretação:} Mede concordância considerando concordância por acaso.
+
+\textbf{Valores de interpretação:}
+\begin{itemize}
+    \item $\kappa < 0$: Pior que acaso
+    \item $\kappa = 0$: Concordância por acaso
+    \item $0 < \kappa < 0.2$: Concordância ligeira
+    \item $0.2 \leq \kappa < 0.4$: Concordância razoável
+    \item $0.4 \leq \kappa < 0.6$: Concordância moderada
+    \item $0.6 \leq \kappa < 0.8$: Concordância substancial
+    \item $0.8 \leq \kappa \leq 1.0$: Concordância quase perfeita
+\end{itemize}
+
+\textbf{Vantagens:}
+\begin{itemize}
+    \item Considera concordância por acaso
+    \item Útil para conjuntos de dados desequilibrados
+    \item Fornece interpretação mais conservadora que exatidão
+\end{itemize}
+
+\subsection{Implementação das Métricas}
+
+Cada métrica foi adicionada à lista \texttt{list\_score\_metric} com configuração específica:
+
+\begin{lstlisting}
+list_score_metric = [
+    ("accuracy", accuracy_score, {}),
+    ("precision", precision_score, {"zero_division": 0}),
+    ("recall", recall_score, {"zero_division": 0}),
+    ("f1_score", f1_score, {"zero_division": 0}),
+    ("cohen_kappa", cohen_kappa_score, {})
+]
+\end{lstlisting}
+
+\subsection{Holdout Repetido}
+
+O método holdout repetido melhora a divisão holdout simples ao:
+\begin{enumerate}
+    \item Executar múltiplas divisões treino-teste com seeds aleatórios diferentes
+    \item Calcular a média dos resultados em todas as repetições
+    \item Fornecer estimativas mais estáveis do desempenho
+\end{enumerate}
+
+\subsubsection{Configuração}
+
+\begin{lstlisting}
+( "repeated_holdout", repeated_holdout, (1.0/3.0, 2, 5) ),
+\end{lstlisting}
+
+Parâmetros:
+\begin{itemize}
+    \item \textbf{Proporção de teste:} 1/3 (33\%)
+    \item \textbf{Número de repetições:} 2
+    \item \textbf{Seed inicial:} 5
+\end{itemize}
+
+\subsubsection{Vantagens sobre Holdout Simples}
+
+\begin{itemize}
+    \item Reduz variância nas estimativas de desempenho
+    \item Fornece múltiplas avaliações para análise estatística
+    \item Ainda computacionalmente eficiente em comparação com validação cruzada
+    \item Melhor utilização de dados em comparação com holdout único
+\end{itemize}
+
+\subsection{Análise de Avisos}
+
+Durante a execução do script com o conjunto de dados pequeno (\texttt{simple\_dataset} com apenas 6 instâncias), surgiram vários avisos. Compreender estes avisos é crucial para interpretação adequada das métricas.
+
+\subsubsection{Tipos de Avisos}
+
+\textbf{1. Aviso "Nenhuma Amostra Prevista"}
+
+\begin{lstlisting}[language=bash]
+UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 
+due to no predicted samples.
+\end{lstlisting}
+
+\textbf{Causa:} O classificador não previu nenhuma instância como positiva (TP + FP = 0)
+
+\textbf{Impacto:}
+\begin{itemize}
+    \item Precisão torna-se indefinida matematicamente
+    \item O parâmetro \texttt{zero\_division=0} define-a como 0.0
+    \item Indica que o modelo pode estar enviesado para a classe negativa
+\end{itemize}
+
+\textbf{2. Aviso "Nenhuma Amostra Verdadeira"}
+
+\begin{lstlisting}[language=bash]
+UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 
+due to no true samples.
+\end{lstlisting}
+
+\textbf{Causa:} O conjunto de teste não contém nenhuma instância positiva verdadeira (TP + FN = 0)
+
+\textbf{Impacto:}
+\begin{itemize}
+    \item Revocação torna-se indefinida matematicamente
+    \item O parâmetro \texttt{zero\_division=0} define-a como 0.0
+    \item Indica problema com tamanho do conjunto de dados ou estratificação
+\end{itemize}
+
+\textbf{3. Avisos de F1-Score}
+
+O F1-score pode gerar avisos por duas razões:
+\begin{enumerate}
+    \item Herda avisos de precisão (sem amostras previstas)
+    \item Herda avisos de revocação (sem amostras verdadeiras)
+\end{enumerate}
+
+Uma vez que o F1-score é calculado a partir de precisão e revocação, quaisquer problemas de divisão por zero em qualquer uma dessas métricas propagam-se para o F1-score.
+
+\subsection{Parâmetro zero\_division}
+
+O parâmetro \texttt{zero\_division} controla o que acontece quando ocorre divisão por zero no cálculo de métricas:
+
+\textbf{Opções:}
+\begin{itemize}
+    \item \texttt{zero\_division=0}: Define a métrica como 0.0 (conservador)
+    \item \texttt{zero\_division=1}: Define a métrica como 1.0 (otimista)
+    \item \texttt{zero\_division="warn"}: Levanta aviso mas não define valor (padrão)
+\end{itemize}
+
+\textbf{Nossa escolha:} Utilizámos \texttt{zero\_division=0} porque:
+\begin{itemize}
+    \item Fornece interpretação conservadora
+    \item Evita inflar artificialmente as pontuações
+    \item Mantém coerência com a literatura de aprendizagem automática
+    \item Fácil identificação de divisões de dados problemáticas
+\end{itemize}
+
+\subsection{Supressão de Avisos}
+
+Para produzir saída mais limpa mantendo funcionalidade, adicionámos:
+
+\begin{lstlisting}
+from warnings import filterwarnings
+from sklearn.exceptions import UndefinedMetricWarning
+
+filterwarnings("ignore", category=UndefinedMetricWarning)
+\end{lstlisting}
+
+\textbf{Importante:} Embora suprimamos avisos visuais, os valores das métricas ainda são calculados corretamente utilizando \texttt{zero\_division=0}. A supressão é apenas para melhor legibilidade, não para esconder problemas.
+
+\subsection{Resultados com simple\_dataset}
+
+Ao executar com o conjunto de dados pequeno (6 instâncias), observámos:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Métrica} & \textbf{Repetição 1} & \textbf{Repetição 2} \\
+\hline
+Exatidão & Varia & Varia \\
+Precisão & Frequentemente 0.0 & Frequentemente 0.0 \\
+Revocação & Frequentemente 0.0 & Frequentemente 0.0 \\
+F1-score & Frequentemente 0.0 & Frequentemente 0.0 \\
+Kappa de Cohen & Varia & Varia \\
+\hline
+\end{tabular}
+\caption{Resultados típicos com simple\_dataset (6 instâncias)}
+\end{table}
+
+\subsubsection{Por que Tantos Avisos?}
+
+O conjunto de dados pequeno causa avisos frequentes porque:
+
+\begin{enumerate}
+    \item \textbf{Tamanho minúsculo do conjunto de teste:} Com divisão 1/3, o conjunto de teste tem apenas 2 instâncias
+    \item \textbf{Sem estratificação:} A divisão aleatória pode colocar todas as instâncias de uma classe no conjunto de treino
+    \item \textbf{Capacidade limitada do modelo:} Com apenas 4 instâncias de treino, a árvore de decisão não consegue aprender padrões bem
+    \item \textbf{Alta variância:} Cada divisão pode produzir distribuições de classes completamente diferentes
+\end{enumerate}
+
+\subsection{Análise Comparativa}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Aspeto} & \textbf{simple\_dataset} & \textbf{diabetes dataset} \\
+\hline
+Instâncias totais & 6 & 768 \\
+Tamanho do conjunto de teste & 2 & 256 \\
+Tamanho do conjunto de treino & 4 & 512 \\
+Avisos de métricas & Frequentes & Raros/Nenhum \\
+Estabilidade dos resultados & Muito baixa & Moderada \\
+Fiabilidade das métricas & Baixa & Alta \\
+\hline
+\end{tabular}
+\caption{Comparação de conjuntos de dados pequenos vs. grandes}
+\end{table}
+
+\subsection{Comparação Holdout vs. Holdout Repetido}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Aspeto} & \textbf{Holdout} & \textbf{Holdout Repetido} \\
+\hline
+Número de avaliações & 1 & Múltiplas (2 neste caso) \\
+Estabilidade & Baixa & Mais alta \\
+Custo computacional & Mais baixo & Moderado \\
+Confiança estatística & Baixa & Mais alta \\
+Utilização recomendada & Conjuntos de dados grandes & Conjuntos de dados médios \\
+\hline
+\end{tabular}
+\caption{Holdout vs. Holdout Repetido}
+\end{table}
+
+\section{Boas Práticas e Conclusões}
+
+\subsection{Principais Aprendizagens}
+
+\begin{enumerate}
+    \item \textbf{Tamanho do conjunto de dados importa:} Conjuntos de dados pequenos levam a métricas não fiáveis e avisos frequentes
+    
+    \item \textbf{Múltiplas métricas são essenciais:} Exatidão por si só pode ser enganadora; precisão, revocação e F1-score fornecem visão completa
+    
+    \item \textbf{Compreender os avisos:} Avisos de métricas indicam problemas de dados reais, não apenas questões técnicas
+    
+    \item \textbf{Uso adequado do zero\_division:} Define o comportamento para casos extremos de forma conservadora
+    
+    \item \textbf{Holdout repetido melhora a estabilidade:} Múltiplas repetições fornecem estimativas mais fiáveis
+\end{enumerate}
+
+\subsection{Recomendações}
+
+\begin{enumerate}
+    \item \textbf{Tamanho mínimo do conjunto de dados:}
+    \begin{itemize}
+        \item Para holdout: pelo menos 100 instâncias
+        \item Para holdout repetido: pelo menos 50 instâncias
+        \item Para conjuntos de dados mais pequenos: utilizar validação cruzada leave-one-out
+    \end{itemize}
+    
+    \item \textbf{Utilizar divisão estratificada:}
+    \begin{itemize}
+        \item Garantir proporções de classes consistentes entre conjuntos de treino e teste
+        \item Especialmente importante para conjuntos de dados desequilibrados
+    \end{itemize}
+    
+    \item \textbf{Definir seeds aleatórios:}
+    \begin{itemize}
+        \item Garantir reprodutibilidade
+        \item Facilitar depuração e comparação
+    \end{itemize}
+    
+    \item \textbf{Monitorizar avisos de métricas:}
+    \begin{itemize}
+        \item Não ignorar simplesmente avisos sem compreensão
+        \item Investigar causas de valores de métrica indefinidos
+        \item Considerar se o tamanho do conjunto de dados é adequado
+    \end{itemize}
+    
+    \item \textbf{Reportar múltiplas métricas:}
+    \begin{itemize}
+        \item Sempre reportar pelo menos exatidão, precisão e revocação
+        \item Incluir Kappa de Cohen para conjuntos de dados desequilibrados
+        \item Considerar métricas específicas do domínio quando apropriado
+    \end{itemize}
+\end{enumerate}
+
+\section{Conclusão}
+
+A realização deste laboratório permitiu percorrer todas as etapas de avaliação de modelos preditivos: preparação do ambiente, carregamento de dados, divisão correta de test-train, implementação de métodos avançados de amostragem e integração de métricas de desempenho.
+
+\subsection{Competências Adquiridas}
+
+Ao longo dos sete exercícios, desenvolvemos competências em:
+
+\begin{enumerate}
+    \item \textbf{Preparação de Ambiente:} Integração de bibliotecas Python (pandas, numpy, scikit-learn) no ambiente Orange Data Mining
+    
+    \item \textbf{Gestão de Dados:} Carregamento e processamento de datasets reais (Pima Indians Diabetes) e sintéticos
+    
+    \item \textbf{Métodos de Validação:} Implementação e comparação de múltiplos métodos de divisão treino-teste:
+    \begin{itemize}
+        \item Holdout simples e estratificado
+        \item Holdout repetido
+        \item Leave-one-out e leave-p-out
+        \item K-fold e stratified k-fold
+        \item Bootstrap simples e repetido
+    \end{itemize}
+    
+    \item \textbf{Construção de Classificadores:} Implementação de árvores de decisão com scikit-learn
+    
+    \item \textbf{Avaliação de Desempenho:} Aplicação de múltiplas métricas (exatidão, precisão, revocação, F1-score, Kappa de Cohen)
+    
+    \item \textbf{Análise Crítica:} Interpretação de avisos, identificação de limitações e gestão de casos extremos
+\end{enumerate}
+
+\subsection{Principais Aprendizagens}
+
+\begin{itemize}
+    \item \textbf{Tamanho do dataset importa:} Conjuntos de dados pequenos levam a métricas não fiáveis e avisos frequentes
+    
+    \item \textbf{Múltiplas métricas são essenciais:} Exatidão por si só pode ser enganadora; precisão, revocação e F1-score fornecem visão completa
+    
+    \item \textbf{Escolha adequada do método:} Cada técnica de validação tem o seu caso de uso ideal, considerando tamanho do dataset e custo computacional
+    
+    \item \textbf{Estratificação é crucial:} Preservar proporções de classes melhora significativamente a qualidade da validação
+    
+    \item \textbf{Repetições aumentam robustez:} Múltiplas divisões fornecem estimativas mais estáveis e confiáveis
+    
+    \item \textbf{Bootstrap é versátil:} A amostragem com reposição oferece um bom compromisso entre precisão e eficiência
+    
+    \item \textbf{Tratamento de avisos:} Compreender os avisos de métricas indica problemas de dados reais, não apenas questões técnicas
+\end{itemize}
+
+\subsection{Visão Final}
+
+No final, o laboratório fornece uma visão completa das práticas recomendadas para avaliar modelos de Machine Learning de forma rigorosa. A experiência demonstra que a avaliação adequada de classificadores requer:
+
+\begin{itemize}
+    \item Conjuntos de dados de tamanho suficiente para validação robusta
+    \item Múltiplas perspetivas através de diferentes métricas
+    \item Compreensão profunda das limitações de cada método e métrica
+    \item Tratamento cuidadoso de casos extremos e avisos
+    \item Múltiplas avaliações para estimativas estáveis e confiáveis
+    \item Escolha informada do método de validação baseada no contexto do problema
+\end{itemize}
+
+Estes exercícios estabelecem uma base sólida para técnicas de avaliação mais avançadas e para a aplicação prática de machine learning em problemas reais, garantindo que os modelos desenvolvidos são devidamente validados e têm desempenho confiável em dados não vistos.
+
+\end{document}
