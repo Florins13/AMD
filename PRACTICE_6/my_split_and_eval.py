@@ -241,7 +241,7 @@ def leave_p_out( p ):
 # sklearn does not directly implements bootstrap, so
 # - it must use "resample" which does not return indexes
 def bootstrap_split_once( seed=None ):
-  tt_split_indexes = None # <your-code-here>
+  tt_split_indexes = MyBootstrapSplitOnce( seed )
   return tt_split_indexes
 
 
@@ -249,7 +249,7 @@ def bootstrap_split_once( seed=None ):
 # sklearn does not directly implements bootstrap, so
 # - it must use "resample" which does not return indexes
 def bootstrap_split_repeated( n_repeat, seed=None ):
-  tt_split_indexes = None # <your-code-here>
+  tt_split_indexes = MyBootstrapSplitRepeated( n_repeat, seed )
   return tt_split_indexes
 
 
