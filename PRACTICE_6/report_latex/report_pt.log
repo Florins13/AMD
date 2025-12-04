@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.3.5)  1 DEC 2025 20:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.3.5)  4 DEC 2025 17:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -328,64 +328,63 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 LaTeX Info: Redefining \[ on input line 2938.
 LaTeX Info: Redefining \] on input line 2939.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
-Package: enumitem 2019/06/20 v3.9 Customized lists
-\labelindent=\skip53
-\enit@outerparindent=\dimen167
-\enit@toks=\toks28
-\enit@inbox=\box56
-\enit@count@id=\count295
-\enitdp@description=\count296
-)
-Package hyperref Info: Option `colorlinks' set `true' on input line 29.
+Package hyperref Info: Option `colorlinks' set `true' on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count297
-\l__pdf_internal_box=\box57
+\l__color_backend_stack_int=\count295
+\l__pdf_internal_box=\box56
 )
 (./report_pt.aux)
 \openout1 = `report_pt.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count298
-\scratchdimen=\dimen168
-\scratchbox=\box58
-\nofMPsegments=\count299
-\nofMParguments=\count300
-\everyMPshowfont=\toks29
-\MPscratchCnt=\count301
-\MPscratchDim=\dimen169
-\MPnumerator=\count302
-\makeMPintoPDFobject=\count303
-\everyMPtoPDFconversion=\toks30
+\scratchcounter=\count296
+\scratchdimen=\dimen167
+\scratchbox=\box57
+\nofMPsegments=\count297
+\nofMParguments=\count298
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count299
+\MPscratchDim=\dimen168
+\MPnumerator=\count300
+\makeMPintoPDFobject=\count301
+\everyMPtoPDFconversion=\toks29
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
@@ -425,7 +424,7 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 47.
+Package hyperref Info: Link coloring ON on input line 46.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -435,24 +434,24 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count304
+\c@section@level=\count302
 )
-LaTeX Info: Redefining \ref on input line 47.
-LaTeX Info: Redefining \pageref on input line 47.
-LaTeX Info: Redefining \nameref on input line 47.
+LaTeX Info: Redefining \ref on input line 46.
+LaTeX Info: Redefining \pageref on input line 46.
+LaTeX Info: Redefining \nameref on input line 46.
 
 (./report_pt.out) (./report_pt.out)
 \@outlinefile=\write3
 \openout3 = `report_pt.out'.
 
-\c@lstlisting=\count305
-<figures/01_ISEL-Logotipo-RGB_Horizontal-Compacto-900.png, id=273, 2263.2555pt 
+\c@lstlisting=\count303
+<figures/01_ISEL-Logotipo-RGB_Horizontal-Compacto-900.png, id=213, 2263.2555pt 
 x 853.7496pt>
 File: figures/01_ISEL-Logotipo-RGB_Horizontal-Compacto-900.png Graphic file (ty
 pe png)
 <use figures/01_ISEL-Logotipo-RGB_Horizontal-Compacto-900.png>
 Package pdftex.def Info: figures/01_ISEL-Logotipo-RGB_Horizontal-Compacto-900.p
-ng  used on input line 65.
+ng  used on input line 64.
 (pdftex.def)             Requested size: 364.19667pt x 137.37132pt.
  [1
 
@@ -462,228 +461,209 @@ ng  used on input line 65.
 me{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.44 ...tricas de Avaliação}{15}{subsection.8.3}
+l.44 ...ferença entre Avisos}{16}{subsection.8.4}
                                                   % [1])
 \tf@toc=\write4
 \openout4 = `report_pt.toc'.
 
  [2]
-<figures/verificacao_versoes.png, id=361, 1444.64719pt x 295.85532pt>
+<figures/verificacao_versoes.png, id=285, 1444.64719pt x 295.85532pt>
 File: figures/verificacao_versoes.png Graphic file (type png)
 <use figures/verificacao_versoes.png>
 Package pdftex.def Info: figures/verificacao_versoes.png  used on input line 12
-3.
+2.
 (pdftex.def)             Requested size: 364.19667pt x 74.5821pt.
  [3]
-<figures/execucao_my_split_and_eval.png, id=375, 1444.64719pt x 856.70062pt>
+<figures/execucao_my_split_and_eval.png, id=299, 1444.64719pt x 856.70062pt>
 File: figures/execucao_my_split_and_eval.png Graphic file (type png)
 <use figures/execucao_my_split_and_eval.png>
 Package pdftex.def Info: figures/execucao_my_split_and_eval.png  used on input 
-line 139.
+line 138.
 (pdftex.def)             Requested size: 409.71692pt x 242.95956pt.
  [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.150     \item \textbf
+l.149     \item \textbf
                        {Características:} 8 características médicas (grav...
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.150     \item \textbf
+l.149     \item \textbf
                        {Características:} 8 características médicas (grav...
  <./figures/verificacao_versoes.png> <./figures/execucao_my_split_and_eval.png>
 ]
-<figures/substituicao_simple_datas.png, id=385, 1444.64719pt x 855.94781pt>
+<figures/substituicao_simple_datas.png, id=309, 1444.64719pt x 855.94781pt>
 File: figures/substituicao_simple_datas.png Graphic file (type png)
 <use figures/substituicao_simple_datas.png>
 Package pdftex.def Info: figures/substituicao_simple_datas.png  used on input l
-ine 156.
+ine 155.
 (pdftex.def)             Requested size: 409.71692pt x 242.74608pt.
 
-Overfull \hbox (9.25493pt too wide) in paragraph at lines 172--173
+Overfull \hbox (9.25493pt too wide) in paragraph at lines 171--172
 \OT1/cmr/m/n/12 Alteramos o me-ca-nismo de car-re-ga-mento de da-dos para uti-l
 i-zar no-va-mente \OT1/cmtt/m/n/12 simple[]dataset\OT1/cmr/m/n/12 ,
  []
 
-<figures/carregamento_dataset.png, id=386, 1444.64719pt x 855.94781pt>
+<figures/carregamento_dataset.png, id=310, 1444.64719pt x 855.94781pt>
 File: figures/carregamento_dataset.png Graphic file (type png)
 <use figures/carregamento_dataset.png>
 Package pdftex.def Info: figures/carregamento_dataset.png  used on input line 1
-76.
+75.
 (pdftex.def)             Requested size: 409.71692pt x 242.74608pt.
 [5pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.179 
+l.178 
        <./figures/substituicao_simple_datas.png>]
-<figures/metodo_holdout.png, id=393, 1444.64719pt x 853.68938pt>
+<figures/metodo_holdout.png, id=317, 1444.64719pt x 853.68938pt>
 File: figures/metodo_holdout.png Graphic file (type png)
 <use figures/metodo_holdout.png>
-Package pdftex.def Info: figures/metodo_holdout.png  used on input line 199.
+Package pdftex.def Info: figures/metodo_holdout.png  used on input line 198.
 (pdftex.def)             Requested size: 409.71692pt x 242.10559pt.
  [6pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.202 
+l.201 
        <./figures/carregamento_dataset.png>]
-<figures/divisao_50_50.png, id=401, 1444.64719pt x 855.195pt>
+<figures/divisao_50_50.png, id=326, 1444.64719pt x 855.195pt>
 File: figures/divisao_50_50.png Graphic file (type png)
 <use figures/divisao_50_50.png>
-Package pdftex.def Info: figures/divisao_50_50.png  used on input line 214.
+Package pdftex.def Info: figures/divisao_50_50.png  used on input line 213.
 (pdftex.def)             Requested size: 409.71692pt x 242.53258pt.
  [7pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.222 ...tbf{Vantagens da divisão estratificada:}
+l.221 ...tbf{Vantagens da divisão estratificada:}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{figure.6}) has been already used, duplicat
 e ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.222 ...tbf{Vantagens da divisão estratificada:}
+l.221 ...tbf{Vantagens da divisão estratificada:}
                                                    <./figures/metodo_holdout.pn
 g> <./figures/divisao_50_50.png>]
-<figures/divisaoestratificada_50_50.png, id=410, 1443.89438pt x 853.68938pt>
+<figures/divisaoestratificada_50_50.png, id=335, 1443.89438pt x 853.68938pt>
 File: figures/divisaoestratificada_50_50.png Graphic file (type png)
 <use figures/divisaoestratificada_50_50.png>
 Package pdftex.def Info: figures/divisaoestratificada_50_50.png  used on input 
-line 232.
+line 231.
 (pdftex.def)             Requested size: 409.71692pt x 242.23586pt.
-<figures/repeated_stratified_holdout.png, id=411, 1444.64719pt x 854.44218pt>
+<figures/repeated_stratified_holdout.png, id=336, 1444.64719pt x 854.44218pt>
 File: figures/repeated_stratified_holdout.png Graphic file (type png)
 <use figures/repeated_stratified_holdout.png>
 Package pdftex.def Info: figures/repeated_stratified_holdout.png  used on input
- line 257.
+ line 256.
 (pdftex.def)             Requested size: 409.71692pt x 242.31908pt.
  [8pdfTeX warning (ext4): destination with the same identifier (name{figure.7})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.260 
-       <./figures/divisaoestratificada_50_50.png>]
-Overfull \hbox (20.63159pt too wide) in paragraph at lines 261--261
-[]\OT1/cmr/bx/n/17.28 Exerc^^S^^Pcio 4: C^^Sodigo Com-pleto de Train-Test e An^
-^Salise
- []
-
-[9pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) 
-has been already used, duplicate ignored
+l.259 
+       <./figures/divisaoestratificada_50_50.png>] [9pdfTeX warning (ext4): des
+tination with the same identifier (name{figure.8}) has been already used, dupli
+cate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.283 \textbf{Comparação de métodos:}
+l.282 \textbf{Comparação de métodos:}
                                          <./figures/repeated_stratified_holdout
 .png>]
-<figures/output_my_split_bootstrap.png, id=424, 932.48375pt x 224.84pt>
+<figures/output_my_split_bootstrap.png, id=349, 932.48375pt x 224.84pt>
 File: figures/output_my_split_bootstrap.png Graphic file (type png)
 <use figures/output_my_split_bootstrap.png>
 Package pdftex.def Info: figures/output_my_split_bootstrap.png  used on input l
-ine 332.
+ine 331.
 (pdftex.def)             Requested size: 409.71692pt x 98.78923pt.
  [10pdfTeX warning (ext4): destination with the same identifier (name{table.1})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.335 
+l.334 
       ]
-<figures/output_after_split.png, id=430, 642.4pt x 180.675pt>
+<figures/output_after_split.png, id=355, 642.4pt x 180.675pt>
 File: figures/output_after_split.png Graphic file (type png)
 <use figures/output_after_split.png>
-Package pdftex.def Info: figures/output_after_split.png  used on input line 355
+Package pdftex.def Info: figures/output_after_split.png  used on input line 354
 .
 (pdftex.def)             Requested size: 409.71692pt x 115.2346pt.
  [11pdfTeX warning (ext4): destination with the same identifier (name{figure.9}
 ) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.378 
+l.377 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.378 
+l.377 
        <./figures/output_my_split_bootstrap.png> <./figures/output_after_split.
 png>]
-<figures/output_repetitions.png, id=444, 1220.56pt x 464.73625pt>
+<figures/output_repetitions.png, id=369, 1220.56pt x 464.73625pt>
 File: figures/output_repetitions.png Graphic file (type png)
 <use figures/output_repetitions.png>
-Package pdftex.def Info: figures/output_repetitions.png  used on input line 387
+Package pdftex.def Info: figures/output_repetitions.png  used on input line 386
 .
 (pdftex.def)             Requested size: 409.71692pt x 156.00139pt.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 395.
- [12pdfTeX warning (ext4): destination with the same identifier (name{table.2})
- has been already used, duplicate ignored
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 394.
+
+Overfull \hbox (10.06134pt too wide) in paragraph at lines 407--408
+\OT1/cmr/m/n/12 O exerc^^S^^Pcio so-li-cita pro-cu-rar a tag \OT1/cmtt/m/n/12 <
+your-code-here> \OT1/cmr/m/n/12 e apli-car o \OT1/cmtt/m/n/12 DecisionTreeClass
+ifier\OT1/cmr/m/n/12 .
+ []
+
+[12pdfTeX warning (ext4): destination with the same identifier (name{table.2}) 
+has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.409 
+l.408 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.409 
-       <./figures/output_repetitions.png>] [13] [14pdfTeX warning (ext4): desti
-nation with the same identifier (name{table.3}) has been already used, duplicat
-e ignored
+l.408 
+       <./figures/output_repetitions.png>]
+Overfull \hbox (89.31616pt too wide) in paragraph at lines 431--432
+\OT1/cmr/m/n/12 O pr^^Soximo passo foi ati-var o m^^Setodo de di-vis~ao treino-
+teste \OT1/cmtt/m/n/12 holdout \OT1/cmr/m/n/12 (uti-li-zando \OT1/cmtt/m/n/12 D
+ecisionTreeClassifier\OT1/cmr/m/n/12 ).
+ []
+
+[13] [14] [15pdfTeX warning (ext4): destination with the same identifier (name{
+table.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.514     \item C
-                 alcular a métrica de pontuação especificada] [15] [16]
-[17] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-) [18] [19]
-[20pdfTeX warning (ext4): destination with the same identifier (name{table.4}) 
-has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.862     \item \textbf
-                       {Múltiplas métricas são essenciais:} Exatidão por...
-pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has
- been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.862     \item \textbf
-                       {Múltiplas métricas são essenciais:} Exatidão por...
-pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has
- been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.862     \item \textbf
-                       {Múltiplas métricas são essenciais:} Exatidão por...
-] [21] [22] [23] (./report_pt.aux)
+l.563 score_method:
+                    precision_score] [16] [17] [18] [19] (./report_pt.aux)
 Package rerunfilecheck Info: File `report_pt.out' has not changed.
-(rerunfilecheck)             Checksum: BE0F763B96F1E2770935B7F32B4288BE;13664.
+(rerunfilecheck)             Checksum: C22776372B4262D7FB9292DC386A8C86;11396.
  ) 
 Here is how much of TeX's memory you used:
- 13389 strings out of 480154
- 206298 string characters out of 5893789
- 761306 words of memory out of 5000000
- 30988 multiletter control sequences out of 15000+600000
+ 13000 strings out of 480154
+ 200529 string characters out of 5893789
+ 811489 words of memory out of 5000000
+ 30612 multiletter control sequences out of 15000+600000
  476407 words of font info for 53 fonts, out of 8000000 for 9000
  61 hyphenation exceptions out of 8191
- 60i,9n,63p,454b,1280s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,9n,63p,396b,1945s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.
 600pk> </home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1
 440.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmtt12.pfb>
-Output written on report_pt.pdf (24 pages, 1561420 bytes).
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on report_pt.pdf (20 pages, 1537128 bytes).
 PDF statistics:
- 666 PDF objects out of 1000 (max. 8388607)
- 590 compressed objects within 6 object streams
- 190 named destinations out of 1000 (max. 500000)
- 597 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 574 PDF objects out of 1000 (max. 8388607)
+ 506 compressed objects within 6 object streams
+ 181 named destinations out of 1000 (max. 500000)
+ 477 words of extra memory for PDF output out of 10000 (max. 10000000)
 

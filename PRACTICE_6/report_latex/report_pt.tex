@@ -10,7 +10,6 @@
 \usepackage{xcolor}
 \usepackage{float}
 \usepackage{amsmath}
-\usepackage{enumitem}
 
 % Page geometry
 \geometry{
@@ -97,7 +96,7 @@ Os objetivos principais são:
     \item Comparar desempenho em conjuntos de dados de diferentes tamanhos
 \end{enumerate}
 
-\section{Exercício 1: Orange Data Mining}
+\section{Orange Data Mining}
 
 \subsection{Objetivo}
 
@@ -124,7 +123,7 @@ Esta verificação garante que todas as dependências necessárias estão corret
 \caption{Verificação das versões de pandas, numpy e scikit-learn instaladas no ambiente virtual}
 \end{figure}
 
-\section{Exercício 2: Carregamento de um Dataset}
+\section{Carregamento de um Dataset}
 
 \subsection{Objetivo}
 
@@ -177,7 +176,7 @@ Alteramos o mecanismo de carregamento de dados para utilizar novamente \texttt{s
 \caption{Carregamento do dataset simples através da função simple\_dataset}
 \end{figure}
 
-\section{Exercício 3: Aplicação de Métodos de Separação Train-Test}
+\section{Aplicação de Métodos de Separação Train-Test}
 
 \subsection{Objetivo}
 
@@ -258,7 +257,7 @@ Aplicamos o método \texttt{repeated\_stratified\_holdout}, que executa várias 
 \caption{Aplicação do método repeated\_stratified\_holdout com duas repetições}
 \end{figure}
 
-\section{Exercício 4: Código Completo de Train-Test e Análise de Resultados}
+\section{Código Completo de Train-Test e Análise de Resultados}
 
 \subsection{Objetivo}
 
@@ -317,7 +316,7 @@ As funções produziram resultados de classificação variados: algumas entregar
     \item É importante testar a viabilidade computacional antes da aplicação em produção
 \end{itemize}
 
-\section{Exercício 5: Análise e Implementação Bootstrap}
+\section{Análise e Implementação Bootstrap}
 
 \subsection{Objetivo}
 
@@ -401,13 +400,52 @@ Implementamos métodos de divisão treino-teste bootstrap criando instâncias da
 ("bootstrap_repeated", MyBootstrapSplitRepeated(n_repeats=50), ()),
 \end{lstlisting}
 
-\section{Exercício 6: Construir um Classificador com Divisão Treino-Teste}
+\section{Construir um Classificador com Divisão Treino-Teste}
 
-\subsection{Objetivo}
+\subsection{Exercício 6 (b): Aplicar o DecisionTreeClassifier}
 
-O Exercício 6 requer a implementação de um classificador básico utilizando o método de divisão treino-teste holdout. O primeiro passo exigiu comentar todos os métodos de divisão treino-teste na lista \texttt{list\_func\_tt\_split}, exceto o método \texttt{holdout}. Isto permite-nos focar num único método de divisão e verificar a sua implementação corretamente.
+O exercício solicita procurar a tag \texttt{<your-code-here>} e aplicar o \texttt{DecisionTreeClassifier}. Ao executar o código inicial, observámos que "nada aconteceu" porque, embora o classificador tenha sido criado, nenhum método de divisão treino-teste estava ativo para treinar e avaliar o modelo.
 
-\subsection{Método de Divisão Holdout}
+\subsubsection{Implementação}
+
+Na lista de classificadores (linhas 354-358), ativamos o \texttt{DecisionTreeClassifier}:
+\begin{lstlisting}[language=Python]
+list_func_classifier = \
+  [
+#    (GaussianNB, ()),
+   (DecisionTreeClassifier, ())
+  ]
+\end{lstlisting}
+
+Esta configuração é utilizada na função \texttt{main()} (linha 409) onde o classificador é instanciado:
+\begin{lstlisting}[language=Python]
+classifier = f_classifier( *args_classifier )
+\end{lstlisting}
+
+Que resulta em \texttt{classifier = DecisionTreeClassifier()}.
+
+Sem um método de divisão treino-teste ativo na lista \texttt{list\_func\_tt\_split}, o classificador não é treinado nem avaliado, resultando em nenhuma saída visível no terminal.
+
+\subsection{Exercício 6 (c): Aplicar a Divisão Holdout}
+
+O próximo passo foi ativar o método de divisão treino-teste \texttt{holdout} (utilizando \texttt{DecisionTreeClassifier}). Ao executar o código, observámos que agora é necessário aplicar a função \texttt{score\_recipe} utilizando algum(ns) método(s) de pontuação para avaliar o desempenho do modelo.
+
+\subsubsection{Implementação}
+
+Na lista de métodos de divisão (linhas 328-341), ativamos o método \texttt{holdout}:
+\begin{lstlisting}[language=Python]
+list_func_tt_split = \
+  [
+   (holdout, (1.0/3.0, seed)),
+#    (stratified_holdout, (1.0/3.0, seed)),
+#    (repeated_holdout, (1.0/3.0, 2, seed)),
+#    ...
+  ]
+\end{lstlisting}
+
+Isto configura uma divisão holdout com 1/3 dos dados para teste (aproximadamente 33\%) e 2/3 para treino (aproximadamente 67\%), utilizando \texttt{seed=5} para reprodutibilidade.
+
+\subsubsection{Método de Divisão Holdout}
 
 O método holdout é a abordagem mais simples para divisão treino-teste. Divide o conjunto de dados numa única vez em dois subconjuntos:
 
@@ -416,21 +454,21 @@ O método holdout é a abordagem mais simples para divisão treino-teste. Divide
     \item \textbf{Conjunto de Teste:} Utilizado para avaliar o desempenho do modelo (tipicamente 20-40\% dos dados)
 \end{itemize}
 
-\subsubsection{Vantagens do Holdout}
+\textbf{Vantagens do Holdout:}
 \begin{itemize}
     \item Computacionalmente eficiente (apenas uma divisão)
     \item Simples de implementar e compreender
     \item Adequado para conjuntos de dados grandes
 \end{itemize}
 
-\subsubsection{Desvantagens do Holdout}
+\textbf{Desvantagens do Holdout:}
 \begin{itemize}
     \item Alta variância nos resultados (dependente da divisão específica)
     \item Pode não ser representativo para conjuntos de dados pequenos
     \item Utiliza menos dados para treino em comparação com validação cruzada
 \end{itemize}
 
-\subsection{Implementação}
+\subsubsection{Implementação}
 
 No código fornecido, o método holdout está configurado como:
 \begin{lstlisting}
@@ -444,7 +482,7 @@ Isto configura:
     \item \textbf{Seed aleatório:} 5 (para reprodutibilidade)
 \end{itemize}
 
-\subsection{Classificador: Árvore de Decisão}
+\subsubsection{Classificador: Árvore de Decisão}
 
 O exercício utiliza o \texttt{DecisionTreeClassifier} do scikit-learn. As árvores de decisão são uma escolha popular devido à sua:
 \begin{itemize}
@@ -454,7 +492,7 @@ O exercício utiliza o \texttt{DecisionTreeClassifier} do scikit-learn. As árvo
     \item Capacidade de capturar relações não-lineares
 \end{itemize}
 
-\subsection{Conjunto de Dados: Pima Indians Diabetes}
+\subsubsection{Conjunto de Dados: Pima Indians Diabetes}
 
 O conjunto de dados utilizado contém:
 \begin{itemize}
@@ -464,7 +502,7 @@ O conjunto de dados utilizado contém:
     \item \textbf{Distribuição:} 268 positivos (34.9\%), 500 negativos (65.1\%)
 \end{itemize}
 
-\subsection{Resultados}
+\subsubsection{Resultados}
 
 Ao executar o script com apenas o método holdout ativo, obtivemos:
 
@@ -480,7 +518,7 @@ Exatidão (Accuracy) & 66.15\% \\
 \caption{Resultados do Exercício 6 utilizando divisão holdout}
 \end{table}
 
-\subsubsection{Interpretação dos Resultados}
+\textbf{Interpretação dos Resultados:}
 
 \begin{itemize}
     \item A exatidão de 66.15\% significa que o classificador prevê corretamente a classe para aproximadamente 2 em cada 3 instâncias
@@ -494,416 +532,140 @@ Exatidão (Accuracy) & 66.15\% \\
     \end{itemize}
 \end{itemize}
 
-\section{Exercício 7: Múltiplas Métricas e Divisões Repetidas}
+\section{Múltiplas Métricas e Divisões Repetidas}
 
-\subsection{Objetivo}
+\subsection{(d) Completar a Função score\_recipe}
 
-O Exercício 7 expande o Exercício 6 ao:
-\begin{enumerate}
-    \item Completar a função \texttt{score\_recipe} para calcular previsões e pontuações
-    \item Ativar múltiplas métricas de avaliação
-    \item Implementar o método holdout repetido
-    \item Lidar com avisos de métricas adequadamente
-\end{enumerate}
+Procurámos a tag \texttt{<your-code-here>} na função \texttt{score\_recipe} (linhas 296-314) e completámos o código:
 
-\subsection{Completar a Função score\_recipe}
+\begin{lstlisting}[language=Python]
+# predict using the model and X_test (testing dataset)
+y_predict = classifier.predict( X_test )
 
-A função \texttt{score\_recipe} é responsável por:
-\begin{enumerate}
-    \item Gerar previsões utilizando o classificador treinado
-    \item Calcular a métrica de pontuação especificada
-\end{enumerate}
-
-\subsubsection{Implementação}
-
-As duas linhas principais adicionadas foram:
-
-\begin{lstlisting}
-y_predict = classifier.predict( X_test )  -- Gera previsoes para dados de teste
-score = f_score( y_test, y_predict, **keyword_args_score )  -- Calcula a pontuacao
+# score the model using y_test (expected) and y_predict (predicted by model)
+score = f_score( y_test, y_predict, **keyword_args_score )
 \end{lstlisting}
 
-\textbf{Explicação linha por linha:}
+\vspace{2cm}
 
-\begin{enumerate}
-    \item \texttt{y\_predict = classifier.predict(X\_test)}
-    \begin{itemize}
-        \item Utiliza o classificador treinado para fazer previsões no conjunto de teste
-        \item \texttt{X\_test} contém os valores das características
-        \item \texttt{y\_predict} conterá as etiquetas de classe previstas
-    \end{itemize}
-    
-    \item \texttt{score = f\_score(y\_test, y\_predict, **keyword\_args\_score)}
-    \begin{itemize}
-        \item Compara as previsões com as verdadeiras etiquetas
-        \item \texttt{f\_score} é uma função de métrica (exatidão, precisão, etc.)
-        \item \texttt{**keyword\_args\_score} passa argumentos adicionais (como \texttt{zero\_division})
-        \item Devolve um valor numérico representando o desempenho
-    \end{itemize}
-\end{enumerate}
+\subsection{(e) Testar o Código}
 
-\subsection{Métricas de Avaliação}
+Testámos o código com a configuração especificada: \texttt{repeated\_holdout(1.0/3.0, 2, seed)} e \texttt{DecisionTreeClassifier} com \texttt{seed=5}.
 
-O Exercício 7 requer a ativação de cinco métricas de avaliação. Cada métrica fornece uma perspetiva diferente sobre o desempenho do classificador.
-
-\subsubsection{1. Exatidão (Accuracy)}
-
-\begin{equation}
-\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
-\end{equation}
-
-\textbf{Interpretação:} Proporção de previsões corretas em relação ao total de previsões.
-
-\textbf{Quando usar:}
-\begin{itemize}
-    \item Conjuntos de dados equilibrados
-    \item Quando todos os erros têm igual importância
-\end{itemize}
-
-\textbf{Limitações:}
-\begin{itemize}
-    \item Enganadora para conjuntos de dados desequilibrados
-    \item Não distingue entre tipos de erros
-\end{itemize}
-
-\subsubsection{2. Precisão (Precision)}
-
-\begin{equation}
-\text{Precision} = \frac{TP}{TP + FP}
-\end{equation}
-
-\textbf{Interpretação:} Entre todas as previsões positivas, que proporção estava correta?
-
-\textbf{Quando usar:}
-\begin{itemize}
-    \item Quando falsos positivos são dispendiosos
-    \item Exemplo: deteção de spam (marcar incorretamente emails legítimos como spam)
-\end{itemize}
-
-\textbf{Características especiais:}
-\begin{itemize}
-    \item Indefinida quando não há previsões positivas (TP + FP = 0)
-    \item Necessita do parâmetro \texttt{zero\_division} para lidar com este caso
-\end{itemize}
-
-\subsubsection{3. Revocação (Recall / Sensibilidade)}
-
-\begin{equation}
-\text{Recall} = \frac{TP}{TP + FN}
-\end{equation}
-
-\textbf{Interpretação:} Entre todos os casos realmente positivos, que proporção foi corretamente identificada?
-
-\textbf{Quando usar:}
-\begin{itemize}
-    \item Quando falsos negativos são dispendiosos
-    \item Exemplo: diagnóstico médico (falhar a deteção de uma doença)
-\end{itemize}
-
-\textbf{Características especiais:}
-\begin{itemize}
-    \item Indefinida quando não há amostras positivas verdadeiras (TP + FN = 0)
-    \item Necessita do parâmetro \texttt{zero\_division} para lidar com este caso
-\end{itemize}
-
-\subsubsection{4. F1-Score}
-
-\begin{equation}
-\text{F1-score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2 \times TP}{2 \times TP + FP + FN}
-\end{equation}
-
-\textbf{Interpretação:} Média harmónica de precisão e revocação.
-
-\textbf{Quando usar:}
-\begin{itemize}
-    \item Quando se necessita equilibrar precisão e revocação
-    \item Conjuntos de dados desequilibrados
-    \item Quando ambos falsos positivos e falsos negativos são importantes
-\end{itemize}
-
-\textbf{Características especiais:}
-\begin{itemize}
-    \item Herda problemas de divisão por zero tanto de precisão como de revocação
-    \item Pode gerar avisos mesmo quando apenas uma das métricas principais tem problemas
-\end{itemize}
-
-\subsubsection{5. Kappa de Cohen}
-
-\begin{equation}
-\kappa = \frac{p_o - p_e}{1 - p_e}
-\end{equation}
-
-Onde:
-\begin{itemize}
-    \item $p_o$ = concordância observada (exatidão)
-    \item $p_e$ = concordância esperada por acaso
-\end{itemize}
-
-\textbf{Interpretação:} Mede concordância considerando concordância por acaso.
-
-\textbf{Valores de interpretação:}
-\begin{itemize}
-    \item $\kappa < 0$: Pior que acaso
-    \item $\kappa = 0$: Concordância por acaso
-    \item $0 < \kappa < 0.2$: Concordância ligeira
-    \item $0.2 \leq \kappa < 0.4$: Concordância razoável
-    \item $0.4 \leq \kappa < 0.6$: Concordância moderada
-    \item $0.6 \leq \kappa < 0.8$: Concordância substancial
-    \item $0.8 \leq \kappa \leq 1.0$: Concordância quase perfeita
-\end{itemize}
-
-\textbf{Vantagens:}
-\begin{itemize}
-    \item Considera concordância por acaso
-    \item Útil para conjuntos de dados desequilibrados
-    \item Fornece interpretação mais conservadora que exatidão
-\end{itemize}
-
-\subsection{Implementação das Métricas}
-
-Cada métrica foi adicionada à lista \texttt{list\_score\_metric} com configuração específica:
+Resultados obtidos:
 
 \begin{lstlisting}
-list_score_metric = [
-    ("accuracy", accuracy_score, {}),
-    ("precision", precision_score, {"zero_division": 0}),
-    ("recall", recall_score, {"zero_division": 0}),
-    ("f1_score", f1_score, {"zero_division": 0}),
-    ("cohen_kappa", cohen_kappa_score, {})
-]
+score_method: accuracy_score
+::all-evaluated-datasets::
+50.00% | 0.00% |
+25.00% (+/- 25.00%)
+
+score_method: precision_score
+::all-evaluated-datasets::
+100.00% | 0.00% |
+50.00% (+/- 50.00%)
+
+score_method: recall_score
+::all-evaluated-datasets::
+50.00% | 0.00% |
+25.00% (+/- 25.00%)
+
+score_method: f1_score
+::all-evaluated-datasets::
+66.67% | 0.00% |
+33.33% (+/- 33.33%)
+
+score_method: cohen_kappa_score
+::all-evaluated-datasets::
+0.00% | 0.00% |
+0.00% (+/- 0.00%)
 \end{lstlisting}
 
-\subsection{Holdout Repetido}
+\subsection{(f) Observar os Avisos}
 
-O método holdout repetido melhora a divisão holdout simples ao:
-\begin{enumerate}
-    \item Executar múltiplas divisões treino-teste com seeds aleatórios diferentes
-    \item Calcular a média dos resultados em todas as repetições
-    \item Fornecer estimativas mais estáveis do desempenho
-\end{enumerate}
+Durante a execução, surgiram avisos (warnings). Identificámos os seguintes textos importantes:
 
-\subsubsection{Configuração}
-
+\textbf{Aviso "no predicted samples":}
 \begin{lstlisting}
-( "repeated_holdout", repeated_holdout, (1.0/3.0, 2, 5) ),
-\end{lstlisting}
-
-Parâmetros:
-\begin{itemize}
-    \item \textbf{Proporção de teste:} 1/3 (33\%)
-    \item \textbf{Número de repetições:} 2
-    \item \textbf{Seed inicial:} 5
-\end{itemize}
-
-\subsubsection{Vantagens sobre Holdout Simples}
-
-\begin{itemize}
-    \item Reduz variância nas estimativas de desempenho
-    \item Fornece múltiplas avaliações para análise estatística
-    \item Ainda computacionalmente eficiente em comparação com validação cruzada
-    \item Melhor utilização de dados em comparação com holdout único
-\end{itemize}
-
-\subsection{Análise de Avisos}
-
-Durante a execução do script com o conjunto de dados pequeno (\texttt{simple\_dataset} com apenas 6 instâncias), surgiram vários avisos. Compreender estes avisos é crucial para interpretação adequada das métricas.
-
-\subsubsection{Tipos de Avisos}
-
-\textbf{1. Aviso "Nenhuma Amostra Prevista"}
-
-\begin{lstlisting}[language=bash]
 UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 
 due to no predicted samples.
 \end{lstlisting}
 
-\textbf{Causa:} O classificador não previu nenhuma instância como positiva (TP + FP = 0)
-
-\textbf{Impacto:}
-\begin{itemize}
-    \item Precisão torna-se indefinida matematicamente
-    \item O parâmetro \texttt{zero\_division=0} define-a como 0.0
-    \item Indica que o modelo pode estar enviesado para a classe negativa
-\end{itemize}
-
-\textbf{2. Aviso "Nenhuma Amostra Verdadeira"}
-
-\begin{lstlisting}[language=bash]
+\textbf{Aviso "no true samples":}
+\begin{lstlisting}
 UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 
 due to no true samples.
 \end{lstlisting}
 
-\textbf{Causa:} O conjunto de teste não contém nenhuma instância positiva verdadeira (TP + FN = 0)
+\subsection{(g) Explicar a Diferença entre Avisos}
 
-\textbf{Impacto:}
+\subsubsection{Diferença entre Avisos}
+
+\textbf{"no predicted samples":}
 \begin{itemize}
-    \item Revocação torna-se indefinida matematicamente
-    \item O parâmetro \texttt{zero\_division=0} define-a como 0.0
-    \item Indica problema com tamanho do conjunto de dados ou estratificação
+    \item Significa que o classificador não previu nenhuma instância como positiva (TP + FP = 0)
+    \item Todas as previsões foram da classe negativa
+    \item Afeta a métrica de precisão (precision)
 \end{itemize}
 
-\textbf{3. Avisos de F1-Score}
-
-O F1-score pode gerar avisos por duas razões:
-\begin{enumerate}
-    \item Herda avisos de precisão (sem amostras previstas)
-    \item Herda avisos de revocação (sem amostras verdadeiras)
-\end{enumerate}
-
-Uma vez que o F1-score é calculado a partir de precisão e revocação, quaisquer problemas de divisão por zero em qualquer uma dessas métricas propagam-se para o F1-score.
-
-\subsection{Parâmetro zero\_division}
-
-O parâmetro \texttt{zero\_division} controla o que acontece quando ocorre divisão por zero no cálculo de métricas:
-
-\textbf{Opções:}
+\textbf{"no true samples":}
 \begin{itemize}
-    \item \texttt{zero\_division=0}: Define a métrica como 0.0 (conservador)
-    \item \texttt{zero\_division=1}: Define a métrica como 1.0 (otimista)
-    \item \texttt{zero\_division="warn"}: Levanta aviso mas não define valor (padrão)
+    \item Significa que o conjunto de teste não contém nenhuma instância positiva verdadeira (TP + FN = 0)
+    \item Todas as instâncias reais no conjunto de teste são da classe negativa
+    \item Afeta a métrica de revocação (recall)
 \end{itemize}
 
-\textbf{Nossa escolha:} Utilizámos \texttt{zero\_division=0} porque:
-\begin{itemize}
-    \item Fornece interpretação conservadora
-    \item Evita inflar artificialmente as pontuações
-    \item Mantém coerência com a literatura de aprendizagem automática
-    \item Fácil identificação de divisões de dados problemáticas
-\end{itemize}
+\subsubsection{Aviso: no true samples (recall e f1-score)}
 
-\subsection{Supressão de Avisos}
+A revocação (recall) é definida como:
+\begin{equation}
+\text{Recall} = \frac{TP}{TP + FN}
+\end{equation}
 
-Para produzir saída mais limpa mantendo funcionalidade, adicionámos:
+Quando não há amostras verdadeiras positivas no conjunto de teste, temos TP + FN = 0, o que resulta em divisão por zero. O F1-score depende de recall, portanto herda este problema.
 
-\begin{lstlisting}
-from warnings import filterwarnings
-from sklearn.exceptions import UndefinedMetricWarning
+\subsubsection{Aviso: no predicted samples (precision e f1-score)}
 
-filterwarnings("ignore", category=UndefinedMetricWarning)
+A precisão (precision) é definida como:
+\begin{equation}
+\text{Precision} = \frac{TP}{TP + FP}
+\end{equation}
+
+Quando o classificador não prevê nenhuma amostra como positiva, temos TP + FP = 0, o que resulta em divisão por zero. O F1-score depende de precision, portanto herda este problema.
+
+\subsection{(h) Utilizar o Parâmetro zero\_division}
+
+Lemos a documentação do scikit-learn para as funções \texttt{precision\_score} e \texttt{recall\_score}. Utilizámos o parâmetro \texttt{zero\_division} para eliminar os avisos.
+
+Na lista de métricas (linhas 365-373):
+
+\begin{lstlisting}[language=Python]
+list_score_metric = \
+  [
+   (accuracy_score, {}),
+   (precision_score, {"average":"weighted", "zero_division":0}),
+   (recall_score, {"average":"weighted", "zero_division":0}),
+   (f1_score, {"average":"weighted", "zero_division":0}),
+   (cohen_kappa_score, {}),
+  ]
 \end{lstlisting}
 
-\textbf{Importante:} Embora suprimamos avisos visuais, os valores das métricas ainda são calculados corretamente utilizando \texttt{zero\_division=0}. A supressão é apenas para melhor legibilidade, não para esconder problemas.
+O parâmetro \texttt{zero\_division=0} define o valor da métrica como 0.0 quando ocorre divisão por zero, eliminando os avisos.
 
-\subsection{Resultados com simple\_dataset}
+\subsection{(i) Desativar Avisos UndefinedMetricWarning}
 
-Ao executar com o conjunto de dados pequeno (6 instâncias), observámos:
+Procurámos a tag \texttt{<your-code-here>} e utilizámos o valor "ignore" para desativar a apresentação de avisos da categoria \texttt{UndefinedMetricWarning}.
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|c|c|}
-\hline
-\textbf{Métrica} & \textbf{Repetição 1} & \textbf{Repetição 2} \\
-\hline
-Exatidão & Varia & Varia \\
-Precisão & Frequentemente 0.0 & Frequentemente 0.0 \\
-Revocação & Frequentemente 0.0 & Frequentemente 0.0 \\
-F1-score & Frequentemente 0.0 & Frequentemente 0.0 \\
-Kappa de Cohen & Varia & Varia \\
-\hline
-\end{tabular}
-\caption{Resultados típicos com simple\_dataset (6 instâncias)}
-\end{table}
+No início do ficheiro (linhas 39-43):
 
-\subsubsection{Por que Tantos Avisos?}
+\begin{lstlisting}[language=Python]
+from sklearn.exceptions import UndefinedMetricWarning
+import warnings
 
-O conjunto de dados pequeno causa avisos frequentes porque:
+warnings.filterwarnings( "ignore", category=UndefinedMetricWarning )
+\end{lstlisting}
 
-\begin{enumerate}
-    \item \textbf{Tamanho minúsculo do conjunto de teste:} Com divisão 1/3, o conjunto de teste tem apenas 2 instâncias
-    \item \textbf{Sem estratificação:} A divisão aleatória pode colocar todas as instâncias de uma classe no conjunto de treino
-    \item \textbf{Capacidade limitada do modelo:} Com apenas 4 instâncias de treino, a árvore de decisão não consegue aprender padrões bem
-    \item \textbf{Alta variância:} Cada divisão pode produzir distribuições de classes completamente diferentes
-\end{enumerate}
-
-\subsection{Análise Comparativa}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|c|c|}
-\hline
-\textbf{Aspeto} & \textbf{simple\_dataset} & \textbf{diabetes dataset} \\
-\hline
-Instâncias totais & 6 & 768 \\
-Tamanho do conjunto de teste & 2 & 256 \\
-Tamanho do conjunto de treino & 4 & 512 \\
-Avisos de métricas & Frequentes & Raros/Nenhum \\
-Estabilidade dos resultados & Muito baixa & Moderada \\
-Fiabilidade das métricas & Baixa & Alta \\
-\hline
-\end{tabular}
-\caption{Comparação de conjuntos de dados pequenos vs. grandes}
-\end{table}
-
-\subsection{Comparação Holdout vs. Holdout Repetido}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|c|c|}
-\hline
-\textbf{Aspeto} & \textbf{Holdout} & \textbf{Holdout Repetido} \\
-\hline
-Número de avaliações & 1 & Múltiplas (2 neste caso) \\
-Estabilidade & Baixa & Mais alta \\
-Custo computacional & Mais baixo & Moderado \\
-Confiança estatística & Baixa & Mais alta \\
-Utilização recomendada & Conjuntos de dados grandes & Conjuntos de dados médios \\
-\hline
-\end{tabular}
-\caption{Holdout vs. Holdout Repetido}
-\end{table}
-
-\section{Boas Práticas e Conclusões}
-
-\subsection{Principais Aprendizagens}
-
-\begin{enumerate}
-    \item \textbf{Tamanho do conjunto de dados importa:} Conjuntos de dados pequenos levam a métricas não fiáveis e avisos frequentes
-    
-    \item \textbf{Múltiplas métricas são essenciais:} Exatidão por si só pode ser enganadora; precisão, revocação e F1-score fornecem visão completa
-    
-    \item \textbf{Compreender os avisos:} Avisos de métricas indicam problemas de dados reais, não apenas questões técnicas
-    
-    \item \textbf{Uso adequado do zero\_division:} Define o comportamento para casos extremos de forma conservadora
-    
-    \item \textbf{Holdout repetido melhora a estabilidade:} Múltiplas repetições fornecem estimativas mais fiáveis
-\end{enumerate}
-
-\subsection{Recomendações}
-
-\begin{enumerate}
-    \item \textbf{Tamanho mínimo do conjunto de dados:}
-    \begin{itemize}
-        \item Para holdout: pelo menos 100 instâncias
-        \item Para holdout repetido: pelo menos 50 instâncias
-        \item Para conjuntos de dados mais pequenos: utilizar validação cruzada leave-one-out
-    \end{itemize}
-    
-    \item \textbf{Utilizar divisão estratificada:}
-    \begin{itemize}
-        \item Garantir proporções de classes consistentes entre conjuntos de treino e teste
-        \item Especialmente importante para conjuntos de dados desequilibrados
-    \end{itemize}
-    
-    \item \textbf{Definir seeds aleatórios:}
-    \begin{itemize}
-        \item Garantir reprodutibilidade
-        \item Facilitar depuração e comparação
-    \end{itemize}
-    
-    \item \textbf{Monitorizar avisos de métricas:}
-    \begin{itemize}
-        \item Não ignorar simplesmente avisos sem compreensão
-        \item Investigar causas de valores de métrica indefinidos
-        \item Considerar se o tamanho do conjunto de dados é adequado
-    \end{itemize}
-    
-    \item \textbf{Reportar múltiplas métricas:}
-    \begin{itemize}
-        \item Sempre reportar pelo menos exatidão, precisão e revocação
-        \item Incluir Kappa de Cohen para conjuntos de dados desequilibrados
-        \item Considerar métricas específicas do domínio quando apropriado
-    \end{itemize}
-\end{enumerate}
+\textbf{Aviso importante:} Ao desativar estes avisos, perde-se informação importante sobre problemas no conjunto de dados ou no modelo. Só se deve fazer isto quando realmente se conhece o impacto correspondente!
 
 \section{Conclusão}
 
