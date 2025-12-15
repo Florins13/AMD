@@ -11,6 +11,7 @@ from math import sqrt
 from random import randrange
 from random import seed
 import csv
+import matplotlib.pyplot as plt
 
 
 
@@ -27,9 +28,9 @@ def get_euclidean_distance( v1, v2 ):
   # the feature list excludes last component because it is the "class"
   lenFeature = len(v1) - 1
   for i in range( lenFeature ): 
-    pass
+    distance += (v1[i] - v2[i]) ** 2
     #<HERE> implement the Euclidean distance (recall Spreadsheet exercise)
-  return distance
+  return sqrt(distance)
 
 
 ## attraction/repulsion rules
@@ -41,7 +42,17 @@ def apply_attraction_rule( learningRate, trainingInstance, BMU ):
 def apply_repulsion_rule( learningRate, trainingInstance, BMU ):
   #<HERE> correct the next "return" to properly implement the repulsion_rule
   # hint: follow the same reasoning as in the "apply_attraction_rule"
-  return ( BMU, float( "inf" ) )
+  sumError = 0.0
+  
+  updated_BMU = BMU[:]  # Create a copy of veector BMU for modification
+  lenFeature = len(BMU) - 1  
+  for i in range(lenFeature):
+        error = trainingInstance[i] - BMU[i] # move BMU away from trainingInstance
+        sumError += error**2
+        updated_BMU[i] = BMU[i] - learningRate * (trainingInstance[i] - BMU[i])
+
+  return ( BMU, sumError) #updated_BMU
+  #
 
 
 def attraction_repulsion_rule( learningRate, trainingInstance, BMU,
@@ -58,7 +69,7 @@ def attraction_repulsion_rule( learningRate, trainingInstance, BMU,
 
 ## learning-rate (non-linear)
 def get_learning_rate( alpha, epoch, maxEpoch ):
-  return alpha
+  return alpha * ( 1.0 - (epoch / float( maxEpoch ) ))
   #<HERE> return the time-dependent learning rate (cf., slides)
   #return alpha * ( 1.0 <HERE> float( maxEpoch ) ) )
 
@@ -83,6 +94,7 @@ def get_BMU( codebook, trainingInstance ):
 # - a dataset, an initial codebook,
 # - the alpha initial-learning-rate and the maximum number of epochs
 def train_LVQ( dataset, codebook, alpha, maxEpoch ):
+  errors = []
   for epoch in range( maxEpoch ):
     lRate = get_learning_rate( alpha, epoch, maxEpoch )
     totalError = 0.0
@@ -94,9 +106,10 @@ def train_LVQ( dataset, codebook, alpha, maxEpoch ):
         ( BMU, error ) = apply_repulsion_rule( lRate, trainingInstance, BMU )
       totalError += error
 
+    errors.append(totalError)
     print( "> Epoch=%d, learningRate=%.3f, totalError=%.3f" % \
            (epoch, lRate, totalError))
-  return ( codebook, totalError )
+  return ( codebook, totalError, errors )
 
 
 #______________________________________________________________________________
@@ -148,8 +161,8 @@ def print_info( description, aHeader, aList, aStr=None, aFloat=None ):
 seed( 1 )
 
 _alpha = 0.7 #0.3
-_maxEpoch = 1 #100
-_codebookRandom = False #True
+_maxEpoch = 100  #1
+_codebookRandom = True #True
 # next variable only used for the random codebook (if _codebookRandom = True):
 _dimCodebook = 2
 #______________________________________________________________________________
@@ -158,8 +171,19 @@ _dimCodebook = 2
 #______________________________________________________________________________
 # The Dataset and Codebook files in CSV Format
 #______________________________________________________________________________
-_datasetFileName_csv  = "01_dataset_slides.txt"
-_codebookFileName_csv = "02_codebook_slides.txt"
+_datasetFileName_csv  = r"01_dataset_slides.txt" 
+_codebookFileName_csv = r"02_codebook_slides.txt"
+
+# Plotting the function 
+def plot_error(errors):
+  plt.figure(figsize=(10, 6)) 
+  plt.plot(errors, label="Total Error", color='blue') 
+  plt.xlabel("Epoch") 
+  plt.ylabel("Total Error") 
+  plt.title("Evolution of Total Error Over Epochs") 
+  plt.legend() 
+  plt.grid(True) 
+  plt.show()
 
 
 #______________________________________________________________________________
@@ -176,10 +200,11 @@ def main():
   print_info( ">> initial codebook:", cbook_header, codebook )
 
   # learn a codebook (given an initial one)
-  ( codebook, totalError ) = train_LVQ( dataset, codebook, _alpha, _maxEpoch )
+  ( codebook, totalError, errors ) = train_LVQ( dataset, codebook, _alpha, _maxEpoch )
   print_info( ">> learned codebook:", cbook_header, codebook,
               "totalError =", totalError )
 
+  plot_error(errors)
 
 #______________________________________________________________________________
 # The "main" of this module (is case this module is loaded from another module)
