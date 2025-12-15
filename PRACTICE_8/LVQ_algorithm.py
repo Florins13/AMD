@@ -160,11 +160,11 @@ def print_info( description, aHeader, aList, aStr=None, aFloat=None ):
 #______________________________________________________________________________
 seed( 1 )
 
-_alpha = 0.7 #0.3
-_maxEpoch = 100  #1
-_codebookRandom = True #True
+_alpha = 0.7
+_maxEpoch = 100
+_codebookRandom = True 
 # next variable only used for the random codebook (if _codebookRandom = True):
-_dimCodebook = 2
+_dimCodebook = 15
 #______________________________________________________________________________
 
 
