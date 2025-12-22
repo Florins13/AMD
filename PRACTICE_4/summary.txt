@@ -1,50 +1,245 @@
-# Exercise 4
-a) Imports module: Imports a01_aFunction as aF and calls aF.f(['x', 4])
+# Exercício 1
+Introdução aos conceitos básicos de Python - criação e execução de scripts Python simples
 
-This function filters the list for even integers (none in this list), so it becomes empty
-It then waits for user input, looping until the user enters 'quit' or 'exit'
-In the script a02 the number 4 is included in the list. If we press 4 we break the loop and exit the prompt script.
+a) hello.py: Programa simples "Hello World!"
+   - Primeiro script Python demonstrando a função básica print()
+   - Mostra como executar código Python: python3 hello.py
+   - Saída: "Hello World!"
 
-b) code added for this part
+b) fluxo_controlo.py: Estruturas de controlo de fluxo
+   - Condicionais if/elif/else: Demonstra tomada de decisão com x = 10
+   - Ciclo while: Contador de 0 a 4
+   - Ciclos for: Itera através de strings ("Python"), intervalos e demonstra break/continue
+   - Função range(): Mostra parâmetro de passo com range(0, 21, 5)
+   - Resultado: Compreensão da sintaxe baseada em indentação e estruturas de controlo em Python
 
-c) The created script is a .bat script which cannot be runned in linux based systems. But after investigating
-the file we observed that this file tries to ensure a specific version of python is being used rather then default python set in the system path.
-This guaratess that the correct python interpreter runs the file even with multiple versions.
-This part also writes a new line in the a02 file and prints it into the console.
-
-d) We can observe that its possible to have dynamic code generation. The ITEM-C adds a new function that prints even when the
-number is divided and the rest is 0 and display odd if the rest is different then 0.
-
-e) When executed in Windows Command Prompt (DOS shell):
-   - platform.system() returns "Windows", so launcher = "my_python"
-   - Executes: my_python a01_aFunction.py
-   - The my_python.bat batch file runs, setting the specific Python path
-   - The modified a01_aFunction.py executes in a subprocess within the DOS shell
-   - Output shows the new print statement and function definition added by ITEM-A and ITEM-C
-   - The subprocess runs in the DOS shell environment, showing true inter-process communication
+c) funcoes.py: Funções e âmbito
+   - Definição de funções: saudacao(), apresentar(nome, idade), soma(a, b)
+   - Valores de retorno: soma() retorna resultado da adição
+   - Âmbito de variáveis: Demonstra variável local x dentro da função teste()
+   - Demonstração de erro: Tentar aceder a variável local fora do âmbito da função (NameError)
+   - Parâmetros por omissão: mensagem(txt="Hip! Hip!") com substituição opcional do argumento
+   - Resultado: Compreensão da definição de funções, parâmetros, valores de retorno e regras de âmbito
 
 
-# Exercise 5
+# Exercício 2
+Trabalhar com estruturas de dados Python: listas, tuplos e dicionários
 
-a) Uncomment ITEM-A through ITEM-C and Execute
-   - ITEM-A appends a new print statement to a01_aFunction.py
-   - ITEM-B executes the modified file using the platform-appropriate launcher (my_python.bat on Windows, ../my_python.sh on Linux/macOS)
-   - ITEM-C appends a new function g(x) to a01_aFunction.py that checks if a number is even or odd
-   - Result: The file is modified twice and executed, showing the cascading effects of dynamic code generation
-   - Undo: Remove the added print statement and function g(x) from a01_aFunction.py, then re-comment ITEM-A, ITEM-B, ITEM-C in a02_anotherBehavior.py
+a) listas.py: Operações com listas
+   - Criação e indexação: lista[0], lista[-1] (indexação negativa)
+   - Modificação: lista[1] = 8 (natureza mutável)
+   - Métodos: append(5), insert(0, "zero"), del lista[0], pop(), remove(8)
+   - Operações: Concatenação com +, função len(), teste de pertença com 'in'
+   - Resultado: Listas são coleções ordenadas e mutáveis com métodos versáteis
 
-b) Add average() function to a01_aFunction.py
-   - Created new function average(aList) that calculates the average of all numeric values in aList
-   - Returns the sum divided by the count of numeric values
-   - Function handles empty lists and mixed data types correctly
+b) tuplos.py: Operações com tuplos
+   - Demonstração de imutabilidade: t[1] = 99 causa TypeError
+   - Desempacotamento de tuplos: nome, idade, cidade = pessoa
+   - Uso prático: pessoa = ("Nuno", 25, "Sines") para agrupar dados relacionados
+   - Conversão: tuple(lista) converte lista em tuplo, list(tuplo) converte de volta
+   - Estruturas mistas: lista = [("a", 1), ("b", 2), ("c", 3)] combinando listas e tuplos
+   - Resultado: Tuplos são coleções ordenadas e imutáveis ideais para dados fixos
 
-c) Uncomment ITEM-A through ITEM-D and Execute with average() function
-   - Uncommented all sections including ITEM-D which now calls the average() function
-   - ITEM-A adds a print statement to a01_aFunction.py
-   - ITEM-B executes the modified file via subprocess
-   - ITEM-C adds the average() function (or another custom function) to a01_aFunction.py
-   - ITEM-D imports the module, reloads it with importlib, and calls the average() function with test data
-   - Result: The script demonstrates complete dynamic code generation workflow from file modification to execution
-   - The average() function is dynamically added and executed in the subprocess
+c) dicionarios.py: Operações com dicionários
+   - Pares chave-valor: info = {"nome": "Nuno", "idade": 25, "curso": "MEIC"}
+   - Acesso: info["nome"], info["idade"]
+   - Modificação: Adicionar (info["cidade"] = "Sines"), atualizar (info["idade"] = 29)
+   - Eliminação: del info["curso"], valor = info.pop("cidade")
+   - Métodos: keys(), values(), items() para aceder ao conteúdo do dicionário
+   - Pertença: "nome" in info retorna True
+   - Iteração: for chave, valor in info.items() para processar todas as entradas
+   - Resultado: Dicionários são mapeamentos chave-valor mutáveis e não ordenados (Python 3.7+ mantém ordem de inserção)
+
+
+# Exercício 3
+Operações com ficheiros e operações avançadas com listas
+
+a) ficheiros.py: Ler e escrever ficheiros
+   - Leitura: open("1f.txt", "r") com chamada manual a close()
+   - Linha a linha: for linha in f itera através das linhas do ficheiro
+   - Gestor de contexto: with open() as f trata automaticamente do fecho do ficheiro
+   - Escrita: open("novo1f.txt", "w") cria/sobrescreve ficheiro
+   - Anexar: open("novo1f.txt", "a") adiciona ao ficheiro existente
+   - Boa prática: Usar instrução 'with' para garantir limpeza adequada dos recursos
+   - Resultado: Compreensão dos modos de ficheiro (r, w, a) e gestores de contexto para manuseamento seguro de ficheiros
+
+b) conversion_comprehension.py: Conversões de tipos e compreensões de listas
+   - Conversão de tipos: tuple(lista), list(tuplo), dict(pares)
+   - Métodos de dicionário como listas: list(d.keys()), list(d.values()), list(d.items())
+   - Compreensões de listas: [x*x for x in range(1, 6)] cria quadrados [1, 4, 9, 16, 25]
+   - Compreensões filtradas: [x for x in range(10) if x % 2 == 0] gera números pares
+   - Operações com strings: [nome.upper() for nome in nomes] aplica transformação
+   - Compreensões de tuplos: [(x, x**2) for x in range(5)] cria pares de coordenadas
+   - Resultado: Sintaxe concisa para criar e transformar coleções
+
+c) modulo_util.py, modulo_a.py, modulo_b.py, modulo_exemplos.py: Sistema de módulos
+   - Criação de módulos: modulo_util.py contém funções reutilizáveis (saudacao, soma, dobro)
+   - Métodos de importação: import modulo_util, import as mu, from module import function
+   - Variável __name__: Mostra diferença entre execução direta e importação
+   - Execução de módulo: instruções print executam na importação (modulo_a imprime ao carregar)
+   - Uso entre módulos: modulo_b importa e usa modulo_a.cumprimentar()
+   - Resultado: Compreensão do sistema de módulos Python para organização e reutilização de código
+
+
+# Exercício 4
+a) Importa módulo: Importa a01_aFunction como aF e chama aF.f(['x', 4])
+
+Esta função filtra a lista para inteiros pares (nenhum nesta lista), portanto torna-se vazia
+Depois espera por input do utilizador, fazendo loop até que o utilizador insira 'quit' ou 'exit'
+No script a02 o número 4 está incluído na lista. Se premir 4 interrompemos o loop e saímos do script de prompt.
+
+b) código adicionado para esta parte
+
+c) O script criado é um script .bat que não pode ser executado em sistemas baseados em linux. Mas após investigar
+o ficheiro observámos que este ficheiro tenta garantir que uma versão específica do python está a ser usada em vez do python padrão definido no caminho do sistema.
+Isto garante que o interpretador python correto executa o ficheiro mesmo com múltiplas versões.
+Esta parte também escreve uma nova linha no ficheiro a02 e imprime-a na consola.
+
+d) Podemos observar que é possível ter geração dinâmica de código. O ITEM-C adiciona uma nova função que imprime par quando o
+número é dividido e o resto é 0 e exibe ímpar se o resto for diferente de 0.
+
+e) Quando executado no Windows Command Prompt (shell DOS):
+   - platform.system() retorna "Windows", portanto launcher = "my_python"
+   - Executa: my_python a01_aFunction.py
+   - O ficheiro batch my_python.bat executa, definindo o caminho Python específico
+   - O a01_aFunction.py modificado executa num subprocesso dentro da shell DOS
+   - A saída mostra a nova instrução print e definição de função adicionada por ITEM-A e ITEM-C
+   - O subprocesso executa no ambiente shell DOS, mostrando verdadeira comunicação entre processos
+
+
+# Exercício 5
+
+a) Descomentar ITEM-A até ITEM-C e Executar
+   - ITEM-A anexa uma nova instrução print a a01_aFunction.py
+   - ITEM-B executa o ficheiro modificado usando o lançador apropriado à plataforma (my_python.bat no Windows, ../my_python.sh no Linux/macOS)
+   - ITEM-C anexa uma nova função g(x) a a01_aFunction.py que verifica se um número é par ou ímpar
+   - Resultado: O ficheiro é modificado duas vezes e executado, mostrando os efeitos em cascata da geração dinâmica de código
+   - Desfazer: Remover a instrução print adicionada e função g(x) de a01_aFunction.py, depois re-comentar ITEM-A, ITEM-B, ITEM-C em a02_anotherBehavior.py
+
+b) Adicionar função average() a a01_aFunction.py
+   - Criada nova função average(aList) que calcula a média de todos os valores numéricos em aList
+   - Retorna a soma dividida pela contagem de valores numéricos
+   - Função trata corretamente listas vazias e tipos de dados mistos
+
+c) Descomentar ITEM-A até ITEM-D e Executar com função average()
+   - Descomentadas todas as secções incluindo ITEM-D que agora chama a função average()
+   - ITEM-A adiciona uma instrução print a a01_aFunction.py
+   - ITEM-B executa o ficheiro modificado via subprocesso
+   - ITEM-C adiciona a função average() (ou outra função personalizada) a a01_aFunction.py
+   - ITEM-D importa o módulo, recarrega-o com importlib, e chama a função average() com dados de teste
+   - Resultado: O script demonstra o fluxo de trabalho completo de geração dinâmica de código desde modificação de ficheiro até execução
+   - A função average() é dinamicamente adicionada e executada no subprocesso
+
+
+# Exercício 6
+Análise de argumentos de linha de comandos usando o módulo getopt
+
+a) e_Config.py: Configuração básica de linha de comandos
+   - Classe e_Config: Analisa argumentos de linha de comandos usando o módulo getopt
+   - Parâmetros por omissão: Define pares (opção, valor) para -x/--paramX, -y/--paramY, -z/--paramZ, -t/--paramT
+   - Módulo getopt: Análise de argumentos estilo Unix suportando opções curtas (-x) e longas (--paramX)
+   - Resultado: Abordagem estruturada para tratar parâmetros configuráveis via linha de comandos
+
+e) Classe BackupConfig (Exercício 6.e): Aplicar padrão de linha de comandos ao sistema de backup
+   - Estende o padrão e_Config para operações de backup
+   - Parâmetros:
+     * -s/--sources: Diretórios de origem para backup
+     * -d/--target: Diretório de destino para ficheiros de backup
+     * -v/--version: Versão de backup (v01, v02, v03)
+     * -c/--comment: Comentário opcional para nome de ficheiro de backup
+   - Integração: Conecta com funções backup.py (backup_v01, backup_v02, backup_v03)
+   - Versões de backup:
+     * v01: Ficheiro zip simples baseado em timestamp
+     * v02: Organizado em pastas diárias (estrutura AAAA-MM-DD)
+     * v03: Adiciona comentário do utilizador ao nome do ficheiro para melhor identificação
+   - Padrão de design: Padrão de linha de comandos separa configuração de execução
+   - Resultado: Sistema de backup flexível controlado via argumentos de linha de comandos, demonstrando separação de preocupações
+
+
+# Exercício 7
+Funções de funções e padrão decorator
+
+a) u_function_of_function_and_decorator.py: Composição básica de funções
+   - Funções aninhadas: f() retorna g() que retorna valor (conceito de closure)
+   - Âmbito: Funções internas acedem a variáveis de funções externas
+   - Função como valor de retorno: Demonstra funções como objetos de primeira classe
+   - Simulação de classe: Função c(v) simula comportamento de classe com métodos acedidos via c()(1), c()(2)
+   - Resultado: Compreensão de closures e conceitos de programação funcional em Python
+
+b) Classe estendida com novos métodos (Exercício 7.b)
+   - Método adicionado 3: Cálculo de cubo (y**3 + v)
+   - Método adicionado 4: Cálculo de fatorial com acumulador
+   - Método adicionado 5: Operação de concatenação de strings
+   - Exemplos:
+     * c_extended()(3)(5) = 125 (cubo de 5)
+     * c_extended(10)(4)(4) = 34 (fatorial de 4 mais 10 = 24 + 10)
+     * c_extended('Hello')(5)('World') = "Hello concatenated with World"
+   - Resultado: Demonstra extensibilidade do padrão de "classe" baseada em funções
+
+c) Conceito de meta-classe (Exercício 7.c)
+   - Meta-classe: Função que retorna classes (função de ordem superior)
+   - Três tipos de classe:
+     1. "math": Operações (adição, multiplicação, subtração, divisão)
+     2. "string": Operações de string (concatenação, maiúsculas, minúsculas)
+     3. "geometry": Cálculos de área (círculo, retângulo, triângulo)
+   - Uso: MathClass = meta_class("math") cria classe especializada
+   - Exemplos:
+     * MathClass(10)(1)(5) = 15 (adição: 10 + 5)
+     * StringClass('Hello')(2)('World') = "HELLO | WORLD" (maiúsculas)
+     * GeometryClass(5)(1)(None) = 78.54 (área do círculo com raio 5)
+   - Resultado: Demonstra conceitos de meta-programação e padrão factory
+
+d) Variações de decorator (Exercício 7.d)
+   - Decorators f e g: Envolvem funções com "< >" e "# #" respetivamente
+   - Sintaxe @f @g: Equivalente a h = f(g(h))
+   - 8 variações testadas:
+     1. @f @g → < # h # > (ordem original)
+     2. @g @f → # < h > # (invertida)
+     3. @f @f @f @g → < < < # h # > > > (múltiplos f)
+     4. @g @g @g @f → # # # < h > # # # (múltiplos g)
+     5. @f @g @f @g → < # < # h # > # > (alternada)
+     6. @f → < h > (apenas f)
+     7. @g → # h # (apenas g)
+     8. @g @f @f @g @g → # < < # # h # # > > # (combinação personalizada)
+   - Resultado: Compreensão da composição de decorators, a ordem importa (aplicação de baixo para cima)
+
+
+# Exercício 8
+Padrão de design Singleton usando decorators
+
+Visão geral: x_singleton.py, z01_singleton_usage.py, z02_singleton_usage_anotherContext.py
+- Padrão Singleton: Garante que apenas uma instância de uma classe existe em toda a aplicação
+- Implementação: decorator @singleton usando closure para armazenar dicionário de instâncias
+
+a) z01_singleton_usage.py: Uso básico de singleton
+   - Duas classes singleton: C e D decoradas com @singleton
+   - Comportamento:
+     * c1 = C() cria instância, imprime "--> applying-the-decorator <--"
+     * c1.f() imprime 1 (valor inicial)
+     * c1.inc() incrementa para 2
+     * c2 = C() retorna a MESMA instância que c1 (não cria novo objeto)
+     * c2.f() imprime 2 (prova que é a mesma instância)
+   - Mesmo padrão para classe D
+   - Resultado: Múltiplas atribuições de variáveis (c1, c2) referenciam a mesma instância única
+
+b) Momento de aplicação do decorator
+   - Instrução print em x_singleton.py (linha 18): print("--> applying-the-decorator <--")
+   - Momento: Decorator aplica-se UMA VEZ por classe quando a definição da classe é avaliada
+   - NÃO é chamado quando instâncias são solicitadas (c1=C(), c2=C())
+   - Saída mostra apenas 2 aplicações de decorator no total (uma vez para C, uma vez para D)
+   - Resultado: Decorator envolve classe no momento da definição, não no momento da instanciação
+
+c) z02_singleton_usage_anotherContext.py: Persistência de singleton entre módulos
+   - Importa classes C e D de z01_singleton_usage
+   - Sem novas aplicações de decorator (sem mensagens "--> applying-the-decorator <--")
+   - Estado singleton persiste: Contador inicial é 2 (continuando do módulo anterior)
+   - Múltiplos contextos testados:
+     * Uso direto: c1=C() no âmbito do módulo
+     * Âmbito de função: c=C() dentro da função f()
+     * Contexto de classe: c=C() no __init__() e m() da classe H
+     * Função main: c=C() em main()
+   - Progressão do contador: 2→3→4→5→6→7 (todos acedendo à mesma instância)
+   - Resultado: Padrão Singleton garante unicidade global em toda a aplicação, independentemente do contexto de importação ou âmbito
+
 
 

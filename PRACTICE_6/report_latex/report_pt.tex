@@ -546,8 +546,6 @@ y_predict = classifier.predict( X_test )
 score = f_score( y_test, y_predict, **keyword_args_score )
 \end{lstlisting}
 
-\vspace{2cm}
-
 \subsection{(e) Testar o Código}
 
 Testámos o código com a configuração especificada: \texttt{repeated\_holdout(1.0/3.0, 2, seed)} e \texttt{DecisionTreeClassifier} com \texttt{seed=5}.
@@ -599,7 +597,7 @@ due to no true samples.
 
 \subsection{(g) Explicar a Diferença entre Avisos}
 
-\subsubsection{Diferença entre Avisos}
+\subsubsection{Diferença entre "no true samples" e "no predicted samples"}
 
 \textbf{"no predicted samples":}
 \begin{itemize}
@@ -615,7 +613,7 @@ due to no true samples.
     \item Afeta a métrica de revocação (recall)
 \end{itemize}
 
-\subsubsection{Aviso: no true samples (recall e f1-score)}
+\subsubsection{Por que "no true samples" afeta recall e f1\_score}
 
 A revocação (recall) é definida como:
 \begin{equation}
@@ -624,7 +622,7 @@ A revocação (recall) é definida como:
 
 Quando não há amostras verdadeiras positivas no conjunto de teste, temos TP + FN = 0, o que resulta em divisão por zero. O F1-score depende de recall, portanto herda este problema.
 
-\subsubsection{Aviso: no predicted samples (precision e f1-score)}
+\subsubsection{Por que "no predicted samples" afeta precision e f1\_score}
 
 A precisão (precision) é definida como:
 \begin{equation}
@@ -666,6 +664,57 @@ warnings.filterwarnings( "ignore", category=UndefinedMetricWarning )
 \end{lstlisting}
 
 \textbf{Aviso importante:} Ao desativar estes avisos, perde-se informação importante sobre problemas no conjunto de dados ou no modelo. Só se deve fazer isto quando realmente se conhece o impacto correspondente!
+
+\section{Boas Práticas e Conclusões}
+
+\subsection{Principais Aprendizagens}
+
+\begin{enumerate}
+    \item \textbf{Tamanho do conjunto de dados importa:} Conjuntos de dados pequenos levam a métricas não fiáveis e avisos frequentes
+    
+    \item \textbf{Múltiplas métricas são essenciais:} Exatidão por si só pode ser enganadora; precisão, revocação e F1-score fornecem visão completa
+    
+    \item \textbf{Compreender os avisos:} Avisos de métricas indicam problemas de dados reais, não apenas questões técnicas
+    
+    \item \textbf{Uso adequado do zero\_division:} Define o comportamento para casos extremos de forma conservadora
+    
+    \item \textbf{Holdout repetido melhora a estabilidade:} Múltiplas repetições fornecem estimativas mais fiáveis
+\end{enumerate}
+
+\subsection{Recomendações}
+
+\textbf{1. Tamanho mínimo do conjunto de dados:}
+\begin{itemize}
+    \item Para holdout: pelo menos 100 instâncias
+    \item Para holdout repetido: pelo menos 50 instâncias
+    \item Para conjuntos de dados mais pequenos: utilizar validação cruzada leave-one-out
+\end{itemize}
+
+\textbf{2. Utilizar divisão estratificada:}
+\begin{itemize}
+    \item Garantir proporções de classes consistentes entre conjuntos de treino e teste
+    \item Especialmente importante para conjuntos de dados desequilibrados
+\end{itemize}
+
+\textbf{3. Definir seeds aleatórios:}
+\begin{itemize}
+    \item Garantir reprodutibilidade
+    \item Facilitar depuração e comparação
+\end{itemize}
+
+\textbf{4. Monitorizar avisos de métricas:}
+\begin{itemize}
+    \item Não ignorar simplesmente avisos sem compreensão
+    \item Investigar causas de valores de métrica indefinidos
+    \item Considerar se o tamanho do conjunto de dados é adequado
+\end{itemize}
+
+\textbf{5. Reportar múltiplas métricas:}
+\begin{itemize}
+    \item Sempre reportar pelo menos exatidão, precisão e revocação
+    \item Incluir Kappa de Cohen para conjuntos de dados desequilibrados
+    \item Considerar métricas específicas do domínio quando apropriado
+\end{itemize}
 
 \section{Conclusão}
 
