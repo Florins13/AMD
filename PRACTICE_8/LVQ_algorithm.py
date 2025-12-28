@@ -40,19 +40,8 @@ def apply_attraction_rule( learningRate, trainingInstance, BMU ):
 
 
 def apply_repulsion_rule( learningRate, trainingInstance, BMU ):
-  #<HERE> correct the next "return" to properly implement the repulsion_rule
-  # hint: follow the same reasoning as in the "apply_attraction_rule"
-  sumError = 0.0
-  
-  updated_BMU = BMU[:]  # Create a copy of veector BMU for modification
-  lenFeature = len(BMU) - 1  
-  for i in range(lenFeature):
-        error = trainingInstance[i] - BMU[i] # move BMU away from trainingInstance
-        sumError += error**2
-        updated_BMU[i] = BMU[i] - learningRate * (trainingInstance[i] - BMU[i])
-
-  return ( BMU, sumError) #updated_BMU
-  #
+  return attraction_repulsion_rule( learningRate, trainingInstance, BMU,
+                                    lambda a, b: a - b )
 
 
 def attraction_repulsion_rule( learningRate, trainingInstance, BMU,
@@ -175,15 +164,19 @@ _datasetFileName_csv  = r"01_dataset_slides.txt"
 _codebookFileName_csv = r"02_codebook_slides.txt"
 
 # Plotting the function 
-def plot_error(errors):
+def plot_error(errors, save_path=None):
   plt.figure(figsize=(10, 6)) 
   plt.plot(errors, label="Total Error", color='blue') 
   plt.xlabel("Epoch") 
   plt.ylabel("Total Error") 
   plt.title("Evolution of Total Error Over Epochs") 
   plt.legend() 
-  plt.grid(True) 
+  plt.grid(True)
+  if save_path:
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    print(f"Plot saved to: {save_path}")
   plt.show()
+  plt.close()
 
 
 #______________________________________________________________________________
@@ -206,7 +199,149 @@ def main():
 
   plot_error(errors)
 
+
+#______________________________________________________________________________
+# Exercise 5b: Impact of Number of Epochs on Final Error
+def main_5b():
+  print("\n" + "="*60)
+  print("EXERCISE 5b: Impact of Number of Epochs")
+  print("="*60)
+  
+  (data_header, dataset) = read_csv(_datasetFileName_csv)
+  (cbook_header, codebook_initial) = read_csv(_codebookFileName_csv)
+  
+  epoch_values = []
+  error_values = []
+  
+  print("\nRunning training with epochs from 1 to 100...")
+  for max_epoch in range(1, 101):
+    # Deep copy codebook to reset for each run
+    codebook = [row[:] for row in codebook_initial]
+    (_, totalError, _) = train_LVQ(dataset, codebook, 0.7, max_epoch)
+    epoch_values.append(max_epoch)
+    error_values.append(totalError)
+    if max_epoch % 10 == 0:
+      print(f"  MaxEpoch={max_epoch}, FinalError={totalError:.3f}")
+  
+  # Plot
+  plt.figure(figsize=(10, 6))
+  plt.plot(epoch_values, error_values, 'b-', linewidth=2)
+  plt.xlabel("Maximum Epochs", fontsize=12)
+  plt.ylabel("Final Total Error", fontsize=12)
+  plt.title("Convergence Analysis: Total Error vs Number of Epochs\n(Fixed α=0.7, Non-random codebook)", fontsize=14)
+  plt.grid(True, alpha=0.3)
+  plt.savefig('plots/5b_epochs_vs_error.png', dpi=300, bbox_inches='tight')
+  print(f"\n✓ Plot saved to: plots/5b_epochs_vs_error.png")
+  plt.show()
+  plt.close()
+
+
+#______________________________________________________________________________
+# Exercise 5c: Impact of Codebook Size
+def main_5c():
+  print("\n" + "="*60)
+  print("EXERCISE 5c: Impact of Codebook Size")
+  print("="*60)
+  
+  (data_header, dataset) = read_csv(_datasetFileName_csv)
+  
+  codebook_sizes = [2, 4, 6, 8, 10, 12, 15, 20, 25]
+  avg_errors = []
+  std_errors = []
+  num_trials = 5
+  
+  print(f"\nTesting codebook sizes: {codebook_sizes}")
+  print(f"Running {num_trials} trials per size for reliability...\n")
+  
+  for dim in codebook_sizes:
+    errors_for_dim = []
+    for trial in range(num_trials):
+      seed(trial)
+      codebook = [build_codebook_random(dataset) for i in range(dim)]
+      (_, totalError, _) = train_LVQ(dataset, codebook, 0.7, 100)
+      errors_for_dim.append(totalError)
+    
+    avg_error = sum(errors_for_dim) / len(errors_for_dim)
+    std_error = (sum((e - avg_error)**2 for e in errors_for_dim) / len(errors_for_dim))**0.5
+    avg_errors.append(avg_error)
+    std_errors.append(std_error)
+    print(f"  Codebook Size={dim:2d}: Avg Error={avg_error:.3f}, Std Dev={std_error:.3f}")
+  
+  # Plot
+  plt.figure(figsize=(10, 6))
+  plt.errorbar(codebook_sizes, avg_errors, yerr=std_errors, fmt='ro-', 
+               linewidth=2, markersize=8, capsize=5, capthick=2, label='Avg Error ± Std')
+  plt.xlabel("Codebook Size (Number of Vectors)", fontsize=12)
+  plt.ylabel("Average Total Error (5 trials)", fontsize=12)
+  plt.title("Impact of Codebook Size on Model Performance\n(α=0.7, 100 epochs, Random codebook)", fontsize=14)
+  plt.grid(True, alpha=0.3)
+  plt.legend()
+  plt.savefig('plots/5c_codebook_size_vs_error.png', dpi=300, bbox_inches='tight')
+  print(f"\n✓ Plot saved to: plots/5c_codebook_size_vs_error.png")
+  plt.show()
+  plt.close()
+
+
+#______________________________________________________________________________
+# Exercise 5d: Free Exploration - Learning Rate Impact
+def main_5d():
+  print("\n" + "="*60)
+  print("EXERCISE 5d: Free Exploration - Learning Rate Impact")
+  print("="*60)
+  
+  (data_header, dataset) = read_csv(_datasetFileName_csv)
+  (cbook_header, codebook_initial) = read_csv(_codebookFileName_csv)
+  
+  alphas = [0.1, 0.3, 0.5, 0.7, 0.9]
+  colors = ['blue', 'green', 'orange', 'red', 'purple']
+  
+  print(f"\nTesting learning rates: {alphas}")
+  print("Training for 100 epochs each...\n")
+  
+  plt.figure(figsize=(12, 6))
+  
+  for alpha, color in zip(alphas, colors):
+    codebook = [row[:] for row in codebook_initial]
+    (_, totalError, errors) = train_LVQ(dataset, codebook, alpha, 100)
+    plt.plot(range(len(errors)), errors, color=color, linewidth=2, 
+             label=f'α={alpha}, Final Error={totalError:.3f}', alpha=0.8)
+    print(f"  α={alpha}: Final Error={totalError:.3f}")
+  
+  plt.xlabel("Epoch", fontsize=12)
+  plt.ylabel("Total Error", fontsize=12)
+  plt.title("Learning Rate Comparison: Convergence Behavior\n(Non-random codebook, 100 epochs)", fontsize=14)
+  plt.legend(loc='upper right')
+  plt.grid(True, alpha=0.3)
+  plt.savefig('plots/5d_learning_rate_comparison.png', dpi=300, bbox_inches='tight')
+  print(f"\n✓ Plot saved to: plots/5d_learning_rate_comparison.png")
+  plt.show()
+  plt.close()
+
+
+#______________________________________________________________________________
+# Run all exercises
+def run_all_exercises():
+  print("\n" + "="*60)
+  print("RUNNING ALL EXPERIMENTS FOR EXERCISE 5")
+  print("="*60)
+  
+  main_5b()
+  main_5c()
+  main_5d()
+  
+  print("\n" + "="*60)
+  print("✓ ALL EXPERIMENTS COMPLETED!")
+  print("✓ All plots saved in 'plots/' directory")
+  print("="*60 + "\n")
+
+
 #______________________________________________________________________________
 # The "main" of this module (is case this module is loaded from another module)
 if __name__ == "__main__":
-   main()
+   # Uncomment the one you want to run:
+   
+   # main()              # Original: runs with current parameters
+   # main_5b()           # Exercise 5b: Epochs vs Error
+   # main_5c()           # Exercise 5c: Codebook Size vs Error
+   # main_5d()           # Exercise 5d: Learning Rate Comparison
+   run_all_exercises()   # Run all experiments for Exercise 5
