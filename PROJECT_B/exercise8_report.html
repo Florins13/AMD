@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>We-Commerce Market-Basket Analysis Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2E86AB;
+            text-align: center;
+            border-bottom: 3px solid #2E86AB;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #A23B72;
+            margin-top: 30px;
+        }
+        .metadata {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .visualization {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #2E86AB;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>We-Commerce Market-Basket Analysis Report</h1>
+    
+    <div class="metadata">
+        <h2>Analysis Metadata</h2>
+        <p><strong>Report Date:</strong> 2026-01-04 21:13:03</p>
+        <p><strong>Analysis Period:</strong> January 2012</p>
+        <p><strong>Total Transactions:</strong> 4,945</p>
+        <p><strong>Unique Products:</strong> 1,750</p>
+        <p><strong>Frequent Itemsets Found:</strong> 72</p>
+        <p><strong>Association Rules Found:</strong> 26</p>
+        <p><strong>Minimum Support:</strong> 0.30% (14 transactions)</p>
+        <p><strong>Minimum Confidence:</strong> 65%</p>
+    </div>
+    
+    <div class="visualization">
+        <h2>1. Summary Statistics</h2>
+        <img src="exercise8_visualizations/6_summary_report.png" alt="Summary Report">
+    </div>
+    
+    <div class="visualization">
+        <h2>2. Association Rules: Confidence vs Support</h2>
+        <img src="exercise8_visualizations/1_scatter_confidence_support.png" alt="Confidence vs Support">
+        <p>This scatter plot shows the relationship between rule confidence and support. 
+        Rules in the upper-right quadrant have both high confidence and support, making them 
+        the most actionable for business decisions.</p>
+    </div>
+    
+    <div class="visualization">
+        <h2>3. Top 15 Most Visited Products</h2>
+        <img src="exercise8_visualizations/2_top_products_barchart.png" alt="Top Products">
+        <p>Homepage category and Luis Onofre footwear products dominate visitor traffic. 
+        These products should be featured prominently on the main page.</p>
+    </div>
+    
+    <div class="visualization">
+        <h2>4. Top 10 Association Rules by Confidence</h2>
+        <img src="exercise8_visualizations/3_top_rules_by_confidence.png" alt="Top Rules">
+        <p>Rules with 100% confidence represent perfect associations. The iPad/iPod Touch 
+        combination is a prime opportunity for product bundling.</p>
+    </div>
+    
+    <div class="visualization">
+        <h2>5. Itemset Size Distribution</h2>
+        <img src="exercise8_visualizations/4_itemset_size_distribution.png" alt="Itemset Sizes">
+        <p>Most frequent itemsets contain 1-2 products, indicating that most co-visitations 
+        involve small product sets rather than large shopping baskets.</p>
+    </div>
+    
+    <div class="visualization">
+        <h2>6. Rule Support Distribution</h2>
+        <img src="exercise8_visualizations/5_support_distribution.png" alt="Support Distribution">
+        <p>Support values are concentrated in the lower range, reflecting the filtered dataset 
+        (5-30 sessions) which focuses on meaningful visitor patterns.</p>
+    </div>
+    
+    <div class="metadata">
+        <h2>Key Business Recommendations</h2>
+        <ol>
+            <li><strong>Create Apple Bundle Page:</strong> iPad + iPod Touch show 100% co-visitation</li>
+            <li><strong>Homepage Optimization:</strong> Feature top 10 products in hero carousel</li>
+            <li><strong>Luis Onofre Branding:</strong> Dedicated landing page for this dominant brand</li>
+            <li><strong>Cross-Selling Widgets:</strong> Implement "Customers also viewed" using discovered rules</li>
+            <li><strong>Tech Products Section:</strong> Group gaming/mobile accessories together</li>
+        </ol>
+    </div>
+    
+    <div class="footer">
+        <p>Generated by Exercise 8 - Orange Market-Basket Analysis</p>
+        <p>PROJECT_B - ISEL AMD 2025/2026</p>
+    </div>
+</body>
+</html>
+    

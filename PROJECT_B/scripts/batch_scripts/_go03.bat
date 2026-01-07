@@ -1,0 +1,1 @@
+_go 03_create_views_exercise3.sql
