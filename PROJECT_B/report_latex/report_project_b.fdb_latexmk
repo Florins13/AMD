@@ -1,9 +1,9 @@
 # Fdb version 3
-["pdflatex"] 1767810842 "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex" "report_project_b.pdf" "report_project_b" 1767810842
+["pdflatex"] 1767881807 "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex" "report_project_b.pdf" "report_project_b" 1767881807
   "/etc/texmf/web2c/texmf.cnf" 1695455309 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1095.600pk" 1767542156 13556 4bde15f2e6a09c5fe886fd120d563375 ""
   "/home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1741107125 12644 6bb71e2866e4f2208054b8b752ad7886 ""
-  "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex" 1767810840 36416 023e8a1122d0f2e4f8c2cece9ca65029 ""
+  "/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex" 1767881805 37275 fbaac4fee22f0fcdfe2d2d74165a2641 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcbx1095.tfm" 1136768653 1536 0adca69c597a47fe7664bf81057bb53b ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -104,9 +104,12 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1741010837 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1741190221 1436545 2783031dc6bfc028ac60e6aa6fb2dfac ""
   "figures/01_ISEL-Logotipo-RGB_Horizontal-Compacto-900.png" 1767540310 175655 a752eadc29ee8e45bb24d13743f3211b ""
-  "report_project_b.aux" 1767810842 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "figures/figure_1_rules.png" 1767818072 168192 5f3a472c64bf33ef255c1c4f90fcd240 ""
+  "figures/figure_2_rules.png" 1767818072 192260 a95be290ee9428da0cb8db25c255a10a ""
+  "figures/figure_3_rules.png" 1767818072 168025 45d1c01317172ad21e728bd7172a19d2 ""
+  "report_project_b.aux" 1767881807 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
   "report_project_b.out" 0 -1 0 "pdflatex"
-  "report_project_b.tex" 1767810840 36416 023e8a1122d0f2e4f8c2cece9ca65029 ""
+  "report_project_b.tex" 1767881805 37275 fbaac4fee22f0fcdfe2d2d74165a2641 ""
   (generated)
   "report_project_b.aux"
   "report_project_b.log"

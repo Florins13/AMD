@@ -442,130 +442,123 @@ Os ficheiros \texttt{.basket} e \texttt{.tab} foram gerados com sucesso e estão
 
 \subsection{Enunciado}
 
-Implementar um processo que explora o espaço de parâmetros support/confidence para encontrar configurações que produzem no máximo $maxR$ regras de associação, respondendo a questões de negócio sobre:
-\begin{itemize}
-    \item Produtos a manter juntos numa página web
-    \item Produtos raramente visitados mas frequentemente co-visitados
-    \item Produtos mais visitados
-\end{itemize}
-
-\subsection{Resolução}
-
-\subsubsection{Exploração do Espaço de Parâmetros}
-
-Foi implementado um script Python que:
+Implementar um processo de exploração do espaço de parâmetros support/confidence para encontrar configurações que respondem a três questões de negócio:
 \begin{enumerate}
-    \item Testa múltiplas combinações de support (0,1\% a 10\%) e confidence (50\% a 95\%)
-    \item Gera itemsets frequentes e regras de associação usando FP-Growth
-    \item Identifica a configuração mais próxima do $maxR$ desejado
+    \item Which few products should be kept together in a Web page?
+    \item Which products are rarely visited but often visited together?
+    \item Which products are the most visited?
 \end{enumerate}
 
-\subsubsection{Configuração Ótima Encontrada (maxR=30)}
+\subsection{Metodologia}
 
-\begin{table}[H]
+O ficheiro gerado (.basket) para ser trabalhado foi construído com a característica do \texttt{cookie\_id} para a transação (4.945 transações) e o \texttt{product\_gui} para os itens (1.942 produtos únicos). 
+
+Foi implementado um algoritmo de exploração automática que:
+\begin{itemize}
+    \item Testa múltiplas combinações de support (4 a 495 transações) e confidence (50\% a 95\%)
+    \item Converte percentagens de suporte em números absolutos de transações
+    \item Utiliza FP-Growth para gerar itemsets frequentes e regras de associação
+    \item Aplica estratégias diferentes para cada questão de negócio
+\end{itemize}
+
+\subsection{Resultados}
+
+\subsubsection{Configuração 1: Produtos para Manter Juntos}
+
+\textbf{Estratégia:} Suporte moderado-alto + Confiança moderada-alta
+
+\textbf{Configuração encontrada:} Support $\geq$ 19 transações, Confidence $\geq$ 65\%
+
+\textbf{Regras geradas:} 7 regras com confiança de 98\% a 100\%
+
+\begin{figure}[H]
 \centering
-\begin{tabular}{@{}lr@{}}
-\toprule
-\textbf{Parâmetro} & \textbf{Valor} \\ \midrule
-Support mínimo & 0,30\% (14 transações) \\
-Confidence mínimo & 65\% \\
-Regras encontradas & 26 \\
-Itemsets frequentes & 72 \\
-Total de transações & 4.945 \\ \bottomrule
-\end{tabular}
-\caption{Configuração ótima para análise de associação}
-\label{tab:assoc_config}
-\end{table}
+\includegraphics[width=0.85\textwidth]{figures/figure_1_rules.png}
+\caption{Q1: Produtos para manter juntos numa página web}
+\label{fig:regras_q1}
+\end{figure}
 
-\subsubsection{Produtos Mais Visitados (Top 10)}
+\textbf{Principais descobertas:}
+\begin{itemize}
+    \item \textbf{Ecossistema Apple:} iPad 1/2 $\rightarrow$ iPod Touch (Support=51, Confidence=100\%)
+    \item \textbf{Gaming Mobile:} Helicóptero telecomandado está perfeitamente associado com iPad/iPod (Confidence=100\%)
+    \item Todas as 7 regras mostram associações muito fortes (confiança $\geq$ 98\%)
+\end{itemize}
 
-\begin{table}[H]
+\subsubsection{Configuração 2: Produtos Raramente Visitados mas Frequentemente Co-visitados}
+
+\textbf{Estratégia:} Suporte baixo + Confiança muito alta
+
+\textbf{Configuração encontrada:} Support $\geq$ 9 transações, Confidence $\geq$ 95\%
+
+\textbf{Regras geradas:} 36 regras com confiança de 98\% a 100\%
+
+\begin{figure}[H]
 \centering
-\small
-\begin{tabular}{@{}clrr@{}}
-\toprule
-\textbf{\#} & \textbf{Produto} & \textbf{Visitas} & \textbf{\%} \\ \midrule
-1 & display.category*homepage & 294 & 5,95\% \\
-2 & intro*fbpage*link1 & 118 & 2,39\% \\
-3 & lon\_4508 (Botas Luís Onofre) & 99 & 2,00\% \\
-4 & lon\_2125 (Botas Taupe) & 81 & 1,64\% \\
-5 & lon\_4504 (Botas Camurça Verde) & 78 & 1,58\% \\
-6 & lon\_4004 (Pumps Croco) & 75 & 1,52\% \\
-7 & lon\_4108 (Botins Bordeaux) & 67 & 1,35\% \\
-8 & lon\_4013 (Pumps Stiletto) & 64 & 1,29\% \\
-9 & lon\_2119 (Botas Swarovski) & 61 & 1,23\% \\
-10 & ipodtouch & 52 & 1,05\% \\ \bottomrule
-\end{tabular}
-\caption{Top 10 produtos mais visitados}
-\label{tab:top_products}
-\end{table}
+\includegraphics[width=0.85\textwidth]{figures/figure_2_rules.png}
+\caption{Q2: Produtos raramente visitados mas frequentemente co-visitados}
+\label{fig:regras_q2}
+\end{figure}
 
-\subsubsection{Regras de Associação Mais Fortes}
+\textbf{Principais descobertas:}
+\begin{itemize}
+    \item \textbf{Android products:} Support=17 transações, mas Confidence=100\% com iPad/iPod
+    \item \textbf{Helicóptero telecomandado:} Support=32 transações, Confidence=100\% com produtos Apple
+    \item \textbf{Claquete de cinema:} Support=10 transações, Confidence=100\% com câmara e "Ação!!"
+    \item \textbf{Interpretação:} Produtos com baixo tráfego mas forte co-ocorrência são candidatos ideais para recomendações cruzadas
+\end{itemize}
 
-\begin{table}[H]
+\subsubsection{Configuração 3: Produtos Mais Visitados}
+
+\textbf{Estratégia:} Suporte alto + Confiança moderada
+
+\textbf{Configuração encontrada:} Support $\geq$ 24 transações, Confidence $\geq$ 65\%
+
+\textbf{Regras geradas:} 7 regras focadas nos produtos mais frequentes
+
+\begin{figure}[H]
 \centering
-\small
-\begin{tabular}{@{}llrr@{}}
-\toprule
-\textbf{Antecedente} & \textbf{Consequente} & \textbf{Supp.} & \textbf{Conf.} \\ \midrule
-{[}ipad1/2{]} & {[}ipodtouch{]} & 51 & 100\% \\
-{[}ipodtouch{]} & {[}ipad1/2{]} & 51 & 98\% \\
-{[}helicopter*iphone{]} & {[}ipad1/2, ipodtouch{]} & 32 & 100\% \\
-{[}android*link2{]} & {[}ipad1/2, ipodtouch{]} & 17 & 100\% \\ \bottomrule
-\end{tabular}
-\caption{Principais regras de associação (confidence $\geq$ 98\%)}
-\label{tab:assoc_rules}
-\end{table}
+\includegraphics[width=0.85\textwidth]{figures/figure_3_rules.png}
+\caption{Q3: Produtos mais visitados}
+\label{fig:regras_q3}
+\end{figure}
 
-\subsection{Respostas às Questões de Negócio}
-
-\subsubsection{Produtos a Manter Juntos}
-
-\textbf{Recomendação 1 - Ecossistema Apple:}
+\textbf{Principais descobertas:}
 \begin{itemize}
-    \item \textbf{Produtos:} iPad 1/2 + iPod Touch
-    \item \textbf{Confidence:} 100\% (associação perfeita)
-    \item \textbf{Ação:} Criar página dedicada ``Ecossistema Apple'' com ambos os produtos
+    \item As mesmas associações Apple aparecem com suporte mais alto
+    \item iPad/iPod são os produtos mais co-visitados (Support=51 transações)
+    \item Helicóptero telecomandado mantém associação perfeita mesmo em análise de produtos mais visitados
 \end{itemize}
 
-\textbf{Recomendação 2 - Gaming Mobile:}
+\subsection{Recomendações de Negócio}
+
+\subsubsection{Página Web - Produtos Juntos}
 \begin{itemize}
-    \item \textbf{Produtos:} Helicóptero telecomandado + iPad + iPod Touch
-    \item \textbf{Confidence:} 100\%
-    \item \textbf{Ação:} Secção ``Mobile Gaming'' agrupando estes produtos
+    \item \textbf{Criar secção "Ecossistema Apple"} com iPad + iPod Touch juntos
+    \item \textbf{Página "Mobile Gaming"} agregando helicóptero telecomandado + iPad + iPod
+    \item Confidence de 100\% justifica posicionamento permanente destes produtos juntos
 \end{itemize}
 
-\subsubsection{Produtos Raramente Visitados mas Co-Visitados}
-
+\subsubsection{Recomendações Cruzadas - Produtos Raros}
 \begin{itemize}
-    \item \textbf{Helicóptero telecomandado:} 32 visitas (0,65\%) mas 100\% de co-visita com iPad/iPod
-    \item \textbf{Estratégia:} Não destacar na homepage, mas SEMPRE mostrar como recomendação quando cliente vê iPad/iPod
-    \item \textbf{Android product links:} 17 visitas (0,34\%) mas 94-100\% de associação com produtos iOS
+    \item \textbf{Android products:} Apesar de apenas 17 visitas, SEMPRE mostrar quando cliente vê iPad/iPod
+    \item \textbf{Helicóptero:} Não destacar na homepage, mas sempre recomendar com produtos Apple
+    \item \textbf{Claquete de cinema:} Criar bundle com câmara (confiança perfeita)
 \end{itemize}
 
-\subsubsection{Produtos Mais Visitados}
-
-\paragraph{Observações:}
+\subsubsection{Destaque na Homepage}
 \begin{itemize}
-    \item \textbf{Homepage domina:} 294 visitas (6\% do tráfego)
-    \item \textbf{Marca Luís Onofre:} 7 dos top 10 produtos são desta marca
-    \item \textbf{Calçado premium:} Produtos com cristais Swarovski têm alta procura
-\end{itemize}
-
-\paragraph{Recomendações:}
-\begin{itemize}
-    \item Destacar top 10 produtos no carrossel da homepage
-    \item Criar landing page dedicada para Luís Onofre
-    \item Promover produtos premium (Swarovski) em campanhas especiais
+    \item Priorizar produtos Apple (iPad/iPod) com suporte de 51 transações
+    \item Produtos com suporte $>$ 24 merecem destaque visual
 \end{itemize}
 
 \subsection{Conclusões do Exercício 7}
 
 \begin{itemize}
-    \item \textbf{26 regras acionáveis:} Identificadas para estratégias de cross-selling
-    \item \textbf{Oportunidade Apple:} Associação perfeita entre iPad/iPod (100\% confidence)
-    \item \textbf{Dominância Luís Onofre:} Marca representa 40\%+ do tráfego top products
-    \item \textbf{Segmentação clara:} Tech/gaming vs. calçado premium requerem estratégias distintas
+    \item \textbf{43 regras acionáveis} identificadas (7 + 36 + 7) para estratégias de cross-selling
+    \item \textbf{Associação perfeita Apple:} iPad/iPod têm confidence de 98-100\% em todas as configurações
+    \item \textbf{Produtos raros valiosos:} Android, helicóptero e claquete têm baixo tráfego mas altíssima co-ocorrência
+    \item \textbf{Estratégia diferenciada:} Cada configuração revela insights únicos para diferentes objetivos de negócio
 \end{itemize}
 
 \newpage
@@ -915,6 +908,12 @@ A We-Commerce está agora equipada com:
     \item Visualizações para comunicar com stakeholders
     \item Pipeline automatizado para análises futuras
     \item Recomendações concretas com impacto estimado
+\end{enumerate}
+
+\section{Referências}
+
+\begin{enumerate}[label={[\arabic*]}]
+    \item ChatGPT. (2026). Consulta sobre técnicas de mineração de dados e otimização de regras de associação. OpenAI. \url{https://chatgpt.com/share/695fbbf0-cf20-8007-8b90-b2153fd0f21d}
 \end{enumerate}
 
 \vspace{1cm}

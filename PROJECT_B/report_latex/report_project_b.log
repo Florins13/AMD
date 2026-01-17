@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.3.5)  7 JAN 2026 18:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.3.5)  8 JAN 2026 14:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -453,118 +453,146 @@ Overfull \hbox (75.04593pt too wide) in paragraph at lines 430--431
 []\OT1/cmr/bx/n/10.95 Script Python: \OT1/cmtt/m/n/10.95 exercise6[]transform[]to[]basket.py \OT1/cmr/m/n/10.95 -- pro-cessa o fi-cheiro \OT1/cmtt/m/n/10.95 transactions[]filtered.txt 
  []
 
-[11] [12pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
+[11]
+<figures/figure_1_rules.png, id=124, 1005.2757pt x 716.1957pt>
+File: figures/figure_1_rules.png Graphic file (type png)
+<use figures/figure_1_rules.png>
+Package pdftex.def Info: figures/figure_1_rules.png  used on input line 476.
+(pdftex.def)             Requested size: 386.96027pt x 275.68701pt.
+ [12]
+<figures/figure_2_rules.png, id=139, 1005.2757pt x 716.1957pt>
+File: figures/figure_2_rules.png Graphic file (type png)
+<use figures/figure_2_rules.png>
+Package pdftex.def Info: figures/figure_2_rules.png  used on input line 498.
+(pdftex.def)             Requested size: 386.96027pt x 275.68701pt.
+ [13pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.519 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
+l.502 
+       <./figures/figure_1_rules.png>]
+<figures/figure_3_rules.png, id=148, 1005.2757pt x 716.1957pt>
+File: figures/figure_3_rules.png Graphic file (type png)
+<use figures/figure_3_rules.png>
+Package pdftex.def Info: figures/figure_3_rules.png  used on input line 521.
+(pdftex.def)             Requested size: 386.96027pt x 275.68701pt.
+ [14pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.519 
-      ] [13pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
+l.525 
+       <./figures/figure_2_rules.png>] [15pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.566     \item \textbf
-                       {Oportunidade Apple:} Associação perfeita entre iPa...] [14] [15pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
+l.553 \end{itemize}
+                    <./figures/figure_3_rules.png>]
+Overfull \hbox (2.1978pt too wide) in paragraph at lines 560--561
+[]\OT1/cmr/bx/n/10.95 Produtos ra-ros va-li-o-sos: \OT1/cmr/m/n/10.95 An-droid, he-lic^^Soptero e cla-quete t^em baixo tr^^Safego mas alt^^S^^Pssima
+ []
+
+[16] [17pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.636     \item P
-                 ainel 1: Estatísticas-chave (texto)] [16] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+l.629     \item P
+                 ainel 1: Estatísticas-chave (texto)] [18] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 
-/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:711: LaTeX Error: Unicode character ✓ (U+2713)
+/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:704: LaTeX Error: Unicode character ✓ (U+2713)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.711 Pré-requisitos & 0,5 & ✓
+l.704 Pré-requisitos & 0,5 & ✓
                                   SUCCESS \\
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:712: LaTeX Error: Unicode character ✓ (U+2713)
+/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:705: LaTeX Error: Unicode character ✓ (U+2713)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.712 Exercício 4 (SQL) & 2,8 & ✓
+l.705 Exercício 4 (SQL) & 2,8 & ✓
                                      SUCCESS \\
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:713: LaTeX Error: Unicode character ✓ (U+2713)
+/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:706: LaTeX Error: Unicode character ✓ (U+2713)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.713 Exercício 5 (SQL) & 2,3 & ✓
+l.706 Exercício 5 (SQL) & 2,3 & ✓
                                      SUCCESS \\
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:714: LaTeX Error: Unicode character ✓ (U+2713)
+/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:707: LaTeX Error: Unicode character ✓ (U+2713)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.714 Exercício 6 (Python) & 1,5 & ✓
+l.707 Exercício 6 (Python) & 1,5 & ✓
                                         SUCCESS \\
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:715: LaTeX Error: Unicode character ✓ (U+2713)
+/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:708: LaTeX Error: Unicode character ✓ (U+2713)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.715 Exercício 7 (Python) & 1,6 & ✓
+l.708 Exercício 7 (Python) & 1,6 & ✓
                                         SUCCESS \\ \midrule
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:716: LaTeX Error: Unicode character ✓ (U+2713)
+/home/guerra38/ISEL/AMD/2526/AMD/PROJECT_B/report_latex/report_project_b.tex:709: LaTeX Error: Unicode character ✓ (U+2713)
                not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.716 ...al} & \textbf{8,7} & \textbf{✓ SUCCESS}
+l.709 ...al} & \textbf{8,7} & \textbf{✓ SUCCESS}
                                                    \\ \bottomrule
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[17pdfTeX warning (ext4): destination with the same identifier (name{table.8}) has been already used, duplicate ignored
+[19pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.726     \item T
-                 imeout automático (60s SQL, 300s Python)] [18pdfTeX warning (ext4): destination with the same identifier (name{table.9}) has been already used, duplicate ignored
+l.719     \item T
+                 imeout automático (60s SQL, 300s Python)] [20pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.773 \newpage
-              ] [19] [20] [21pdfTeX warning (ext4): destination with the same identifier (name{table.10}) has been already used, duplicate ignored
+l.766 \newpage
+              ] [21] [22]
+Overfull \hbox (44.02415pt too wide) in paragraph at lines 916--917
+\OT1/cmr/m/n/10.95 de as-so-cia^^Xc~ao. Ope-nAI. []$\OT1/cmtt/m/n/10.95 https : / / chatgpt . com / share / 695fbbf0-[]cf20-[]8007-[]8b90-[]b2153fd0f21d$[] 
+ []
+
+[23pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.928 \end{document}
-                    ] (./report_project_b.aux)
+l.927 \end{document}
+                    ] [24] (./report_project_b.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -578,21 +606,21 @@ Package rerunfilecheck Warning: File `report_project_b.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `report_project_b.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  E5A3D13EDEBF3174987B377D7158FBBB;15320.
+(rerunfilecheck)             After:  DAA2B04B415CF1CA17B2C96B00DC0AE0;15495.
  ) 
 Here is how much of TeX's memory you used:
- 13354 strings out of 480154
- 204941 string characters out of 5893789
- 759324 words of memory out of 5000000
- 30953 multiletter control sequences out of 15000+600000
+ 13385 strings out of 480154
+ 205699 string characters out of 5893789
+ 759491 words of memory out of 5000000
+ 30978 multiletter control sequences out of 15000+600000
  478363 words of font info for 60 fonts, out of 8000000 for 9000
  61 hyphenation exceptions out of 8191
  60i,12n,63p,772b,1268s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1095.600pk> </home/guerra38/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report_project_b.pdf (21 pages, 412574 bytes).
+Output written on report_project_b.pdf (24 pages, 837011 bytes).
 PDF statistics:
- 382 PDF objects out of 1000 (max. 8388607)
- 329 compressed objects within 4 object streams
- 199 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 401 PDF objects out of 1000 (max. 8388607)
+ 339 compressed objects within 4 object streams
+ 202 named destinations out of 1000 (max. 500000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

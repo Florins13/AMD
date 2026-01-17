@@ -97,7 +97,7 @@ def generateBasket(fileNameIN):
 
 def generateDataFile_basket(basket, fileNameOUT):
     """
-    Generate .basket file for Orange (space-separated items per line).
+    Generate .basket file for Orange (COMMA-SEPARATED items per line).
     """
     print(f"Generating: {fileNameOUT}")
     
@@ -106,7 +106,7 @@ def generateDataFile_basket(basket, fileNameOUT):
             line = ""
             for itemID in basket[transactionID]:
                 if line != "":
-                    line += " "
+                    line += ", "  # Changed from " " to ", " for Orange basket format
                 line += itemID
             f.write(line + '\n')
     

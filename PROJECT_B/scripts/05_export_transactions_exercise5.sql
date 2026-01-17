@@ -15,8 +15,8 @@
 
 --==========================
 -- Output file path
--- Format: TRANSACTION_ID;PRODUCT_ID
--- Where TRANSACTION_ID can be session_id or cookie_id
+-- Format: TRANSACTION_ID;PRODUCT_ID;PRODUCT_NAME
+-- Where TRANSACTION_ID = session_id
 -- Output to PROJECT_B root directory
 --==========================
 \set filePath '../transactions_filtered.txt'
@@ -31,14 +31,14 @@
 
 --==============================
 -- Export transactions from filtered view
--- Format: TRANSACTION_ID;PRODUCT_ID
+-- Format: SESSION_ID;PRODUCT_ID;PRODUCT_NAME
 -- Using session_id as TRANSACTION_ID for market-basket analysis
 --==============================
 
 COPY ( 
-  SELECT session_id, product_gui 
+  SELECT session_id, product_id, product_name
   FROM v_export_filtered 
-  ORDER BY cookie_id, session_id, product_gui 
+  ORDER BY cookie_id, session_id, product_id
 )
 TO STDOUT
 WITH ( FORMAT CSV, HEADER FALSE, DELIMITER ';' )
@@ -56,7 +56,7 @@ WITH ( FORMAT CSV, HEADER FALSE, DELIMITER ';' )
 \echo 'EXPORT COMPLETED: Exercise 5'
 \echo '=========================================='
 \echo 'Output file: transactions_filtered.txt'
-\echo 'Format: TRANSACTION_ID;PRODUCT_ID'
+\echo 'Format: TRANSACTION_ID;PRODUCT_ID;PRODUCT_NAME'
 \echo '=========================================='
 
 -- Count exported records
@@ -70,7 +70,7 @@ FROM v_export_filtered
 ;
 
 -- Count unique products
-SELECT COUNT(DISTINCT product_gui) AS unique_product_ids
+SELECT COUNT(DISTINCT product_id) AS unique_product_ids
 FROM v_export_filtered
 ;
 
@@ -78,6 +78,12 @@ FROM v_export_filtered
 \echo ''
 \echo '=========================================='
 \echo 'SAMPLE: First 10 transactions'
+\echo '=========================================='
+SELECT session_id, product_id, product_name
+FROM v_export_filtered
+ORDER BY cookie_id, session_id, product_id
+LIMIT 10
+;
 \echo '=========================================='
 SELECT session_id AS transaction_id, product_gui AS product_id
 FROM v_export_filtered

@@ -23,21 +23,37 @@ DROP VIEW IF EXISTS v_export_filtered;
 
 -- Create filtered view for market-basket analysis
 -- This view contains only events from visitors with 5 to 30 sessions
--- Also filters out invalid product_gui values
-CREATE VIEW v_export_filtered( cookie_id, session_id, product_gui )
+-- Extracts product_id and product_name from product_gui format: display.product*PRODUCT_ID*PRODUCT_NAME
+-- Then filters out invalid product_id values
+CREATE VIEW v_export_filtered( cookie_id, session_id, product_id, product_name )
 AS
-SELECT T1.cookie_id, session_id, product_gui
-FROM ( SELECT *
-       FROM v_cookie_number_of_sessions
-       WHERE number_of_sessions >= 5 AND number_of_sessions <= 30 ) AS T1
-     INNER JOIN
-     track AS T2
-     ON ( T1.cookie_id = T2.cookie_id )
-WHERE product_gui NOT IN ( 'open', 'home', 'Spy', 'Tecnologia', 'Divertimento', 'Jogos',
-                           '/customer/account/login/', '/customer/account/forgotpassword/',
-                           '/customer/account/create/' )
-  AND product_gui NOT LIKE '/%'
-  AND product_gui NOT LIKE '/catalog/%'
+SELECT cookie_id, session_id, product_id, product_name
+FROM (
+  SELECT 
+    T1.cookie_id, 
+    session_id,
+    -- Extract product_id: if format is display.product*ID*NAME, get ID; otherwise use product_gui
+    CASE 
+      WHEN product_gui LIKE 'display.product*%*%' THEN 
+        split_part(product_gui, '*', 2)
+      ELSE 
+        product_gui
+    END AS product_id,
+    -- Extract product_name: if format is display.product*ID*NAME, get NAME; otherwise use product_gui
+    CASE 
+      WHEN product_gui LIKE 'display.product*%*%' THEN 
+        split_part(product_gui, '*', 3)
+      ELSE 
+        product_gui
+    END AS product_name
+  FROM ( SELECT *
+         FROM v_cookie_number_of_sessions
+         WHERE number_of_sessions >= 5 AND number_of_sessions <= 30 ) AS T1
+       INNER JOIN
+       track AS T2
+       ON ( T1.cookie_id = T2.cookie_id )
+  WHERE product_gui LIKE 'display.product*%'
+) AS extracted_data
 ;
 -- Note: ORDER BY is commented for performance (will be used during export)
 -- ORDER BY cookie_id, session_id, product_gui;
@@ -63,7 +79,7 @@ FROM v_export_filtered
 ;
 
 -- Count unique products in filtered dataset
-SELECT COUNT(DISTINCT product_gui) AS total_filtered_products
+SELECT COUNT(DISTINCT product_id) AS total_filtered_products
 FROM v_export_filtered
 ;
 
@@ -83,7 +99,7 @@ ORDER BY T1.number_of_sessions ASC
 \echo '=========================================='
 \echo 'SAMPLE: First 20 filtered events'
 \echo '=========================================='
-SELECT cookie_id, session_id, product_gui
+SELECT cookie_id, session_id, product_id, product_name
 FROM v_export_filtered
 ORDER BY cookie_id, session_id
 LIMIT 20
