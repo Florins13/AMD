@@ -1,0 +1,4 @@
+Antecedent	Consequent	Support	Confidence	Coverage	Strength	Lift	Leverage
+string	string	continuous	continuous	continuous	continuous	continuous	continuous
+meta	meta						
+lon_4009	lon_4000	0.007	0.408	0.016	1.082	23.473	0.006

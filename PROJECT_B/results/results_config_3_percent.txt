@@ -1,0 +1,29 @@
+============================================================
+RESULTS FOR CONFIGURATION: results_config_3_percent.txt
+============================================================
+
+Parameters: Min Support=0.70% (~21 trans), Confidence=0%
+Total Transactions: 3048
+Rules Found: 4
+------------------------------------------------------------
+
+Rule 1:
+   IF:   ['lon_4000']
+   THEN: ['lon_4012']
+   Stats: Conf=39.62%, Supp=21 (0.69%)
+
+Rule 2:
+   IF:   ['lon_4016']
+   THEN: ['lon_4012']
+   Stats: Conf=28.38%, Supp=21 (0.69%)
+
+Rule 3:
+   IF:   ['lon_4012']
+   THEN: ['lon_4016']
+   Stats: Conf=20.19%, Supp=21 (0.69%)
+
+Rule 4:
+   IF:   ['lon_4012']
+   THEN: ['lon_4000']
+   Stats: Conf=20.19%, Supp=21 (0.69%)
+

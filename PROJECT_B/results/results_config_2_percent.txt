@@ -1,0 +1,39 @@
+============================================================
+RESULTS FOR CONFIGURATION: results_config_2_percent.txt
+============================================================
+
+Parameters: Min Support=0.25% (~7 trans), Confidence=90%
+Total Transactions: 3048
+Rules Found: 6
+------------------------------------------------------------
+
+Rule 1:
+   IF:   ['ljv_0237']
+   THEN: ['ljv_0530']
+   Stats: Conf=100.00%, Supp=12 (0.39%)
+
+Rule 2:
+   IF:   ['eas_0004']
+   THEN: ['eas_0005']
+   Stats: Conf=100.00%, Supp=10 (0.33%)
+
+Rule 3:
+   IF:   ['ljv_0069']
+   THEN: ['ljv_0197']
+   Stats: Conf=100.00%, Supp=8 (0.26%)
+
+Rule 4:
+   IF:   ['lon_4002', 'lon_4004']
+   THEN: ['lon_4007']
+   Stats: Conf=100.00%, Supp=7 (0.23%)
+
+Rule 5:
+   IF:   ['ljv_0242']
+   THEN: ['ljv_0530']
+   Stats: Conf=100.00%, Supp=7 (0.23%)
+
+Rule 6:
+   IF:   ['lon_4009', 'lon_4016', 'lon_4012']
+   THEN: ['lon_4000']
+   Stats: Conf=90.00%, Supp=9 (0.30%)
+

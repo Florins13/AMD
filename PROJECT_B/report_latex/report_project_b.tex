@@ -13,6 +13,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
+\usepackage{amssymb}  
 
 % Listing configuration
 \lstset{
@@ -329,17 +330,28 @@ Os resultados obtidos pela execução do \textit{script} \texttt{exercise3\_gene
 
 \subsection{Enunciado}
 
-Filtrar os dados para focar em visitantes com padrões de comportamento significativos, especificamente aqueles com número de sessões entre 5 e 30.
+Filtrar os dados para focar em visitantes com padrões de comportamento significativos, especificamente aqueles com número de sessões entre 5 e 30, mantendo apenas eventos de visualização de produtos.
 
 \subsection{Resolução}
 
 \subsubsection{Critérios de Filtragem}
 
-A filtragem foi implementada para selecionar visitantes que:
+A filtragem foi implementada com dois critérios principais para garantir dados relevantes para análise de market-basket:
+
+\textbf{Critério 1: Filtragem por Número de Sessões}
 \begin{itemize}
     \item Têm pelo menos 5 sessões (indicando interesse recorrente)
     \item Têm no máximo 30 sessões (evitando possíveis bots ou scrapers)
 \end{itemize}
+
+\textbf{Critério 2: Filtragem por Tipo de Evento}
+\begin{itemize}
+    \item Apenas eventos de visualização de produtos (\texttt{product\_gui LIKE 'display.product*\%'})
+    \item Remove eventos de navegação sem produto associado (homepage, categorias, etc.)
+    \item Extrai \texttt{product\_id} e \texttt{product\_name} do campo \texttt{product\_gui}
+\end{itemize}
+
+Este segundo critério é essencial para a análise de regras de associação, pois garante que apenas transações com produtos identificáveis sejam consideradas.
 
 \subsubsection{Implementação}
 
@@ -357,10 +369,10 @@ A filtragem foi realizada através de:
 \begin{tabular}{@{}lrr@{}}
 \toprule
 \textbf{Métrica} & \textbf{Original} & \textbf{Filtrado} \\ \midrule
-Eventos totais & 415.863 & 19.364 \\
-Visitantes únicos & 263.137 & 1.253 \\
-Taxa de retenção & -- & 0,48\% \\
-Redução de dados & -- & 95,3\% \\ \bottomrule
+Eventos totais & 415.863 & 7.469 \\
+Visitantes únicos & 263.137 & 3.048 \\
+Taxa de retenção & -- & 1,16\% \\
+Redução de dados & -- & 98,2\% \\ \bottomrule
 \end{tabular}
 \caption{Impacto da filtragem nos dados}
 \label{tab:filtering}
@@ -369,8 +381,8 @@ Redução de dados & -- & 95,3\% \\ \bottomrule
 \subsection{Conclusões do Exercício 4}
 
 \begin{itemize}
-    \item \textbf{Foco em utilizadores engajados:} Os 1.253 visitantes filtrados representam o segmento mais valioso
-    \item \textbf{Redução significativa:} 95,3\% dos dados foram removidos, focando em padrões significativos
+    \item \textbf{Foco em utilizadores engajados:} Os 3.048 visitantes filtrados representam o segmento mais valioso
+    \item \textbf{Redução significativa:} 98,2\% dos dados foram removidos, focando em padrões significativos
     \item \textbf{Qualidade sobre quantidade:} Permite análise mais eficiente de market-basket
 \end{itemize}
 
@@ -394,8 +406,10 @@ TRANSACTION_ID;PRODUCT_ID
 Onde:
 \begin{itemize}
     \item \textbf{TRANSACTION\_ID:} Corresponde ao \texttt{session\_id}
-    \item \textbf{PRODUCT\_ID:} Corresponde ao \texttt{product\_gui}
+    \item \textbf{PRODUCT\_ID:} Identificador extraído do campo \texttt{product\_gui} durante a filtragem (Exercício 4)
 \end{itemize}
+
+\textbf{Nota:} A extração do \texttt{product\_id} foi realizada no Exercício 4 usando \texttt{split\_part(product\_gui, '*', 2)}, convertendo o formato \texttt{'display.product*ID*NAME'} em identificadores numéricos.
 
 \subsubsection{Implementação}
 
@@ -404,7 +418,7 @@ A exportação foi realizada através de:
     \item \textbf{Ficheiro SQL:} \texttt{05\_export\_transactions\_exercise5.sql} -- exporta os dados da view \texttt{v\_export\_filtered}
     \item \textbf{Script shell/batch:} \texttt{\_go05.sh} -- executa o ficheiro SQL
     \item \textbf{Script Python:} \texttt{exercise5\_export\_transactions.py} -- orquestra a execução
-    \item \textbf{Ficheiro de saída:} \texttt{transactions\_filtered.txt} -- contém 19.364 transações
+    \item \textbf{Ficheiro de saída:} \texttt{transactions\_filtered.txt} -- contém 7.469 eventos
 \end{itemize}
 
 \subsection{Conclusões do Exercício 5}
@@ -428,9 +442,11 @@ Processar o ficheiro de transações para:
 O processamento foi realizado através de:
 \begin{itemize}
     \item \textbf{Script Python:} \texttt{exercise6\_transform\_to\_basket.py} -- processa o ficheiro \texttt{transactions\_filtered.txt}
-    \item \textbf{Normalização:} Remoção de espaços, acentos e conversão para minúsculas
-    \item \textbf{Ficheiros gerados:} \texttt{transactions\_basket.basket} (4.945 transações, 1.750 produtos únicos) e \texttt{transactions\_basket.tab}
+    \item \textbf{Normalização:} Aplicada aos \texttt{product\_name} extraídos no Exercício 4, incluindo remoção de espaços, acentos e conversão para minúsculas
+    \item \textbf{Ficheiros gerados:} \texttt{transactions\_basket.basket} (3.048 transações, 774 produtos únicos) e \texttt{transactions\_basket.tab}
 \end{itemize}
+
+\textbf{Nota:} O ficheiro \texttt{.basket} usa os nomes de produtos normalizados (não os IDs numéricos) para facilitar a interpretação das regras de associação geradas.
 
 \subsection{Conclusões do Exercício 6}
 
@@ -451,7 +467,7 @@ Implementar um processo de exploração do espaço de parâmetros support/confid
 
 \subsection{Metodologia}
 
-O ficheiro gerado (.basket) para ser trabalhado foi construído com a característica do \texttt{cookie\_id} para a transação (4.945 transações) e o \texttt{product\_gui} para os itens (1.942 produtos únicos). 
+O ficheiro gerado (.basket) para ser trabalhado foi construído com a característica do \texttt{cookie\_id} para a transação (3.048 transações) e o \texttt{product\_gui} para os itens (774 produtos únicos). 
 
 Foi implementado um algoritmo de exploração automática que:
 \begin{itemize}
@@ -463,94 +479,52 @@ Foi implementado um algoritmo de exploração automática que:
 
 \subsection{Resultados}
 
+A análise foi executada com três configurações otimizadas para responder às questões de negócio. Utilizando support percentual (0.3\%-1.3\%) e diferentes faixas de confidence, foram descobertas regras de alta qualidade.
+
 \subsubsection{Configuração 1: Produtos para Manter Juntos}
 
-\textbf{Estratégia:} Suporte moderado-alto + Confiança moderada-alta
+\textbf{Estratégia:} Suporte moderado (0.5\%-1.0\%) + Confiança alta (40\%-60\%)
 
-\textbf{Configuração encontrada:} Support $\geq$ 19 transações, Confidence $\geq$ 65\%
-
-\textbf{Regras geradas:} 7 regras com confiança de 98\% a 100\%
+Esta configuração identifica produtos com padrões sólidos de co-visitação que devem ser posicionados juntos numa página web.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/figure_1_rules.png}
-\caption{Q1: Produtos para manter juntos numa página web}
+\includegraphics[width=0.95\textwidth]{figures/figure_1_rules_count.png}
+\caption{Regras de associação para Q1: Produtos para manter juntos. As regras mostram forte correlação (confidence 40\%-100\%) com suporte moderado, ideais para agrupamento em páginas web.}
 \label{fig:regras_q1}
 \end{figure}
 
-\textbf{Principais descobertas:}
-\begin{itemize}
-    \item \textbf{Ecossistema Apple:} iPad 1/2 $\rightarrow$ iPod Touch (Support=51, Confidence=100\%)
-    \item \textbf{Gaming Mobile:} Helicóptero telecomandado está perfeitamente associado com iPad/iPod (Confidence=100\%)
-    \item Todas as 7 regras mostram associações muito fortes (confiança $\geq$ 98\%)
-\end{itemize}
+\textbf{Resposta à Questão 1:} Os produtos que devem ser mantidos juntos são aqueles com confiança elevada e suporte moderado. A análise revela ecossistemas de produtos (ex: Apple iPad + iPod Touch) que são frequentemente co-visitados, indicando que devem ser posicionados na mesma página ou secção para facilitar a navegação e aumentar conversões.
 
 \subsubsection{Configuração 2: Produtos Raramente Visitados mas Frequentemente Co-visitados}
 
-\textbf{Estratégia:} Suporte baixo + Confiança muito alta
+\textbf{Estratégia:} Suporte baixo (0.2\%-0.4\%) + Confiança muito alta (70\%-90\%)
 
-\textbf{Configuração encontrada:} Support $\geq$ 9 transações, Confidence $\geq$ 95\%
-
-\textbf{Regras geradas:} 36 regras com confiança de 98\% a 100\%
+Esta configuração descobre produtos de nicho que, embora tenham baixo tráfego individual, são quase sempre visitados em conjunto.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/figure_2_rules.png}
-\caption{Q2: Produtos raramente visitados mas frequentemente co-visitados}
+\includegraphics[width=0.95\textwidth]{figures/figure_2_rules_count.png}
+\caption{Regras de associação para Q2: Produtos raros mas fortemente correlacionados. Baixo suporte mas confiança muito alta (70\%-100\%), ideais para recomendações cruzadas.}
 \label{fig:regras_q2}
 \end{figure}
 
-\textbf{Principais descobertas:}
-\begin{itemize}
-    \item \textbf{Android products:} Support=17 transações, mas Confidence=100\% com iPad/iPod
-    \item \textbf{Helicóptero telecomandado:} Support=32 transações, Confidence=100\% com produtos Apple
-    \item \textbf{Claquete de cinema:} Support=10 transações, Confidence=100\% com câmara e "Ação!!"
-    \item \textbf{Interpretação:} Produtos com baixo tráfego mas forte co-ocorrência são candidatos ideais para recomendações cruzadas
-\end{itemize}
+\textbf{Resposta à Questão 2:} Os produtos raramente visitados mas frequentemente co-visitados são candidatos ideais para sistemas de recomendação. Com confiança de 70\%-100\% mas suporte reduzido, representam oportunidades de cross-selling em segmentos específicos. Quando um cliente visita um destes produtos, deve ser automaticamente recomendado o produto associado.
 
 \subsubsection{Configuração 3: Produtos Mais Visitados}
 
-\textbf{Estratégia:} Suporte alto + Confiança moderada
+\textbf{Estratégia:} Suporte alto (0.7\%-1.3\%) + Confiança baixa-moderada (0.05\%-5\%)
 
-\textbf{Configuração encontrada:} Support $\geq$ 24 transações, Confidence $\geq$ 65\%
-
-\textbf{Regras geradas:} 7 regras focadas nos produtos mais frequentes
+Esta configuração identifica os produtos com maior volume de visitas e suas associações principais.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/figure_3_rules.png}
-\caption{Q3: Produtos mais visitados}
+\includegraphics[width=0.95\textwidth]{figures/figure_3_rules_count.png}
+\caption{Regras de associação para Q3: Produtos mais visitados. Alto suporte indica produtos populares que dominam o tráfego do site.}
 \label{fig:regras_q3}
 \end{figure}
 
-\textbf{Principais descobertas:}
-\begin{itemize}
-    \item As mesmas associações Apple aparecem com suporte mais alto
-    \item iPad/iPod são os produtos mais co-visitados (Support=51 transações)
-    \item Helicóptero telecomandado mantém associação perfeita mesmo em análise de produtos mais visitados
-\end{itemize}
-
-\subsection{Recomendações de Negócio}
-
-\subsubsection{Página Web - Produtos Juntos}
-\begin{itemize}
-    \item \textbf{Criar secção "Ecossistema Apple"} com iPad + iPod Touch juntos
-    \item \textbf{Página "Mobile Gaming"} agregando helicóptero telecomandado + iPad + iPod
-    \item Confidence de 100\% justifica posicionamento permanente destes produtos juntos
-\end{itemize}
-
-\subsubsection{Recomendações Cruzadas - Produtos Raros}
-\begin{itemize}
-    \item \textbf{Android products:} Apesar de apenas 17 visitas, SEMPRE mostrar quando cliente vê iPad/iPod
-    \item \textbf{Helicóptero:} Não destacar na homepage, mas sempre recomendar com produtos Apple
-    \item \textbf{Claquete de cinema:} Criar bundle com câmara (confiança perfeita)
-\end{itemize}
-
-\subsubsection{Destaque na Homepage}
-\begin{itemize}
-    \item Priorizar produtos Apple (iPad/iPod) com suporte de 51 transações
-    \item Produtos com suporte $>$ 24 merecem destaque visual
-\end{itemize}
+\textbf{Resposta à Questão 3:} Os produtos mais visitados são identificados pelo alto suporte (20-40+ transações). Mesmo com confiança mais baixa (típico de produtos populares que são visitados com muitos outros), estes produtos devem ter destaque na homepage e nas campanhas principais, pois representam o maior volume de tráfego e interesse geral dos visitantes.
 
 \subsection{Conclusões do Exercício 7}
 
@@ -571,87 +545,64 @@ Usar o Orange Data Mining para gerar graficamente um relatório de análise mark
 
 \subsection{Resolução}
 
-\subsubsection{Abordagem Dual}
+Foi criado um workflow no Orange Data Mining para análise visual das regras de associação descobertas no Exercício 7.
 
-Foram implementadas duas abordagens:
+\subsubsection{Workflow Construído}
 
-\paragraph{Abordagem 1 - Orange GUI:}
+O workflow implementado segue a estrutura:
+
+\textbf{File → Frequent Itemsets → Association Rules → Data Table + Visualizações}
+
 \begin{itemize}
-    \item Workflow interativo (\texttt{orange\_workflow\_exercise8.ows})
-    \item Widgets: File → Data Table → Frequent Itemsets → Association Rules
-    \item Exportação manual de visualizações
-\end{itemize}
-
-\paragraph{Abordagem 2 - Script Python Automatizado:}
-\begin{itemize}
-    \item Geração automática de 6 visualizações
-    \item Relatório HTML completo
-    \item Executável via: \texttt{python3 exercise8\_generate\_orange\_report.py}
+    \item \textbf{File:} Carrega o ficheiro \texttt{transactions\_basket.basket} (3048 transações)
+    \item \textbf{Frequent Itemsets:} Aplica FP-Growth com support = 0.5\%
+    \item \textbf{Association Rules:} Gera regras com confidence = 20\%
+    \item \textbf{Visualizações:} Scatter plot, tabelas de dados, e análise interativa
 \end{itemize}
 
 \subsubsection{Visualizações Geradas}
 
-\begin{table}[H]
+\begin{figure}[H]
 \centering
-\small
-\begin{tabular}{@{}clr@{}}
-\toprule
-\textbf{\#} & \textbf{Visualização} & \textbf{Tamanho} \\ \midrule
-1 & Scatter Plot (Confidence vs Support) & 205 KB \\
-2 & Top 15 Produtos (Bar Chart) & 348 KB \\
-3 & Top 10 Regras por Confidence & 376 KB \\
-4 & Distribuição Tamanho Itemsets & 119 KB \\
-5 & Distribuição Support das Regras & 134 KB \\
-6 & Dashboard Sumário (4 painéis) & 561 KB \\ \bottomrule
-\end{tabular}
-\caption{Visualizações geradas para o relatório}
-\label{tab:viz}
-\end{table}
+\includegraphics[width=0.95\textwidth]{figures/frequent_items.png}
+\caption{Frequent Itemsets: Visualização dos itemsets frequentes descobertos pelo algoritmo FP-Growth. Mostra os conjuntos de produtos que aparecem com frequência mínima de 0.5\%.}
+\label{fig:frequent_items}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/association_rules.png}
+\caption{Association Rules: Tabela de regras de associação geradas com confidence mínima de 20\%. Exibe antecedente, consequente, support, confidence e lift para cada regra.}
+\label{fig:association_rules}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/scatter_plot.png}
+\caption{Scatter Plot: Visualização gráfica das regras no espaço Support vs Confidence. Permite identificar visualmente regras com diferentes características de qualidade e frequência.}
+\label{fig:scatter_plot}
+\end{figure}
 
 \subsubsection{Insights do Relatório Gráfico}
 
-\paragraph{Scatter Plot (Confidence vs Support):}
-\begin{itemize}
-    \item Visualiza as 26 regras no espaço confidence-support
-    \item Destaca regras com 100\% confidence (iPad/iPod Touch)
-    \item Permite identificar trade-offs entre confiança e frequência
-\end{itemize}
+\paragraph{Frequent Itemsets:}
+Mostra os conjuntos de produtos que atendem ao threshold de support definido (0.5\%), permitindo visualizar quais combinações de produtos são suficientemente frequentes para gerar regras de associação.
 
-\paragraph{Top Produtos:}
-\begin{itemize}
-    \item Confirma visualmente dominância da homepage e Luís Onofre
-    \item Barras horizontais facilitam comparação
-    \item Valores absolutos e percentuais apresentados
-\end{itemize}
+\paragraph{Association Rules:}
+Apresenta as regras descobertas de forma tabular, com todas as métricas relevantes (support, confidence, lift), facilitando a análise detalhada e seleção das regras mais valiosas para o negócio.
 
-\paragraph{Dashboard Executivo:}
-\begin{itemize}
-    \item Painel 1: Estatísticas-chave (texto)
-    \item Painel 2: Top 5 produtos (pie chart)
-    \item Painel 3: Distribuição confidence
-    \item Painel 4: Distribuição support
-\end{itemize}
-
-\subsubsection{Formato de Entrega}
-
-\begin{itemize}
-    \item \textbf{Relatório HTML:} \texttt{exercise8\_report.html} (5,2 KB)
-    \item \textbf{Visualizações:} Pasta \texttt{exercise8\_visualizations/} (1,8 MB total)
-    \item \textbf{Workflow Orange:} \texttt{orange\_workflow\_exercise8.ows} (28 KB)
-    \item \textbf{Formato PNG:} Todas as imagens em 300 DPI (print-ready)
-\end{itemize}
+\paragraph{Scatter Plot:}
+Visualiza o trade-off entre support e confidence, ajudando a identificar diferentes tipos de regras: alta frequência com confiança moderada (produtos populares) vs. baixa frequência com alta confiança (produtos de nicho).
 
 \subsection{Conclusões do Exercício 8}
 
-O relatório gráfico fornece:
+O workflow construído no Orange Data Mining proporciona uma análise visual completa e intuitiva das regras de associação, permitindo:
 \begin{itemize}
-    \item \textbf{Visualizações profissionais:} 6 gráficos de alta qualidade
-    \item \textbf{Acessibilidade:} HTML visualizável em qualquer navegador
-    \item \textbf{Flexibilidade:} Exportável para PDF para distribuição
-    \item \textbf{Insights visuais:} Padrões facilmente identificáveis para stakeholders não-técnicos
+    \item \textbf{Exploração interativa:} Manipulação em tempo real dos parâmetros support e confidence
+    \item \textbf{Visualização clara:} Gráficos profissionais que facilitam a comunicação dos resultados
+    \item \textbf{Exportação facilitada:} Screenshots de alta qualidade para integração em relatórios
+    \item \textbf{Validação:} Confirmação visual dos padrões descobertos no Exercício 7
 \end{itemize}
-
-\newpage
 
 \section{Exercício 9: Automatização do Pipeline}
 
@@ -661,107 +612,7 @@ Implementar código para executar automaticamente os Exercícios 4, 5, 6 e 7 de 
 
 \subsection{Resolução}
 
-\subsubsection{Arquitetura do Pipeline}
-
-Foi desenvolvido um script Python (\texttt{exercise9\_automate\_pipeline.py}) que:
-
-\begin{enumerate}
-    \item \textbf{Verifica pré-requisitos:} PostgreSQL, Python, Orange, database, scripts
-    \item \textbf{Executa sequencialmente:}
-    \begin{itemize}
-        \item Exercício 4: Filtrar dados (SQL)
-        \item Exercício 5: Exportar transações (SQL)
-        \item Exercício 6: Transformar para basket (Python)
-        \item Exercício 7: Regras de associação (Python)
-    \end{itemize}
-    \item \textbf{Valida saídas:} Verifica ficheiros gerados e tamanhos
-    \item \textbf{Reporta resultados:} Sumário executivo com métricas
-\end{enumerate}
-
-\subsubsection{Opções de Linha de Comando}
-
-\begin{lstlisting}[language=bash]
-# Executar pipeline completo (maxR=30)
-python3 exercise9_automate_pipeline.py
-
-# Personalizar maxR
-python3 exercise9_automate_pipeline.py --maxR 50
-
-# Saltar exercicios ja completados
-python3 exercise9_automate_pipeline.py --skip 4 5
-
-# Combinar opcoes
-python3 exercise9_automate_pipeline.py --maxR 20 --skip 4 5 6
-\end{lstlisting}
-
-\subsubsection{Exemplo de Execução}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}lrr@{}}
-\toprule
-\textbf{Passo} & \textbf{Tempo (s)} & \textbf{Status} \\ \midrule
-Pré-requisitos & 0,5 & ✓ SUCCESS \\
-Exercício 4 (SQL) & 2,8 & ✓ SUCCESS \\
-Exercício 5 (SQL) & 2,3 & ✓ SUCCESS \\
-Exercício 6 (Python) & 1,5 & ✓ SUCCESS \\
-Exercício 7 (Python) & 1,6 & ✓ SUCCESS \\ \midrule
-\textbf{Total} & \textbf{8,7} & \textbf{✓ SUCCESS} \\ \bottomrule
-\end{tabular}
-\caption{Métricas de execução do pipeline automatizado}
-\label{tab:pipeline_metrics}
-\end{table}
-
-\subsubsection{Funcionalidades Avançadas}
-
-\paragraph{Gestão de Erros:}
-\begin{itemize}
-    \item Timeout automático (60s SQL, 300s Python)
-    \item Exit codes informativos (0=sucesso, 1=erro, 130=interrupção)
-    \item Mensagens de erro detalhadas com sugestões
-\end{itemize}
-
-\paragraph{Validação Automática:}
-\begin{itemize}
-    \item Verificação de tamanho dos ficheiros gerados
-    \item Confirmação de sucesso de cada passo
-    \item Stop automático em caso de falha
-\end{itemize}
-
-\paragraph{Reporting:}
-\begin{itemize}
-    \item Progress bars com cores (verde=sucesso, vermelho=erro, amarelo=skip)
-    \item Sumário final com tamanhos de ficheiros
-    \item Tempo de execução por passo e total
-\end{itemize}
-
-\subsection{Benefícios da Automatização}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}lcc@{}}
-\toprule
-\textbf{Aspeto} & \textbf{Manual} & \textbf{Automatizado} \\ \midrule
-Tempo de execução & 10-15 min & $<$ 10 segundos \\
-Possibilidade de erro & Alta & Baixa \\
-Reprodutibilidade & Difícil & Garantida \\
-Documentação & Manual & Automática \\
-Validação & Manual & Automática \\
-Parametrização & Difícil & Simples (--maxR) \\ \bottomrule
-\end{tabular}
-\caption{Comparação: execução manual vs. automatizada}
-\label{tab:automation_benefits}
-\end{table}
-
-\subsection{Conclusões do Exercício 9}
-
-\begin{itemize}
-    \item \textbf{Eficiência:} 50-100x mais rápido que execução manual
-    \item \textbf{Robustez:} Gestão automática de erros e validação
-    \item \textbf{Flexibilidade:} Parâmetros configuráveis, passos opcionais
-    \item \textbf{Produção:} Pronto para integração em CI/CD ou cron jobs
-    \item \textbf{Reprodutibilidade:} Garante resultados consistentes
-\end{itemize}
+Todos os Exercícios 4, 5, 6 e 7 foram implementados em scripts Python executáveis de forma independente ou através de pipeline automatizado, garantindo reprodutibilidade completa da análise.
 
 \newpage
 
@@ -769,151 +620,20 @@ Parametrização & Difícil & Simples (--maxR) \\ \bottomrule
 
 \subsection{Síntese do Projeto}
 
-Este relatório apresentou a análise completa de mineração de dados para a We-Commerce, cobrindo todos os 9 exercícios do Projeto B. O trabalho envolveu:
+Este relatório apresentou a análise completa de mineração de dados para a We-Commerce, cobrindo todos os 9 exercícios do Projeto B.
 
-\begin{enumerate}
-    \item \textbf{Compreensão do domínio:} Análise do processo de recolha e qualidade dos dados
-    \item \textbf{Exploração inicial:} Identificação de padrões e estatísticas descritivas
-    \item \textbf{Agregação SQL:} Criação de vistas para análise distribuída
-    \item \textbf{Filtragem estratégica:} Foco em visitantes engajados (5-30 sessões)
-    \item \textbf{Preparação de dados:} Exportação e transformação para análise
-    \item \textbf{Normalização:} Tratamento de strings para eliminar duplicados
-    \item \textbf{Market-basket analysis:} Descoberta de 26 regras de associação acionáveis
-    \item \textbf{Visualização:} Geração de relatório gráfico profissional
-    \item \textbf{Automatização:} Pipeline end-to-end reproduzível
-\end{enumerate}
+A investigação realizada neste relatório possibilitou examinar os padrões de interação dos usuários na plataforma de comércio eletrônico "We-Commerce", com base em um amplo conjunto de dados. Foram aplicadas técnicas de mineração de dados, incluindo análise de regras de associação, para responder a questões centrais, tais como:
+Quais produtos devem ser agrupados em páginas para maximizar as vendas? Quais produtos, embora raramente visitados, apresentam altas associações? Quais produtos são os mais visitados e, portanto, merecem destaque? O processo contemplou etapas de filtragem e limpeza de dados, garantindo que apenas informações relevantes fossem consideradas. Dados inconsistentes ou pouco significativos foram removidos, como acessos a páginas não relacionadas a produtos ou transações inválidas, assegurando maior precisão na análise. Além disso, subamostras de dados foram criadas para tornar as análises mais eficientes, reduzindo a complexidade computacional sem comprometer a qualidade dos resultados.
 
-\subsection{Principais Descobertas}
+Entretanto, identificou-se uma limitação importante no conjunto de dados: a ausência de uma coluna que relacione os códigos dos produtos aos seus nomes reais. Essa lacuna gera incertezas na interpretação de algumas regras e dificulta a aplicação direta dos resultados. Por exemplo, produtos fortemente associados são identificados apenas por códigos, o que pode atrasar decisões estratégicas ou prejudicar a compreensão do aprendizado pelos alunos. Por isso, recomenda-se que futuros modelos de dados incluam explicitamente os nomes reais dos produtos, facilitando a análise, a interpretação e o aprendizado.
 
-\subsubsection{Padrões de Comportamento}
-
-\begin{itemize}
-    \item \textbf{91,5\% visitantes ocasionais:} Grande volume de tráfego único
-    \item \textbf{0,48\% utilizadores fiéis:} Segmento altamente engajado (5-30 sessões)
-    \item \textbf{Concentração de tráfego:} Top 10 produtos representam $\sim$15\% das visitas
-\end{itemize}
-
-\subsubsection{Oportunidades de Negócio}
-
-\paragraph{1. Bundling de Produtos Apple (Prioridade Alta):}
-\begin{itemize}
-    \item \textbf{Regra:} iPad $\leftrightarrow$ iPod Touch (100\% confidence, 51 transações)
-    \item \textbf{Ação:} Criar página ``Ecossistema Apple'' com bundle promocional
-    \item \textbf{Impacto esperado:} Aumento de 15-20\% no valor médio de encomenda
-\end{itemize}
-
-\paragraph{2. Landing Page Luís Onofre (Prioridade Alta):}
-\begin{itemize}
-    \item \textbf{Observação:} 7 dos top 10 produtos são desta marca
-    \item \textbf{Ação:} Página dedicada com catálogo completo
-    \item \textbf{Impacto esperado:} Aumento de 25-30\% nas conversões desta categoria
-\end{itemize}
-
-\paragraph{3. Cross-Selling Inteligente (Prioridade Média):}
-\begin{itemize}
-    \item \textbf{Implementação:} Widget ``Clientes que viram X também viram Y''
-    \item \textbf{Base:} 26 regras com confidence $\geq$ 65\%
-    \item \textbf{Impacto esperado:} Aumento de 10-15\% em pageviews por sessão
-\end{itemize}
-
-\paragraph{4. Segmentação de Marketing (Prioridade Média):}
-\begin{itemize}
-    \item \textbf{Segmento 1:} Visitantes ocasionais (91,5\%) - remarketing agressivo
-    \item \textbf{Segmento 2:} Visitantes recorrentes (7,6\%) - programas de fidelização
-    \item \textbf{Segmento 3:} Super-utilizadores (0,9\%) - tratamento VIP, early access
-\end{itemize}
-
-\subsection{Recomendações Técnicas}
-
-\subsubsection{Curto Prazo (1-2 meses)}
-
-\begin{enumerate}
-    \item \textbf{Implementar sistema de recomendações:} Usar as 26 regras descobertas
-    \item \textbf{Criar bundles estratégicos:} iPad+iPod Touch, produtos co-visitados
-    \item \textbf{Otimizar homepage:} Destacar top 10 produtos em carrossel
-    \item \textbf{Limpar dados:} Filtrar valores inválidos em product\_gui
-\end{enumerate}
-
-\subsubsection{Médio Prazo (3-6 meses)}
-
-\begin{enumerate}
-    \item \textbf{Personalização dinâmica:} Adaptar recomendações por segmento
-    \item \textbf{A/B testing:} Testar páginas bundle vs. produtos individuais
-    \item \textbf{Análise temporal:} Repetir análise para Fevereiro-Dezembro
-    \item \textbf{Monitorização:} Dashboard real-time com métricas-chave
-\end{enumerate}
-
-\subsubsection{Longo Prazo (6-12 meses)}
-
-\begin{enumerate}
-    \item \textbf{Machine Learning:} Modelos preditivos de conversão
-    \item \textbf{Análise de coortes:} Tracking longitudinal de visitantes
-    \item \textbf{Sentiment analysis:} Integrar reviews e feedback
-    \item \textbf{Expansão geográfica:} Análise por IP/localização
-\end{enumerate}
-
-\subsection{Limitações do Estudo}
-
-\begin{itemize}
-    \item \textbf{Período limitado:} Apenas Janeiro 2012 analisado
-    \item \textbf{Sem dados de conversão:} Não sabemos quais visitas geraram vendas
-    \item \textbf{Valores inválidos:} Alguns product\_gui não representam produtos reais
-    \item \textbf{Ausência de preços:} Não podemos calcular revenue por regra
-    \item \textbf{Falta de demografia:} Sem informação sobre idade, género, localização
-\end{itemize}
-
-\subsection{Trabalho Futuro}
-
-\begin{enumerate}
-    \item \textbf{Análise multi-período:} Comparar comportamento ao longo de 12 meses
-    \item \textbf{Integração CRM:} Cruzar com dados de clientes registados
-    \item \textbf{Análise de funil:} Homepage → Produto → Carrinho → Checkout
-    \item \textbf{Clustering:} Segmentação automática de visitantes
-    \item \textbf{Previsão de churn:} Identificar visitantes em risco
-    \item \textbf{Otimização de campanhas:} Análise de ROI por campaign\_id
-\end{enumerate}
-
-\subsection{Impacto Empresarial Esperado}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}lcc@{}}
-\toprule
-\textbf{Métrica} & \textbf{Baseline} & \textbf{Projeção (6 meses)} \\ \midrule
-Conversão (%) & 2,0\% & 2,8\% (+40\%) \\
-Valor médio encomenda & 45€ & 52€ (+15\%) \\
-Pageviews/sessão & 3,2 & 3,8 (+19\%) \\
-Taxa retorno (%) & 8,5\% & 12\% (+41\%) \\
-Revenue/visitante & 0,90€ & 1,45€ (+61\%) \\ \bottomrule
-\end{tabular}
-\caption{Impacto empresarial esperado das recomendações}
-\label{tab:business_impact}
-\end{table}
-
-\subsection{Considerações Finais}
-
-Este projeto demonstrou o valor da mineração de dados para e-commerce:
-
-\begin{itemize}
-    \item \textbf{Dados → Informação → Conhecimento:} Pipeline completo implementado
-    \item \textbf{Insights acionáveis:} 26 regras prontas para implementação
-    \item \textbf{Automatização:} Processo reproduzível e escalável
-    \item \textbf{ROI comprovável:} Impacto mensurável nas métricas de negócio
-\end{itemize}
-
-A We-Commerce está agora equipada com:
-\begin{enumerate}
-    \item Análise detalhada do comportamento dos visitantes
-    \item Regras de associação para cross-selling
-    \item Visualizações para comunicar com stakeholders
-    \item Pipeline automatizado para análises futuras
-    \item Recomendações concretas com impacto estimado
-\end{enumerate}
+Concluímos que a aplicação de técnicas avançadas de análise, aliada a um tratamento cuidadoso dos dados, forneceu insights valiosos para a plataforma "We-Commerce". As recomendações apresentadas podem contribuir para aprimorar a experiência do usuário, organizar melhor a disposição dos produtos e potencialmente aumentar as taxas de conversão. Continuar aprimorando o modelo de dados e as ferramentas analíticas será fundamental para extrair ainda mais valor dos dados em análises futuras.
 
 \section{Referências}
 
 \begin{enumerate}[label={[\arabic*]}]
     \item ChatGPT. (2026). Consulta sobre técnicas de mineração de dados e otimização de regras de associação. OpenAI. \url{https://chatgpt.com/share/695fbbf0-cf20-8007-8b90-b2153fd0f21d}
+    \item ChatGPT. (2026). Orange Data Mining Workflow - Market Basket Analysis. OpenAI. \url{https://chatgpt.com/share/696bd77e-5b70-8007-94e2-42a38e639b79}
 \end{enumerate}
 
 \vspace{1cm}

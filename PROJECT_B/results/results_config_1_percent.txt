@@ -1,0 +1,14 @@
+============================================================
+RESULTS FOR CONFIGURATION: results_config_1_percent.txt
+============================================================
+
+Parameters: Min Support=0.50% (~15 trans), Confidence=40%
+Total Transactions: 3048
+Rules Found: 1
+------------------------------------------------------------
+
+Rule 1:
+   IF:   ['lon_4009']
+   THEN: ['lon_4000']
+   Stats: Conf=40.82%, Supp=20 (0.66%)
+

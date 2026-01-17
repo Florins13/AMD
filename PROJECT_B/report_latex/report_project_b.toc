@@ -1,99 +1,68 @@
 \babel@toc {portuguese}{}\relax 
-\contentsline {section}{\numberline {1}Introdução}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Cenário}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Conjunto de Dados}{3}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Estrutura do Projeto}{3}{subsection.1.3}%
-\contentsline {section}{\numberline {2}Exercício 1: Compreensão do Processo de Recolha de Dados}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Enunciado}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Resolução}{4}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Processo de Recolha de Dados}{4}{subsubsection.2.2.1}%
-\contentsline {paragraph}{Identificação de Visitantes}{4}{section*.2}%
-\contentsline {paragraph}{Gestão de Sessões}{4}{section*.3}%
-\contentsline {subsubsection}{\numberline {2.2.2}Atributos Capturados}{4}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Problemas de Qualidade Identificados}{5}{subsubsection.2.2.3}%
-\contentsline {section}{\numberline {3}Exercício 2: Formulação do Problema de Market-Basket Analysis}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Enunciado}{6}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Resolução}{6}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Definição do Problema}{6}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Mapeamento para o Contexto da We-Commerce}{6}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Escolha do Identificador de Transação}{6}{subsubsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.4}Decisão}{6}{subsubsection.3.2.4}%
-\contentsline {section}{\numberline {4}Exercício 3: Distribuição Agregada de Dados}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Enunciado}{7}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Resolução}{7}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Abordagem Implementada}{7}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Vistas SQL Criadas}{7}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Resultados Obtidos}{7}{subsubsection.4.2.3}%
-\contentsline {subsubsection}{\numberline {4.2.4}Validação}{8}{subsubsection.4.2.4}%
-\contentsline {section}{\numberline {5}Exercício 4: Filtragem de Dados Relevantes}{9}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Enunciado}{9}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Resolução}{9}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Critérios de Filtragem}{9}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Implementação}{9}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Resultados da Filtragem}{9}{subsubsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.3}Conclusões do Exercício 4}{9}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Exercício 5: Exportação de Transações}{10}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Enunciado}{10}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Resolução}{10}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Formato de Exportação}{10}{subsubsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Implementação}{10}{subsubsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.3}Conclusões do Exercício 5}{10}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Exercício 6: Transformação para Formato Basket}{11}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Enunciado}{11}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Resolução}{11}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Conclusões do Exercício 6}{11}{subsection.7.3}%
-\contentsline {section}{\numberline {8}Exercício 7: Mineração de Regras de Associação}{12}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Enunciado}{12}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Metodologia}{12}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Resultados}{12}{subsection.8.3}%
-\contentsline {subsubsection}{\numberline {8.3.1}Configuração 1: Produtos para Manter Juntos}{12}{subsubsection.8.3.1}%
-\contentsline {subsubsection}{\numberline {8.3.2}Configuração 2: Produtos Raramente Visitados mas Frequentemente Co-visitados}{13}{subsubsection.8.3.2}%
-\contentsline {subsubsection}{\numberline {8.3.3}Configuração 3: Produtos Mais Visitados}{14}{subsubsection.8.3.3}%
-\contentsline {subsection}{\numberline {8.4}Recomendações de Negócio}{15}{subsection.8.4}%
-\contentsline {subsubsection}{\numberline {8.4.1}Página Web - Produtos Juntos}{15}{subsubsection.8.4.1}%
-\contentsline {subsubsection}{\numberline {8.4.2}Recomendações Cruzadas - Produtos Raros}{15}{subsubsection.8.4.2}%
-\contentsline {subsubsection}{\numberline {8.4.3}Destaque na Homepage}{16}{subsubsection.8.4.3}%
-\contentsline {subsection}{\numberline {8.5}Conclusões do Exercício 7}{16}{subsection.8.5}%
-\contentsline {section}{\numberline {9}Exercício 8: Relatório Gráfico com Orange}{17}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Enunciado}{17}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Resolução}{17}{subsection.9.2}%
-\contentsline {subsubsection}{\numberline {9.2.1}Abordagem Dual}{17}{subsubsection.9.2.1}%
-\contentsline {paragraph}{Abordagem 1 - Orange GUI:}{17}{section*.4}%
-\contentsline {paragraph}{Abordagem 2 - Script Python Automatizado:}{17}{section*.5}%
-\contentsline {subsubsection}{\numberline {9.2.2}Visualizações Geradas}{17}{subsubsection.9.2.2}%
-\contentsline {subsubsection}{\numberline {9.2.3}Insights do Relatório Gráfico}{17}{subsubsection.9.2.3}%
-\contentsline {paragraph}{Scatter Plot (Confidence vs Support):}{17}{section*.6}%
-\contentsline {paragraph}{Top Produtos:}{18}{section*.7}%
-\contentsline {paragraph}{Dashboard Executivo:}{18}{section*.8}%
-\contentsline {subsubsection}{\numberline {9.2.4}Formato de Entrega}{18}{subsubsection.9.2.4}%
-\contentsline {subsection}{\numberline {9.3}Conclusões do Exercício 8}{18}{subsection.9.3}%
-\contentsline {section}{\numberline {10}Exercício 9: Automatização do Pipeline}{19}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Enunciado}{19}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Resolução}{19}{subsection.10.2}%
-\contentsline {subsubsection}{\numberline {10.2.1}Arquitetura do Pipeline}{19}{subsubsection.10.2.1}%
-\contentsline {subsubsection}{\numberline {10.2.2}Opções de Linha de Comando}{19}{subsubsection.10.2.2}%
-\contentsline {subsubsection}{\numberline {10.2.3}Exemplo de Execução}{19}{subsubsection.10.2.3}%
-\contentsline {subsubsection}{\numberline {10.2.4}Funcionalidades Avançadas}{20}{subsubsection.10.2.4}%
-\contentsline {paragraph}{Gestão de Erros:}{20}{section*.9}%
-\contentsline {paragraph}{Validação Automática:}{20}{section*.10}%
-\contentsline {paragraph}{Reporting:}{20}{section*.11}%
-\contentsline {subsection}{\numberline {10.3}Benefícios da Automatização}{20}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}Conclusões do Exercício 9}{20}{subsection.10.4}%
-\contentsline {section}{\numberline {11}Conclusões e Recomendações}{21}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Síntese do Projeto}{21}{subsection.11.1}%
-\contentsline {subsection}{\numberline {11.2}Principais Descobertas}{21}{subsection.11.2}%
-\contentsline {subsubsection}{\numberline {11.2.1}Padrões de Comportamento}{21}{subsubsection.11.2.1}%
-\contentsline {subsubsection}{\numberline {11.2.2}Oportunidades de Negócio}{21}{subsubsection.11.2.2}%
-\contentsline {paragraph}{1. Bundling de Produtos Apple (Prioridade Alta):}{21}{section*.12}%
-\contentsline {paragraph}{2. Landing Page Luís Onofre (Prioridade Alta):}{21}{section*.13}%
-\contentsline {paragraph}{3. Cross-Selling Inteligente (Prioridade Média):}{21}{section*.14}%
-\contentsline {paragraph}{4. Segmentação de Marketing (Prioridade Média):}{22}{section*.15}%
-\contentsline {subsection}{\numberline {11.3}Recomendações Técnicas}{22}{subsection.11.3}%
-\contentsline {subsubsection}{\numberline {11.3.1}Curto Prazo (1-2 meses)}{22}{subsubsection.11.3.1}%
-\contentsline {subsubsection}{\numberline {11.3.2}Médio Prazo (3-6 meses)}{22}{subsubsection.11.3.2}%
-\contentsline {subsubsection}{\numberline {11.3.3}Longo Prazo (6-12 meses)}{22}{subsubsection.11.3.3}%
-\contentsline {subsection}{\numberline {11.4}Limitações do Estudo}{22}{subsection.11.4}%
-\contentsline {subsection}{\numberline {11.5}Trabalho Futuro}{23}{subsection.11.5}%
-\contentsline {subsection}{\numberline {11.6}Impacto Empresarial Esperado}{23}{subsection.11.6}%
-\contentsline {subsection}{\numberline {11.7}Considerações Finais}{23}{subsection.11.7}%
-\contentsline {section}{\numberline {12}Referências}{23}{section.12}%
+\contentsline {section}{\numberline {1}Introdução}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Cenário}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Conjunto de Dados}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Estrutura do Projeto}{4}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Exercício 1: Compreensão do Processo de Recolha de Dados}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Enunciado}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Resolução}{5}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Processo de Recolha de Dados}{5}{subsubsection.2.2.1}%
+\contentsline {paragraph}{Identificação de Visitantes}{5}{section*.2}%
+\contentsline {paragraph}{Gestão de Sessões}{5}{section*.3}%
+\contentsline {subsubsection}{\numberline {2.2.2}Atributos Capturados}{5}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Problemas de Qualidade Identificados}{6}{subsubsection.2.2.3}%
+\contentsline {section}{\numberline {3}Exercício 2: Formulação do Problema de Market-Basket Analysis}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Enunciado}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Resolução}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Definição do Problema}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Mapeamento para o Contexto da We-Commerce}{7}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Escolha do Identificador de Transação}{7}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Decisão}{7}{subsubsection.3.2.4}%
+\contentsline {section}{\numberline {4}Exercício 3: Distribuição Agregada de Dados}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Enunciado}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Resolução}{8}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Abordagem Implementada}{8}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Vistas SQL Criadas}{8}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Resultados Obtidos}{8}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Validação}{9}{subsubsection.4.2.4}%
+\contentsline {section}{\numberline {5}Exercício 4: Filtragem de Dados Relevantes}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Enunciado}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Resolução}{10}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Critérios de Filtragem}{10}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Implementação}{10}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Resultados da Filtragem}{10}{subsubsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.3}Conclusões do Exercício 4}{10}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Exercício 5: Exportação de Transações}{12}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Enunciado}{12}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Resolução}{12}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Formato de Exportação}{12}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Implementação}{12}{subsubsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.3}Conclusões do Exercício 5}{12}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Exercício 6: Transformação para Formato Basket}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Enunciado}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Resolução}{13}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Conclusões do Exercício 6}{13}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Exercício 7: Mineração de Regras de Associação}{14}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Enunciado}{14}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Metodologia}{14}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Resultados}{14}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}Configuração 1: Produtos para Manter Juntos}{14}{subsubsection.8.3.1}%
+\contentsline {subsubsection}{\numberline {8.3.2}Configuração 2: Produtos Raramente Visitados mas Frequentemente Co-visitados}{15}{subsubsection.8.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.3}Configuração 3: Produtos Mais Visitados}{16}{subsubsection.8.3.3}%
+\contentsline {subsection}{\numberline {8.4}Conclusões do Exercício 7}{17}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Exercício 8: Relatório Gráfico com Orange}{18}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Enunciado}{18}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Resolução}{18}{subsection.9.2}%
+\contentsline {subsubsection}{\numberline {9.2.1}Workflow Construído}{18}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Visualizações Geradas}{18}{subsubsection.9.2.2}%
+\contentsline {subsubsection}{\numberline {9.2.3}Insights do Relatório Gráfico}{20}{subsubsection.9.2.3}%
+\contentsline {paragraph}{Frequent Itemsets:}{20}{section*.4}%
+\contentsline {paragraph}{Association Rules:}{20}{section*.5}%
+\contentsline {paragraph}{Scatter Plot:}{20}{section*.6}%
+\contentsline {subsection}{\numberline {9.3}Conclusões do Exercício 8}{20}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Exercício 9: Automatização do Pipeline}{21}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Enunciado}{21}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Resolução}{21}{subsection.10.2}%
+\contentsline {section}{\numberline {11}Conclusões e Recomendações}{22}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Síntese do Projeto}{22}{subsection.11.1}%
+\contentsline {section}{\numberline {12}Referências}{22}{section.12}%

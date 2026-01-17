@@ -1,0 +1,59 @@
+============================================================
+RESULTS FOR CONFIGURATION: results_config_2.txt
+============================================================
+
+Parameters: Min Support=8 (Count), Confidence=80%
+Total Transactions: 3048
+Rules Found: 10
+------------------------------------------------------------
+
+Rule 1:
+   IF:   ['ljv_0237']
+   THEN: ['ljv_0530']
+   Stats: Conf=100.00%, Supp=12 (0.39%)
+
+Rule 2:
+   IF:   ['eas_0004']
+   THEN: ['eas_0005']
+   Stats: Conf=100.00%, Supp=10 (0.33%)
+
+Rule 3:
+   IF:   ['ljv_0069']
+   THEN: ['ljv_0197']
+   Stats: Conf=100.00%, Supp=8 (0.26%)
+
+Rule 4:
+   IF:   ['lon_4009', 'lon_4016', 'lon_4012']
+   THEN: ['lon_4000']
+   Stats: Conf=90.00%, Supp=9 (0.30%)
+
+Rule 5:
+   IF:   ['lon_4009', 'lon_4007', 'lon_4012']
+   THEN: ['lon_4000']
+   Stats: Conf=88.89%, Supp=8 (0.26%)
+
+Rule 6:
+   IF:   ['lon_4009', 'lon_4007']
+   THEN: ['lon_4000']
+   Stats: Conf=85.71%, Supp=12 (0.39%)
+
+Rule 7:
+   IF:   ['lon_4009', 'lon_4000', 'lon_4012']
+   THEN: ['lon_4016']
+   Stats: Conf=81.82%, Supp=9 (0.30%)
+
+Rule 8:
+   IF:   ['lon_4009', 'lon_4007', 'lon_4016']
+   THEN: ['lon_4000']
+   Stats: Conf=81.82%, Supp=9 (0.30%)
+
+Rule 9:
+   IF:   ['lon_4007', 'lon_4000', 'lon_4012']
+   THEN: ['lon_4009']
+   Stats: Conf=80.00%, Supp=8 (0.26%)
+
+Rule 10:
+   IF:   ['lon_4508', 'lon_4122']
+   THEN: ['lon_4107']
+   Stats: Conf=80.00%, Supp=8 (0.26%)
+
